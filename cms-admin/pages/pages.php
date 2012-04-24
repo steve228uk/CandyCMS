@@ -54,7 +54,7 @@
 	<h1 class="left">Pages</h1>
 	<a href="dashboard.php?page=pages&new" class="addnew right">Add New Page +</a>
 	<?php if (isset($_POST['addnew'])) {
-		echo 'Page Added';
+		echo '<p class="message success">Page Added</p>';
 		Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite']);
 	} ?>
 	
@@ -69,7 +69,7 @@
 	} ?>
 	
 	<?php if (isset($_GET['delete'])) {
-		echo 'Page deleted!';
+		echo '<p class="message success">Page deleted!</p>';
 		Pages::deletePage($_GET['delete']);
 	} ?>
 
