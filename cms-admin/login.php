@@ -1,0 +1,53 @@
+<?php
+
+/**
+* @package CandyCMS
+* @version 0.1
+* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
+* 
+* Login page for CandyCMS admin
+*/
+
+session_start();
+
+if(isset($_SESSION['loggedin'])) header('Location: dashboard.php');
+
+require('bootstrap.php');
+
+if (isset($_POST['username'])) {
+	
+	$login = Login::signin($_POST['username'], $_POST['password']);
+	
+	if ($login != false) {
+		$_SESSION['loggedin'] = 'true';
+		header('Location: dashboard.php');
+	}
+		
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CMS Login</title>
+	<link rel="stylesheet" href="css/login.css" type="text/css" />
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="container">
+		<div id="box">
+			<h1>Login</h1>
+			<form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+				<input type="text" name="username" placeholder="Username" /><br />
+				<input type="password" name="password" placeholder="Password" /><br />
+				<input type="submit" value="Login" class="button" />
+			</form>
+		</div>
+		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo Options::candytitle() ?></a>
+	</div>
+</body>
+</html>

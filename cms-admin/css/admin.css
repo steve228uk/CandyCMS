@@ -1,0 +1,433 @@
+/* @override 
+	http://jquerycandy.com/cms/cms-admin/css/admin.css */
+
+/**
+* @package CandyCMS
+* @version 0.1
+* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
+* 
+* CSS for admin panel
+*/
+
+/* @group Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Automatically clear elements for standards-compliant browsers */
+.clearfix:after,
+.nav:after,
+footer:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Trigger has-layout for IE compatibility */
+.clearfix, .nav, footer {
+	zoom: 1;
+}
+
+.clear{
+	clear: both;
+}
+
+.clearr{
+	clear: right;
+}
+
+.clearl{
+	clear: left;
+}
+
+/* @end */
+
+/* @group Global */
+
+body{
+	background: #eee;
+	font: 75%/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.right{
+	float: right;
+}
+
+.left{
+	float: left;
+}
+
+.hide{
+	display: none;
+}
+
+h1{
+	font-weight: lighter;
+	font-size: 2.3em;
+	margin: 0 0 20px;
+}
+
+h3{
+	font-size: 1.5em;
+	font-weight: lighter;
+	color: #666;
+	margin: 0 0 20px;
+}
+
+p.leadin{
+	font-size: 1.2em;
+	font-weight: lighter;
+	color: #666;
+	padding: 0 0 15px;
+}
+
+strong{
+	font-weight: bold;
+}
+
+fieldset{
+	border-bottom: 1px solid #ccc;
+	padding: 20px 0;
+}
+
+fieldset label{
+	width: 100px;
+	float: left;
+}
+
+fieldset input, .inputstyle {
+	background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+
+	background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+	border: 1px solid #ccc;
+	padding: 8px;
+	font-size: 1.2em;
+	font-weight: lighter;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 300px;
+
+	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	-moz-box-shadow: inset 0 1px 0 #ffffff;
+	box-shadow: inset 0 1px 0 #ffffff;
+}
+
+fieldset input:focus, .inputstyle:focus {
+	outline: none;
+}
+
+.button {
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#013fab), to(#117cff));
+
+	background-image: -webkit-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -moz-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -o-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -ms-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	border: 1px solid #013fab;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: lighter;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	cursor: pointer;
+}
+
+.addnew{
+	padding: 5px;
+	color: #fff;
+	text-decoration: none;
+	margin-top: -5px;
+	font-size: 1.2em;
+	background-color: #dab163;
+}
+
+.addnew:hover{
+	background-color: #d4a449;
+}
+
+.lrg{
+	font-size: 1.2em;
+	font-weight: lighter;
+}
+
+/* @end */
+
+/* @group Header */
+
+header{
+	background: #fff;
+	border-bottom: 3px solid #D3D3D3;
+	position: fixed;
+	width: 100%;
+	height: 55px;
+}
+
+header #head-cont{
+	width: 960px;
+	margin: auto;
+	padding: 15px 10px;
+}
+
+header #head-logo{
+	background: url(../images/header-logo.png) no-repeat;
+	width: 130px;
+	height: 24px;
+	float: left;
+}
+
+/* @end */
+
+/* @group Navigation */
+
+.nav{
+	float: right;
+}
+
+.nav li{
+	float: left;
+	display: inline;
+	margin: 2px 5px 0 0;
+}
+
+.nav li > a{
+	background: #eee;
+	padding: 5px;
+	color: #666;
+	text-decoration: none;
+	font-size: 1.2em;
+}
+
+.nav li > a:hover{
+	background-color: #dedede;
+}
+
+/* @end */
+
+/* @group Content */
+
+#container{
+	padding: 80px 10px 20px;
+	width: 960px;
+	margin: auto;
+}
+
+/* @end */
+
+/* @group Footer */
+
+footer{
+	width: 960px;
+	margin: auto;
+	padding: 10px;
+	border-top: 1px solid #ccc;
+	color: #999;
+	clear: both;
+}
+
+.footer-logo{
+	background: url(../images/footer-logo.png) no-repeat;
+	width: 93px;
+	height: 17px;
+	float: right;
+}
+
+footer p {
+	float: left;
+}
+
+/* @end */
+
+/* @group Settings Page */
+
+.settings-btn{
+	margin: 10px 0 0;
+}
+
+/* @end */
+
+/* @group Table Styles */
+
+table{
+	background: #fff;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+table thead th{
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#e1e1e1), to(#ffffff));
+	background-image: -moz-linear-gradient(90deg, #e1e1e1 0%, #ffffff 100%);
+	text-align: left;
+	padding: 5px;
+	border-bottom: 1px solid #ccc;
+	font-weight: bold;
+	color: #666;
+}
+
+table tr:nth-child(even){
+	background-color: #fafafa;
+	border: 1px solid #eee;
+	border-left: none;
+	border-right: none;
+}
+
+table td{
+	padding: 5px;
+}
+
+/* @end */
+
+/* @group Edit Page */
+
+.viewed-at{
+	background: #E8DFCC;
+	float: right;
+	padding: 5px;
+	border: 1px solid #dab163;
+	margin: 0 0 10px;
+}
+
+/* @end */
+
+/* @group Messages */
+
+.message {
+	clear: both;
+	padding: 5px;
+}
+
+
+.message.success{
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#348422), to(#5cb648));
+	background-image: -moz-linear-gradient(90deg, #348422 0%, #5cb648 100%);
+	color: #fff;
+	border: 1px solid #255d19;
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+	font-size: 1.4em;
+	font-weight: lighter;
+	text-shadow: 0 0 2px #173c0f;
+	margin: 0 0 10px;
+}
+
+/* @end */
+
+/* @group Widgets */
+
+.widget {
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #ccc;
+	width: 47%;
+	margin: 0 0 15px;
+	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
+}
+
+.widget-ttl{
+	font-size: 1.3em;
+	font-weight: lighter;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	color: #666;
+}
+
+.widget p{
+	padding: 0 0 10px;
+}
+
+/* @end */
+
+/* @group List */
+
+.list{
+	margin: 0 0 20px;
+}
+
+.list li{
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0;
+	color: #666;
+}
+
+.plugin-ttl{
+	font-size: 1.3em;
+	color: #333;
+	padding: 0 0 5px;
+}
+
+/* @end */
+
+#sortable li{
+	font-size: 1.2em;
+	background: #fff;
+	padding: 10px;
+	cursor: move;
+	border-bottom: 1px solid #eee;
+}
+
+#sortable li:hover{
+	background: #f6f6f6;
+}

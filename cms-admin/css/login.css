@@ -1,0 +1,162 @@
+/**
+* @package CandyCMS
+* @version 0.1
+* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
+* 
+* CSS for login page
+*/
+
+/* @group Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Automatically clear elements for standards-compliant browsers */
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Trigger has-layout for IE compatibility */
+.clearfix {
+	zoom: 1;
+}
+
+/* @end */
+
+body{
+	background: #eee;
+	font: 1em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.button {
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#013fab), to(#117cff));
+
+	background-image: -webkit-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -moz-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -o-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: -ms-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	background-image: linear-gradient(90deg, #013fab 0%, #117cff 100%);
+	border: 1px solid #013fab;
+	color: #fff;
+	font-size: 1em;
+	font-weight: lighter;
+	text-shadow: 0 1px 1px #000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	width: auto !important;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+	cursor: pointer;
+}
+
+input {
+	background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+
+	background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+	border: 1px solid #ccc;
+	padding: 8px;
+	font-size: 1.2em;
+	font-weight: lighter;
+	margin: 0 0 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 250px;
+
+	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	-moz-box-shadow: inset 0 1px 0 #ffffff;
+	box-shadow: inset 0 1px 0 #ffffff;
+}
+
+input:focus {
+	outline: none;
+}
+
+h1{
+	font-weight: lighter;
+	font-size: 1.7em;
+	margin: 0 0 15px;
+	border-bottom: 1px solid #ccc;
+	color: #666;
+	padding: 0 0 10px;
+}
+
+a:link, a:visited{
+	font-size: 0.7em;
+	color: #999;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+#container{
+	width: 300px;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left: -150px;
+}
+
+#box{
+	background: #fff;
+	padding: 15px;
+	-moz-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.16);
+	-webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.16);
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.16);
+}

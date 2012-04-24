@@ -1,0 +1,191 @@
+/*
+* @theme Default
+* @author Cocoon Design
+* @copyright 2012 (C) Cocoon Design
+* @description The Default CandyCMS Theme
+* @colors Global-bg,Global-link,Global-h1,Navigation-nav,Navigation-hover,Navigation-active
+*/
+
+/* @group Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Automatically clear elements for standards-compliant browsers */
+.clearfix:after, .nav:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Trigger has-layout for IE compatibility */
+.clearfix, .nav {
+	zoom: 1;
+}
+
+/* @end */
+
+/* @group Global */
+
+body{
+	font: 75%/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+h1{
+	font-size: 2.3em;
+	margin: 0 0 10px;
+}
+
+h2{
+	font-size: 1.6em;
+	margin: 0 0 10px;
+}
+
+h3{
+	font-size: 1.2em;
+	margin: 0 0 10px;
+}
+
+strong{
+	font-weight: bold;
+}
+
+p{
+	font-size: 1.1em;
+	color: #666;
+	margin: 0 0 10px;
+}
+
+#container{
+	background: #fff;
+	width: 960px;
+	margin: 20px auto;
+	padding: 20px;
+	-moz-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14);
+	-webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14);
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* @end */
+
+/* @group Navigation */
+
+.nav{
+	list-style: none;
+	border-bottom: 1px solid #ccc;
+	padding: 0 0 10px;
+	margin: 0 0 20px;
+}
+
+.nav li{
+	display: inline;
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+.nav li a {
+	background: #eee;
+	padding: 5px;
+	text-decoration: none;
+	font-size: 1.2em;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #666;
+}
+
+.nav li.active-page a, .nav li.active-page a:hover{
+	color: #fff;
+}
+
+/* @end */
+
+header{
+	padding: 40px 10px;
+	color: #fff;
+	margin: 0 0 20px;
+	font-size: 2.2em;
+	font-weight: lighter;
+}
+
+/* @group Footer */
+
+footer{
+	border-top: 1px solid #ccc;
+	margin: 20px 0 0;
+	padding: 10px 0 0;
+	color: #999;
+	clear: both;
+}
+
+footer a{
+	color: #666;
+}
+
+footer a:hover{
+	text-decoration: none;
+}
+
+/* @end */
+
+/* @group 2col Layout */
+
+#content{
+	float: left;
+	width: 600px;
+}
+
+#sidebar{
+	background: #eee;
+	float: right;
+	width: 300px;
+	padding: 10px;
+}
+
+/* @end */

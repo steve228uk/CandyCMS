@@ -1,0 +1,319 @@
+<?php
+/**
+* @package CandyCMS
+* @version 0.1
+* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
+* 
+* CandyCMS installer. Creates config.php and creates db structure
+*/
+
+if (version_compare(phpversion(), '5.2', '<')) {
+	echo 'Sorry, CandyCMS requires PHP version 5.2, you\'re currently running: ' . phpversion();
+	exit(1);
+}
+
+if (file_exists('core/config.php')) {
+	header('Location: index.php');
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CandyCMS Install</title>
+	<style type="text/css">
+		/* @group Reset */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+		
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		/* @end */
+		
+		body{
+			background: #eee;
+			font: 75%/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+		}
+		
+		#container{
+			background: #fff;
+			width: 960px;
+			padding: 20px;
+			margin: 50px auto;
+		}
+		
+		h1{
+			font-weight: lighter;
+			font-size: 2.3em;
+			margin: 0 0 20px;
+		}
+		
+		h3{
+			font-size: 1.5em;
+			font-weight: lighter;
+			color: #666;
+			margin: 0 0 20px;
+		}
+		
+		p.leadin{
+			font-size: 1.2em;
+			font-weight: lighter;
+			color: #666;
+			padding: 0 0 15px;
+		}
+		fieldset{
+			border-bottom: 1px solid #ccc;
+			padding: 20px 0;
+		}
+		
+		fieldset label{
+			width: 100px;
+			float: left;
+		}
+		
+		fieldset input, .inputstyle {
+			background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+		
+			background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
+			background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
+			background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
+			background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
+			background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+			border: 1px solid #ccc;
+			padding: 8px;
+			font-size: 1.2em;
+			font-weight: lighter;
+		
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			width: 300px;
+		
+			-webkit-box-shadow: inset 0 1px 0 #ffffff;
+			-moz-box-shadow: inset 0 1px 0 #ffffff;
+			box-shadow: inset 0 1px 0 #ffffff;
+		}
+		
+		fieldset input:focus, .inputstyle:focus {
+			outline: none;
+		}
+		
+		.button {
+			background-image: -webkit-gradient(linear, left bottom, left top, from(#013fab), to(#117cff));
+		
+			background-image: -webkit-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+			background-image: -moz-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+			background-image: -o-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+			background-image: -ms-linear-gradient(90deg, #013fab 0%, #117cff 100%);
+			background-image: linear-gradient(90deg, #013fab 0%, #117cff 100%);
+			border: 1px solid #013fab;
+			color: #fff;
+			font-size: 1.2em;
+			font-weight: lighter;
+		
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			padding: 5px;
+		
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+			-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+			cursor: pointer;
+			text-decoration: none;
+		}
+		
+	</style>
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="container">
+		<?php if (isset($_GET['install'])) : ?>
+		
+		<h1>CandyCMS Installer</h1>
+		<p class="leadin">
+			Thanks for installing CandyCMS!
+		</p>
+		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
+		
+		<?php 
+		
+			$dir = trim($_SERVER['PHP_SELF'], 'install.php');
+		
+			$dbhost = $_POST['dbhost'];
+			$dbusername = $_POST['dbusername'];
+			$dbpassword = $_POST['dbpassword'];
+			$dbname = $_POST['dbname'];
+			$dbprefix = $_POST['dbprefix'];
+		
+			$config = "<?php\n\n";
+			$config .= "/**\n";
+			$config .= "* @package CandyCMS\n";
+			$config .= "* @version 0.1\n";
+			$config .= "* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved\n";
+			$config .= "*\n";
+			$config .= "* Config for CandyCMS - Will be generated by installer\n";
+			$config .= "*/\n\n";
+						
+			$config .= "define('CANDYVERSION', '0.1');\n\n";
+			
+			$config .= "# This is set to MySQL by default but can be changed to your DB of choice\n";
+			$config .= "define('DB_DRIVER', 'mysql')\n\n;";
+			
+			$config .= "define('DB_HOST', '$dbhost');\n";
+			$config .= "define('DB_USERNAME', '$dbusername');\n";
+			$config .= "define('DB_PASSWORD', '$dbpassword');\n";
+			$config .= "define('DB_NAME', '$dbname');\n";
+			$config .= "define('DB_PREFIX', '$dbprefix');\n\n";
+			
+			$config .= "define('SALT', '873hjcbdi1kammcvjnj0u3jn');\n\n";
+			
+			$config .= "# Define where CandyCMS is installed WITH trailing slash\n";
+			$config .= "define('CMS_PATH', \$_SERVER['DOCUMENT_ROOT'].'$dir');\n\n";
+			
+			$config .= "define('URL_PATH', '$dir');\n";
+			
+			$config .= "define('THEME_PATH', CMS_PATH.'themes/');\n";
+			
+			$config .= "define('THEME_URL', URL_PATH.'themes/');\n";
+			
+			$config .= "define('PLUGIN_PATH', CMS_PATH.'plugins/');\n";
+			
+			$config .= "define('PLUGIN_URL', URL_PATH.'plugins/');";
+			
+			
+			$fp = fopen('core/config.php', 'w');
+			fwrite($fp, $config);
+			fclose($fp);
+			
+			#Include the file once we've created it!
+			include('core/config.php');
+			
+			$dbh = new PDO(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
+			
+			#Create the Options table if not exists
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."options` (`id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`), `option_key` varchar(256) NOT NULL, UNIQUE KEY (`option_key`), `option_value` varchar(256) NOT NULL)");
+			
+			#Set some defaults for the options table
+			$options = array('site_title' => $_POST['title'],
+							 'site_url' => $_POST['url'],
+							 'theme' => 'default',
+							 'homepage' => 'home',
+							 'enabled_plugins' => '["Sitemap", "PagesWidget"]',
+							 'colors' => '{"bg":"#EEEEEE","link":"#E64C4C","h1":"#E64C4C","nav":"#F2F2F2","hover":"#D9D9D9","active":"#E64C59"}'
+							 );
+			
+			#Populate the Options table
+			foreach ($options as $key => $value) {
+				$dbh->exec("INSERT INTO `".DB_PREFIX."options` (option_key, option_value) VALUES ('$key', '$value')");
+			}
+			
+			#Create the Pages table if not exists
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL, `innav` int(1) DEFAULT 1, `navpos` int(11))");
+			
+			$sql = "INSERT INTO `".DB_PREFIX."pages` (`page_title`, `page_body`, `page_template`, `rewrite`, `innav`, `navpos`) VALUES ('Home', 'Welcome to CandyCMS, this page can be changed in the admin dashboard.', 'onecol', 'home', '1', '1');";
+			
+			#Populate the Pages table with a default Page
+			$dbh->exec($sql);
+			
+			#Create user table
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."users` (`userid` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`userid`), `username` varchar(256) NOT NULL, `password` varchar(256) NOT NULL, `email` varchar(256) NOT NULL, `name` varchar(256) NOT NULL)");
+			
+			$username = $_POST['username'];
+			$password = sha1($_POST['password'].SALT);
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+			
+			#insert the user into the DB
+			$dbh->exec("INSERT INTO `".DB_PREFIX."users` (`username`, `password`, `name`, `email`) VALUES ('$username', '$password', '$name', '$email')");
+		
+			
+		?>
+		
+		<?php else : ?>
+		
+		<h1>CandyCMS Installer</h1>
+		<p class="leadin">
+			Hello, welcome to CandyCMS! Follow the steps below to install it.
+		</p>
+		<form action="install.php?install" method="post">
+			<fieldset>
+				<h3>Site Information</h3>
+				<ul>
+					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo trim($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
+					<li><label>Site Title</label><input type="text" name="title" placeholder="Site TItle" /></li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<h3>Database Details</h3>
+				<ul>
+					<li><label>DB Host</label><input type="text" name="dbhost" value="localhost" /></li>
+					<li><label>DB Name</label><input type="text" name="dbname" placeholder="Database Name" /></li>
+					<li><label>DB Prefix</label><input type="text" name="dbprefix" value="cms_" /></li>
+					<li><label>DB Username</label><input type="text" name="dbusername" placeholder="Database Username" /></li>
+					<li><label>DB Password</label><input type="text" name="dbpassword" placeholder="Database Password" /></li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<h3>User Details</h3>
+				<ul>
+					<li><label>Name</label><input type="text" name="name" placeholder="Name" /></li>
+					<li><label>Email</label><input type="email" name="email" placeholder="email" />
+					<li><label>Username</label><input type="text" name="username" value="admin" /></li>
+					<li><label>Password</label><input type="password" name="password" placeholder="Password" /></li>
+				</ul>
+			</fieldset>
+			<input type="submit" name="submit" value="Install Away!" class="button" />
+		</li>
+		
+		<?php endif; ?>
+		
+	</div>
+</body>
+</html>
