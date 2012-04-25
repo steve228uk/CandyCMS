@@ -232,6 +232,21 @@ if (file_exists('core/config.php')) {
 			fwrite($fp, $config);
 			fclose($fp);
 			
+			#Write the HTACCESS file
+			$dir = (trim($_SERVER['PHP_SELF'], '/install.php') == '') ? '' : '/'.trim($_SERVER['PHP_SELF'], '/install.php');
+				
+			$htaccess = "RewriteEngine On\n\n";	
+			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
+			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
+			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
+			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)$ $dir/index.php?page=$1&post=$2 [QSA,L]";
+				
+			$fp = fopen('.htaccess', 'w');
+			fwrite($fp, $htaccess);
+			fclose($fp);
+			
+			
+			
 			#Include the file once we've created it!
 			include('core/config.php');
 			
@@ -310,8 +325,7 @@ if (file_exists('core/config.php')) {
 				</ul>
 			</fieldset>
 			<input type="submit" name="submit" value="Install Away!" class="button" />
-		</li>
-		
+		</form>
 		<?php endif; ?>
 		
 	</div>
