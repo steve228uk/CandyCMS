@@ -14,7 +14,7 @@
  	public static function install() {
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("CREATE TABLE ". DB_PREFIX ."posts (post_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64), post_body TEXT, permalink VARCHAR(64) ADD UNQIUE(permalink))");
+ 		$dbh->exec("CREATE TABLE ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL)");
  	
  		# todo: ensure the unique is working
  		
