@@ -4,4 +4,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 
-RewriteRule ^([^/.]*)/?([^/.]*)$ /cms/index.php?page=$1&post=$2 [QSA,L]
+RewriteRule ^([^/.]*)/?([^/.]*)$ /index.php?page=$1&post=$2 [QSA,L]
