@@ -35,7 +35,7 @@ class Pages {
 		$html = '<ul id="sortable">';
 		
 		foreach ($pages as $page) {
-			$html .= "<li id='nav_{$page->page_id}'>{$page->page_title}</li>";
+			$html .= "<li id='nav_{$page->page_id}'>{$page->page_title}<span class='move'></span></li>";
 		}
 		
 		$html .= '</ul>';

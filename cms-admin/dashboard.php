@@ -20,7 +20,8 @@ require('bootstrap.php');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>CMS Dashboard</title>
+	<?php $array = adminNav();?>
+	<title>CandyCMS &raquo; Admin</title>
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
@@ -68,10 +69,14 @@ require('bootstrap.php');
 		<div id="head-cont">
 			<a href="dashboard.php" id="head-logo"> </a>
 			<ul class="nav">
-				<li><a href="dashboard.php">Dashboard</a></li>
 				<?php 
 					$array = adminNav();
-					array_walk_recursive($array, 'genAdminNav');
+					if (isset($_GET['page'])) {
+						array_walk_recursive($array, 'genAdminNav', $_GET['page']);
+					} else {
+						array_walk_recursive($array, 'genAdminNav');
+					}
+					
 				?>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>

@@ -52,7 +52,8 @@
 <?php else : ?>
 	
 	<h1 class="left">Pages</h1>
-	<a href="dashboard.php?page=pages&new" class="addnew right">Add New Page +</a>
+	<a href="dashboard.php?page=pages&new" class="addnew button right">Add New Page +</a>
+	<p class="leadin clear">Add, edit or delete.</p>
 	<?php if (isset($_POST['addnew'])) {
 		echo '<p class="message success">Page Added</p>';
 		Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite']);

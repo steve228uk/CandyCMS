@@ -9,7 +9,7 @@
 */
 
 function adminNav(){
-	$adminnav = array('Pages' => 'pages');
+	$adminnav = array('pages' => 'Pages');
 	$plugins = Plugins::enabledPlugins();
 	
 	$nav = $adminnav;
@@ -29,17 +29,18 @@ function adminNav(){
 	$theme = Options::currentTheme();
 	
 	if (file_exists(THEME_PATH.$theme.'/css/user.php')) {
-		$nav[] = array('Apperance' => 'theme');
+		$nav[] = array('theme' => 'Appearance');
 	}
 	
-	$nav[] = array('Navigation' => 'nav', 'Plugins' => 'plugins', 'Settings' => 'settings');
+	$nav[] = array('nav' => 'Navigation', 'plugins' => 'Plugins', 'settings' => 'Settings');
 	
 	return $nav;
 }
 
-function genAdminNav($value, $key){
+function genAdminNav($key, $value, $active = false){
 
-	$html = '<li>';
+	$html = ($active == $value && $active != false) ? '<li class="active">' : '<li>';
+
 	$html .= "<a href='dashboard.php?page=$value'>$key</a>";
 	$html .= '</li>';			
 	
