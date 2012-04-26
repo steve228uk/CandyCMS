@@ -445,9 +445,12 @@ table td{
 	border: 1px solid #ccc;
 	width: 47%;
 	margin: 0 0 15px;
-	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
-	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.09);
+	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.11);
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.11);
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.11);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .widget-ttl{
@@ -495,6 +498,7 @@ table td{
 	background-image: linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#efefef');
 	font-size: 1.4em;
+	font-weight: lighter;
 	padding: 10px;
 	cursor: move;
 	margin-bottom: 5px;

@@ -54,6 +54,20 @@ require('bootstrap.php');
 				}
 			});
 			
+			$(".delete").click(function() {
+				
+				var url = $(this).attr('href');
+				var page = $(this).attr('title');
+				var message = confirm('Are you sure you want to delete the page "'+ page +'"? This cannot be undone.');
+				
+				if (message) {
+					window.location = url;
+				}
+				
+				return false;
+				
+			});
+			
 		});
 		
 	</script>

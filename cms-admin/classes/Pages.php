@@ -82,7 +82,7 @@ class Pages {
 			$html .= '<tr>';
 			$html .= '<td>'.$page->page_title.'</td>';
 			$html .= '<td><a href="dashboard.php?page=pages&edit='.$page->page_id.'" title="Edit Page">Edit</a></td>';
-			$html .= '<td><a href="dashboard.php?page=pages&delete='.$page->page_id.'" title="Delete Page">[x]</a></td>';
+			$html .= '<td><a class="delete" href="dashboard.php?page=pages&delete='.$page->page_id.'" title="'.$page->page_title.'">[x]</a></td>';
 			$html .= '</tr>';	
 		}
 		
