@@ -120,7 +120,7 @@ require('bootstrap.php');
 		<?php endif; ?>
 	</div>
 	<footer>
-		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - CandyCMS v<?php echo CANDYVERSION ?></p>
+		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - Built with CandyCMS v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
 		<a href="http://www.wearecocoon.co.uk" title="Made By Cocoon" target="_blank" class="footer-logo"> </a>
 	</footer>
 </body>
