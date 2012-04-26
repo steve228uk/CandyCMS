@@ -13,7 +13,7 @@
  		# todo: only allow install to run once!
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("INSERT INTO ". DB_PREFIX ."options (option_key, option_value) VALUES ('twitterwidget', 'cocoonuk')");
+ 		$dbh->exec("INSERT INTO ". DB_PREFIX ."options (option_key, option_value) VALUES ('twitterwidget', 'steve228uk')");
  		
  	}
  	
