@@ -8,6 +8,8 @@
 * This file is the main bootstrap for CandyCMS
 */
 
+define('CANDYVERSION', '0.2');
+
 /**
  * Set the development enviornment
  * @options development or production

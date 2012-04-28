@@ -11,6 +11,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+define('CANDYVERSION', '0.1');
+
 require_once '../core/config.php';
 
 # Fire up the autoloader I'm going back to 1977!
