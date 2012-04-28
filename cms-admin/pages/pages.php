@@ -42,21 +42,38 @@
 	
 	<h1>Add New Page</h1>
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST">
-		<input type="text" name="title" placeholder="Title" /><br/>
-		<input type="rewrite" name="rewrite" placeholder="URL" /><br/>
-		<textarea name="body" class="ckeditor"></textarea><br/>
-		<input type="submit" value="Add Page" name="addnew" /> 
-		<input type="hidden" value="onecol" name="template" />
+		<ul>
+			<li class="left">
+				<input type="text" class="inputstyle" name="title" placeholder="Title" />
+			</li>
+			<li class="right">
+				<label for="innav">Display In Navigation?</label><input type="checkbox" id="innav" name="innav" checked="checked" />
+			</li>
+			
+			<li class="viewed-at right clearr">
+				This page can be viewed at 
+				<?php echo Options::siteUrl()?>
+				<input type="text" name="rewrite" class="url-box" id="rewrite" />
+			</li>
+			<li class="left clearl"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
+			<li class="clear"><textarea name="body" class="ckeditor"></textarea></li>
+			<li><input type="submit" value="Add Page" name="addnew" class="button" /></li> 
+		</ul>
 	</form>
 	
 <?php else : ?>
 	
-	<h1 class="left">Pages</h1>
+	<h1 class="left pagesicon">Pages</h1>
 	<a href="dashboard.php?page=pages&new" class="addnew button right">Add New Page +</a>
 	<p class="leadin clear">Add, edit or delete.</p>
 	<?php if (isset($_POST['addnew'])) {
 		echo '<p class="message success">Page Added</p>';
-		Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite']);
+		if (isset($_POST['innav'])) {
+			$innav = 'on';
+		} else {
+			$innav = 'off';
+		}
+		Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite'], $innav);
 	} ?>
 	
 	<?php if (isset($_POST['update'])) {

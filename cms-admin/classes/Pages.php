@@ -114,10 +114,12 @@ class Pages {
 
 	}
 
-	public static function addPage($title, $body, $template, $rewrite){
+	public static function addPage($title, $body, $template, $rewrite, $innav){
+		
+		$innav = ($innav == 'on') ? 1 : 0;
 		
 		$dbh = new CandyDB();
-		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $rewrite .'")');
+		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, innav, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $innav .'", "'. $rewrite .'")');
 		$sth->execute();	
 		
 	}
