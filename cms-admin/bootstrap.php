@@ -11,7 +11,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.1');
+define('CANDYVERSION', '0.2');
 
 require_once '../core/config.php';
 
