@@ -97,6 +97,15 @@ require('bootstrap.php');
 		</div>
 	</header>
 	<div id="container">
+		
+		<?php 
+		
+			if (!isset($_GET['page']) || $_GET['page'] != 'update') {
+				echo Update::checkUpdate();
+			}
+			
+		?>
+		
 		<?php if( isset($_GET['page']) ) : ?>
 		
 			<?php 

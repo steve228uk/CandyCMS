@@ -1,7 +1,3 @@
-/* @override 
-	http://jquerycandy.com/cms/cms-admin/css/admin.css
-	http://jquerycandy.com/cms-admin/css/admin.css */
-
 /**
 * @package CandyCMS
 * @version 0.1
@@ -236,6 +232,7 @@ fieldset input:focus, .inputstyle:focus {
 	font-weight: lighter;
 }
 
+
 /* @end */
 
 /* @group Header */
@@ -435,6 +432,22 @@ table td{
 	margin: 0 0 10px;
 }
 
+.message.notice {
+	background-color: #f4f4c9;
+	border: 1px solid #e4d2af;
+	font-size: 1.2em;
+	font-weight: lighter;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+
+.message.update{
+	margin: 0 0 30px;
+}
+
 /* @end */
 
 /* @group Widgets */
@@ -488,6 +501,8 @@ table td{
 
 /* @end */
 
+/* @group Sortable List */
+
 #sortable li{
 	background-color: #ffffff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(239, 239, 239)));
@@ -524,4 +539,10 @@ table td{
 	float: right;
 	display: block;
 	margin-top: -2px;
+}
+
+/* @end */
+
+.dl-btn{
+	margin-right: 10px;
 }
