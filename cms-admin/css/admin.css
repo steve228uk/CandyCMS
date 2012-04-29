@@ -1,6 +1,6 @@
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CSS for admin panel
@@ -390,6 +390,10 @@ table tr:nth-child(even){
 	border: 1px solid #eee;
 	border-left: none;
 	border-right: none;
+}
+
+table tr:last-child{
+	border-bottom-color: #ccc !important;
 }
 
 table td{
