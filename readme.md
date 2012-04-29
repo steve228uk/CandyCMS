@@ -6,5 +6,12 @@ CandyCMS is an easy to use CMS written in PHP.
 * cURL (for updating)
 * MySQL or other database (DB driver will need to be edited if not using MySQL)
 
+## Installation
+
+* Upload CandyCMS to the directory of your choice.
+* Navigate to the installation in your browser. 
+* Follow the instructions.
+* Done!
+
 ## Documentation
 See the Github wiki for documentation
