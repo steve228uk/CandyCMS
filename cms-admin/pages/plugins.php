@@ -1,3 +1,8 @@
+<?php if ($_SESSION['role'] != 'admin'){
+ echo '<h1>Access Denied</h1>';
+ exit(1);
+}?>
+
 <h1>Plugins</h1>
 
 <?php if (isset($_POST['save'])) :?>

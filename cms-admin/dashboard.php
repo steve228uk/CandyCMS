@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.3
+* @version 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Admin dashboard for CandyCMS admin
@@ -38,9 +38,15 @@ require('bootstrap.php');
 	<header>	
 		<div id="head-cont">
 			<a href="dashboard.php" id="head-logo"> </a>
+			<button class="user-btn"><?php echo $_SESSION['username'] ?></button>
+			<ul id="usernav">
+				<li><a href="dashboard.php?page=profile">Account Settings</a></li>
+				<li><a href="logout.php" title="Logout">Logout</a></li>
+			</ul>
 			<ul class="nav">
 				<?php 
-					$array = adminNav();
+				
+					$array = adminNav($_SESSION['role']);
 					if (isset($_GET['page'])) {
 						array_walk_recursive($array, 'genAdminNav', $_GET['page']);
 					} else {
@@ -48,9 +54,8 @@ require('bootstrap.php');
 					}
 					
 				?>
-				<li><a href="logout.php">Logout</a></li>
 			</ul>
-		</div>
+ 		</div>
 	</header>
 	<div id="container">
 		

@@ -276,7 +276,7 @@ if (file_exists('core/config.php')) {
 			$dbh->exec($sql);
 			
 			#Create user table
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."users` (`userid` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`userid`), `username` varchar(256) NOT NULL, `password` varchar(256) NOT NULL, `email` varchar(256) NOT NULL, `name` varchar(256) NOT NULL)");
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."users` (`userid` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`userid`), `username` varchar(256) NOT NULL, `password` varchar(256) NOT NULL, `email` varchar(256) NOT NULL, `name` varchar(256) NOT NULL, `role` varchar(256) NOT NULL, UNIQUE KEY(`username`, `email`))");
 			
 			$username = $_POST['username'];
 			$password = sha1($_POST['password'].SALT);

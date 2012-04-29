@@ -1,0 +1,48 @@
+<?php $info = User::getUserInfo($_SESSION['username']) ?>
+<h1>Account Settings</h1>
+<?php if (isset($_POST['save'])) : ?>
+	<?php User::saveUserInfo($_SESSION['username'], $_POST['name'], $_POST['email']) ?>
+	<p class="message success">Account Settings Saved</p>
+	
+	<?php if ($_POST['current'] != '' && $_POST['new'] != '' && $_POST['confirm'] != '') {
+	
+		if ($_POST['new'] != $_POST['confirm']) {
+			echo '<p class="message notice">Sorry, your new passwords don\'t match!</p>';
+		} else {
+			User::changePassword($_SESSION['username'], $_POST['current'], $_POST['new']);
+		}
+		
+	} ?>
+	
+<?php endif; ?>
+<form action="dashboard.php?page=profile" method="post">
+	<fieldset>
+		<ul>
+			<li>
+				<label>Full Name</label>
+				<input type="text" name="name" value="<?php echo $info[0]->name ?>" placeholder="Full Name" />
+			</li>
+			<li>
+				<label>Email Address</label>
+				<input type="email" name="email" value="<?php echo $info[0]->email ?>" placeholder="Email Address" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<ul>
+			<li>
+				<label>Current Password</label>
+				<input type="password" name="current" placeholder="Current Password" />
+			</li>
+			<li>
+				<label>New Password</label>
+				<input type="password" name="new" placeholder="New Password" />
+			</li>
+			<li>
+				<label>Confirm Password</label>
+				<input type="password" name="confirm" placeholder="Confirm Password" />
+			</li>
+		</ul>
+	</fieldset>
+	<input type="submit" name="save" value="Save Settings" class="button settings-btn" />
+</form>

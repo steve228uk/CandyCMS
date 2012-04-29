@@ -1,6 +1,12 @@
 <?php if (isset($_POST['colors'])) :?>
 	<?php Theme::setColors($_POST['colors']) ?>
 <?php else : ?>
+
+<?php if ($_SESSION['role'] != 'admin'){
+ echo '<h1>Access Denied</h1>';
+ exit(1);
+}?>
+
 <h1>Theme Options</h1>
 <p class="leadin">Use the colour pickers below to change the colours on your site</p>
 <form id="colorform">

@@ -28,11 +28,15 @@ function adminNav(){
 	
 	$theme = Options::currentTheme();
 	
-	if (file_exists(THEME_PATH.$theme.'/css/user.php')) {
+	if (file_exists(THEME_PATH.$theme.'/css/user.php') && $_SESSION['role'] == 'admin') {
 		$nav[] = array('theme' => 'Appearance');
 	}
 	
-	$nav[] = array('nav' => 'Navigation', 'plugins' => 'Plugins', 'settings' => 'Settings');
+	$nav[] = array('nav' => 'Navigation');
+	
+	if ($_SESSION['role'] == 'admin') {
+		$nav[] = array('plugins' => 'Plugins', 'settings' => 'Settings');
+	}
 	
 	return $nav;
 }

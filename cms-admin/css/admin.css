@@ -1,3 +1,6 @@
+/* @override 
+	http://jquerycandy.com/cms-admin/css/admin.css */
+
 /**
 * @package CandyCMS
 * @version 0.3
@@ -59,7 +62,8 @@ table {
 /* Automatically clear elements for standards-compliant browsers */
 .clearfix:after,
 .nav:after,
-footer:after {
+footer:after,
+#usernav li:after  {
 	content: ".";
 	display: block;
 	height: 0;
@@ -142,7 +146,7 @@ fieldset{
 }
 
 fieldset label{
-	width: 100px;
+	width: 120px;
 	float: left;
 }
 
@@ -259,6 +263,7 @@ header #head-cont{
 	width: 960px;
 	margin: auto;
 	padding: 15px 10px;
+	position: relative;
 }
 
 header #head-logo{
@@ -317,6 +322,107 @@ header #head-logo:active{
 	box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.48), 0 1px 0 rgba(255, 255, 255, 0.16);
 	border: 1px solid #23282B;
 	padding: 5px 7px;
+}
+
+.user-btn{
+	background-color: #4e5254;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(78, 82, 84)), to(rgb(35, 40, 43)));
+	background-image: -webkit-linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
+	background-image: -moz-linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
+	background-image: -o-linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
+	background-image: -ms-linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
+	background-image: linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#4e5254', EndColorStr='#23282b');
+	border: 1px solid #000;
+	color: #ccc;
+	font-size: 1.1em;
+	font-weight: lighter;
+	float: right;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	padding: 5px 7px;
+	margin: -2px 0 0 15px;
+	cursor: pointer;
+}
+
+.user-btn:hover{
+	background-color: #4f5557;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 85, 87)), to(rgb(42, 48, 52)));
+	background-image: -webkit-linear-gradient(top, rgb(79, 85, 87), rgb(42, 48, 52));
+	background-image: -moz-linear-gradient(top, rgb(79, 85, 87), rgb(42, 48, 52));
+	background-image: -o-linear-gradient(top, rgb(79, 85, 87), rgb(42, 48, 52));
+	background-image: -ms-linear-gradient(top, rgb(79, 85, 87), rgb(42, 48, 52));
+	background-image: linear-gradient(top, rgb(79, 85, 87), rgb(42, 48, 52));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#4f5557', EndColorStr='#2a3034');	
+	color: #fff;
+}
+
+.user-btn:active{
+	background-color: #2a3034;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(42, 48, 52)), to(rgb(79, 85, 87)));
+	background-image: -webkit-linear-gradient(top, rgb(42, 48, 52), rgb(79, 85, 87));
+	background-image: -moz-linear-gradient(top, rgb(42, 48, 52), rgb(79, 85, 87));
+	background-image: -o-linear-gradient(top, rgb(42, 48, 52), rgb(79, 85, 87));
+	background-image: -ms-linear-gradient(top, rgb(42, 48, 52), rgb(79, 85, 87));
+	background-image: linear-gradient(top, rgb(42, 48, 52), rgb(79, 85, 87));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#2a3034', EndColorStr='#4f5557');
+	-moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	-webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.36), 0 1px 0 #4d585e;
+	color: #fff;
+}
+
+#usernav{
+	width: 200px;
+	background: #fff;
+	padding: 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	position: absolute;
+	right: 9px;
+	top: 50px;
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.36);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.36);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.36);
+	display: none;
+}
+
+#usernav li {
+	border-bottom: 1px solid #ddd;
+}
+
+#usernav li:last-child{
+	border: none;
+}
+
+#usernav li a{
+	width: 180px;
+	padding: 5px 10px;
+	float: left;
+	font-size: 1.2em;
+	font-weight: lighter;
+	text-decoration: none;
+}
+
+#usernav li a:hover{
+	background-color: #f3f3f3;
+}
+
+#usernav:after{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #fff;
+	position: absolute;
+	top: -5px;
+	right: 25px;
+	content: '';
 }
 
 /* @end */
@@ -547,6 +653,48 @@ table td{
 
 /* @end */
 
+/* @group Upgrade Page */
+
 .dl-btn{
 	margin-right: 10px;
 }
+
+/* @end */
+
+/* @group Tabs */
+
+.tabs{
+	border-bottom: 1px solid #ccc;
+	width: 300px;
+	margin: 0 0 10px 0;
+}
+
+.tabs li {
+	border: 1px solid #ccc;
+	border-bottom: none;
+	float: right;
+	display: inline;
+	margin-left: 5px;
+	-webkit-border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	background-color: #f2f2f2;
+}
+
+.tabs li:hover{
+	background: #fff;
+}
+
+.tabs li.active{
+	background: #fff;
+}
+
+.tabs li a{
+	font-size: 1.3em;
+	font-weight: lighter;
+	text-decoration: none;
+	padding: 10px;
+	float: left;
+}
+
+/* @end */

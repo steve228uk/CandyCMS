@@ -33,4 +33,10 @@ $(function() {
 		
 	});
 	
+	$('.user-btn').toggle(function() {
+		$('#usernav').show();
+	}, function() {
+		$('#usernav').hide();
+	});
+	
 });

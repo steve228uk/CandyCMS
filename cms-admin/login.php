@@ -19,8 +19,12 @@ if (isset($_POST['username'])) {
 	$login = Login::signin($_POST['username'], $_POST['password']);
 	
 	if ($login != false) {
+		
+		$role = User::getRole($_POST['username']);
+		
 		$_SESSION['loggedin'] = 'true';
 		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['role'] = $role;
 		header('Location: dashboard.php');
 	}
 		
@@ -46,6 +50,7 @@ if (isset($_POST['username'])) {
 				<input type="text" name="username" placeholder="Username" /><br />
 				<input type="password" name="password" placeholder="Password" /><br />
 				<input type="submit" value="Login" class="button" />
+				<a href="iforgot.php" class="right">Forgot Your Password?</a>
 			</form>
 		</div>
 		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo Options::candytitle() ?></a>
