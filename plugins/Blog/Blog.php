@@ -14,7 +14,7 @@
  	public static function install() {
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("CREATE TABLE ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL)");
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL)");
  	
  		# todo: ensure the unique is working
  		
@@ -23,7 +23,7 @@
  	}
  
  	public static function adminNav(){
- 		return array('Blog' => 'blog');
+ 		return array('blog' => 'Blog');
  	}
  
  	
@@ -102,7 +102,7 @@
  		
  		$html = '';
  		foreach ($array as $value) {
- 			$html .= "<h2><a href='news/{$value->post_id}'>{$value->post_title}</a></h2>";
+ 			$html .= "<h2><a href='{$value->post_id}'>{$value->post_title}</a></h2>";
  			$pieces = explode('.', $value->post_body);
  			$html .= $pieces[0].'&hellip;';
  		}
