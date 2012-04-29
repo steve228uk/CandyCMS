@@ -20,6 +20,7 @@ if (isset($_POST['username'])) {
 	
 	if ($login != false) {
 		$_SESSION['loggedin'] = 'true';
+		$_SESSION['username'] = $_POST['username'];
 		header('Location: dashboard.php');
 	}
 		
