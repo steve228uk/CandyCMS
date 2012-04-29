@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Admin dashboard for CandyCMS admin
@@ -23,55 +23,11 @@ require('bootstrap.php');
 	<?php $array = adminNav();?>
 	<title>CandyCMS &raquo; Admin</title>
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	
 	<script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
-	
-
-	
-	<script type="text/javascript">
-		
-		$(function() {
-		
-				
-			$('#sortable').sortable({
-				opacity: 0.6,
-				cursor: 'move',
-				update: function() {
-					var order = $('#sortable').sortable('serialize');
-					$.post("dashboard.php?page=nav&savenavigation", order);
-				}
-			});	
-		
-			
-			$(".colorpicker").miniColors({
-				letterCase: 'uppercase',
-				change: function(hex) {
-					var data = $('#colorform').serialize();
-					$.post("dashboard.php?page=theme&savecolors", data);
-				}
-			});
-			
-			$(".delete").click(function() {
-				
-				var url = $(this).attr('href');
-				var page = $(this).attr('title');
-				var message = confirm('Are you sure you want to delete the page "'+ page +'"? This cannot be undone.');
-				
-				if (message) {
-					window.location = url;
-				}
-				
-				return false;
-				
-			});
-			
-		});
-		
-	</script>
-	
+	<script type="text/javascript" src="js/jquery.scripts.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
 	<script type="text/javascript" src="../core/plugins/ckeditor/ckeditor.js"></script>
 	<!--[if lt IE 9]>
