@@ -1,7 +1,7 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.2.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CandyCMS installer. Creates config.php and creates db structure
@@ -231,13 +231,13 @@ if (file_exists('core/config.php')) {
 			fclose($fp);
 			
 			#Write the HTACCESS file
-			$dir = (trim($_SERVER['PHP_SELF'], '/install.php') == '') ? '' : '/'.trim($_SERVER['PHP_SELF'], '/install.php');
+			$dir = (trim($_SERVER['PHP_SELF'], '/install.php') == '') ? '/' : trim($_SERVER['PHP_SELF'], 'install.php');
 				
 			$htaccess = "RewriteEngine On\n\n";	
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
-			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)$ $dir/index.php?page=$1&post=$2 [QSA,L]";
+			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)$ ".$dir."index.php?page=$1&post=$2 [QSA,L]";
 				
 			$fp = fopen('.htaccess', 'w');
 			fwrite($fp, $htaccess);

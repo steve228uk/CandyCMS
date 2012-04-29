@@ -2,13 +2,13 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.2.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.2');
+define('CANDYVERSION', '0.2.1');
 
 /**
  * Set the development enviornment
