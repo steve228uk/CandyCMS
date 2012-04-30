@@ -284,7 +284,7 @@ if (file_exists('core/config.php')) {
 			$email = $_POST['email'];
 			
 			#insert the user into the DB
-			$dbh->exec("INSERT INTO `".DB_PREFIX."users` (`username`, `password`, `name`, `email`) VALUES ('$username', '$password', '$name', '$email')");
+			$dbh->exec("INSERT INTO `".DB_PREFIX."users` (`username`, `password`, `name`, `email`, `role`) VALUES ('$username', '$password', '$name', '$email', 'admin')");
 		
 			
 		?>
