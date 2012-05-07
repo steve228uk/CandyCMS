@@ -15,3 +15,6 @@ CandyCMS is an easy to use CMS written in PHP.
 
 ## Documentation
 See the Github wiki for documentation
+
+## Issues
+Please log any issues found in the Github repo or tweet them at [@steve228uk](http://www.twitter.com/steve228uk)
