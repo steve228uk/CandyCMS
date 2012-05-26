@@ -299,7 +299,7 @@ if (file_exists('core/config.php')) {
 			<fieldset>
 				<h3>Site Information</h3>
 				<ul>
-					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo trim($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
+					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo $_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
 					<li><label>Site Title</label><input type="text" name="title" placeholder="Site TItle" /></li>
 				</ul>
 			</fieldset>
