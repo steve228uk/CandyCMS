@@ -1,14 +1,14 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.2.1
+* @version 0.4
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CandyCMS installer. Creates config.php and creates db structure
 */
 
-if (version_compare(phpversion(), '5.2', '<')) {
-	echo 'Sorry, CandyCMS requires PHP version 5.2, you\'re currently running: ' . phpversion();
+if (version_compare(phpversion(), '5.3', '<=')) {
+	echo 'Sorry, CandyCMS requires PHP version 5.3, you\'re currently running: ' . phpversion();
 	exit(1);
 }
 

@@ -27,8 +27,8 @@ error_reporting(E_ALL);
 
 # Check which version of PHP is running
 
-if (version_compare(phpversion(), '5.2', '<')) {
-	echo 'Sorry, CandyCMS requires PHP version 5.2, you\'re currently running: ' . phpversion();
+if (version_compare(phpversion(), '5.3', '<=')) {
+	echo 'Sorry, CandyCMS requires PHP version 5.3, you\'re currently running: ' . phpversion();
 	exit(1);
 }
 
