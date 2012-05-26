@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.3
+* @version 0.4
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Admin bootstrap
@@ -11,7 +11,7 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.3');
+define('CANDYVERSION', '0.4');
 
 require_once '../core/config.php';
 

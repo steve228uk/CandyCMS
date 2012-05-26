@@ -83,7 +83,6 @@
 		<input type="submit" name="edituser" value="Edit User" class="button settings-btn" />
 	</form>
 	
-	
 <?php else : ?>
 
 	<h1 class="left">User Settings</h1>
@@ -101,6 +100,11 @@
 		<?php User::editUser($_POST['userid'], $_POST['username'], $_POST['name'], $_POST['email'], $_POST['role']) ?>
 		<p class="message success">User Edited Successfully</p>	
 	<?php endif;?>
+	
+	<?php if (isset($_GET['delete'])) : ?>
+		<?php User::deleteUser($_GET['delete']) ?>
+		<p class="message success">User Deleted</p>
+	<?php endif; ?>
 	
 	<?php User::getUserTable() ?>
 	

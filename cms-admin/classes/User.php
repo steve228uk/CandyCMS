@@ -68,6 +68,13 @@ class User {
 	
 	}
 	
+	public static function deleteUser($username){
+		
+		$dbh = new CandyDB();
+		$dbh->exec("DELETE FROM ".DB_PREFIX."users WHERE username='$username'");
+		
+	}
+	
 	public static function getRole($username){
 		
 		$dbh = new CandyDB();

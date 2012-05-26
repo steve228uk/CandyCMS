@@ -8,7 +8,7 @@
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.3');
+define('CANDYVERSION', '0.4');
 
 /**
  * Set the development enviornment

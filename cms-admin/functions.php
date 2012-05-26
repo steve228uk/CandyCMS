@@ -83,3 +83,19 @@ function deleteDir($dir) {
    } 
    return false; 
 }  
+
+function adminHead(){
+	
+	$plugins = Plugins::enabledPlugins();
+	
+	$html = '';
+	
+	foreach ($plugins as $plugin) {
+		if (method_exists($plugin, 'adminHead')) {
+			$html .= $plugin::adminHead();
+		}
+	}
+	
+	echo $html;
+	
+}
