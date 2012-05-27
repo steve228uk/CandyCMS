@@ -120,9 +120,12 @@
   * @returns array
   */
  
- function getBlogPost($id){
+ function getBlogPost($uri){
+ 
+ 	$uri = str_replace('-', ' ', $uri);
+ 
  	$dbh = new CandyDB();
- 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE post_id = '. $id .'');
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_title` = "'. $uri .'"');
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
