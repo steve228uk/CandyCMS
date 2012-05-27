@@ -13,26 +13,32 @@ if ( !isset($_POST['action']) ) {
 	exit(1);
 }
 
-include 'bootstrap.php';
+# Load our user defined config file
+
+require_once 'config.php';
+
+# Fire up the autoloader I'm going back to 1977!
+
+function __autoload($class_name) {
+	include 'classes/'. $class_name . '.php';
+}
 
 $plugins = Plugins::enabledPlugins();
 
-if (!empty($plugins)) {
+if (!empty($plugins) && in_array($_POST['action'], $plugins)) {
 	
-	foreach($plugins as $plugin){
+	$plugin = $_POST['action'];
 	
-		$file = PLUGIN_PATH."$plugin/$plugin.php";
+	$file = PLUGIN_PATH."$plugin/$plugin.php";
+	
+	if (file_exists($file)) {
 		
-		if (file_exists($file)) {
-			
-			include_once $file;
-			
-			if (method_exists($plugin, 'ajax')) {
-				$plugin::ajax();	
-			}
-			
+		include_once $file;
+		
+		if (method_exists($plugin, 'ajax')) {
+			$plugin::ajax();	
 		}
-	
+		
 	}
 		
 }
