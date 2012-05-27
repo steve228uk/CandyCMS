@@ -193,13 +193,19 @@
  	}
  	
  	public static function adminHead(){
- 	 
  	 	return '<script type="text/javascript" src="'.PLUGIN_URL.'Blog/js/admin.jquery.js"></script>';
- 	 		
  	}
  	
  	public static function ajax(){
- 		echo 'Hello!';
+ 		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."categories (`cat_name`) VALUES ('{$_POST['catname']}')");
+		$sth->execute();
+		
+		$sth = $dbh->prepare("SELECT cat_id FROM ".DB_PREFIX."categories WHERE cat_name='{$_POST['catname']}'");
+		$sth->execute();
+		echo $sth->fetchColumn();
+			
  	}
  	
  }
