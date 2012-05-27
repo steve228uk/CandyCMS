@@ -21,11 +21,22 @@
 	if (!empty($posts)) :
 	
 		foreach ($posts as $post) : ?>
+		
 			<div class="post">
-				<h2><a href="<?php echo $_SERVER['REQUEST_URI'].'/'.str_replace(' ', '-', strtolower($post->post_title)) ?>"><?php echo $post->post_title ?></a></h2>
-				<div class="post-date"><?php Blog::postDate($post->post_id, "d/m/Y") ?></div>
-				<?php echo $post->post_body; ?>
+				<h2>
+					<a href="<?php Blog::postUri($post->post_id) ?>">
+						<?php echo $post->post_title ?>
+					</a>
+				</h2>
+				
+				<div class="post-date">
+					<?php Blog::postDate($post->post_id, "d/m/Y") ?>
+				</div>
+				
+				<?php Blog::postExcerpt($post->post_id); ?>
+				
 			</div>
+			
 		<?php endforeach; else : ?>
 		
 			Sorry, there are no posts available

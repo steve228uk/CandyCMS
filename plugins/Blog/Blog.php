@@ -91,6 +91,32 @@
  		
  	}
  	
+ 	public static function postUri($id){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$title = $sth->fetchColumn();
+ 	
+ 		echo $_SERVER['REQUEST_URI'].'/'.str_replace(' ', '-', strtolower($title));
+ 	
+ 	}
+ 	
+ 	public static function postExcerpt($id, $length = 200){
+ 		
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT post_body FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$body = $sth->fetchColumn();
+ 		
+ 		if (strlen($body) >= 200) {
+ 			echo substr($body, 0, $length).'&hellip;';
+ 		} else {
+ 			echo $body;
+ 		}
+ 		
+ 	}
+ 	
  }
  
  function listBlogPosts(){
