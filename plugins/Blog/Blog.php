@@ -186,10 +186,20 @@
  		
  		$html .= '</ul>';
  		
- 		$html .= '<div><input type="text" name="addcat" placeholder="Category" id="newcat" /><button id="addcat" class="button">Add +</button></div>';
+ 		$html .= '<div><input type="text" name="addcat" placeholder="Category" id="newcat" /><a href="javascript:void(0);" id="addcat" class="button">Add +</a></div>';
  		
  		echo $html;
  			
+ 	}
+ 	
+ 	public static function adminHead(){
+ 	 
+ 	 	return '<script type="text/javascript" src="'.PLUGIN_URL.'Blog/js/admin.jquery.js"></script>';
+ 	 		
+ 	}
+ 	
+ 	public static function ajax(){
+ 		echo 'Hello!';
  	}
  	
  }
