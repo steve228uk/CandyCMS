@@ -32,13 +32,16 @@
 	
 <h1>Edit Post</h1>	
 <form action="dashboard.php?page=blog" method="post">
-	<ul>
-		<li>
+
+	<ul id="post-info">
+		<li id="post-title">
 			<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $post[0]->post_title ?>" />
 		</li>
 		<li><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
-		<li><input type="submit" name="editpost" value="Save Post" class="button" /></li>
+		<li id="post-btn"><input type="submit" name="editpost" value="Save Post" class="button" /></li>
 	</ul>
+	<?php Blog::adminCats($post[0]->cat_id) ?>
+
 	<input type="hidden" name="pid" value="<?php echo $_GET['edit'] ?>" />
 </form>
 <?php else: ?>
@@ -48,7 +51,7 @@
 
 <?php if (isset($_POST['addnew'])) {
 	
-	Blog::addPost($_POST['title'], $_POST['body']);
+	Blog::addPost($_POST['title'], $_POST['body'], $_POST['categories']);
 	echo '<p class="message success">Post Added Successfully</p>';
 		
 } 

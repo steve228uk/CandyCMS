@@ -133,7 +133,7 @@
  		
  	}
  	
- 	public static function adminCats(){
+ 	public static function adminCats($selected = false){
  		
  		$cats = self::getCats();
  		
@@ -141,10 +141,32 @@
  		$html .= '<h3>Categories</h3>';
  		$html .= '<ul>';
  		
+ 
  		if (!empty($cats)) {
+ 		
  			foreach ($cats as $cat) {
- 				$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 				
+ 				if ($selected == false) {
+ 			
+ 					$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 					
+ 				} else {
+ 					
+ 					$selected = json_decode($selected);	
+ 					
+ 					if (in_array($cat->cat_id, $selected)) {
+ 						
+ 					
+ 					
+ 						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' checked='checked' /></li>";	
+ 					} else {
+ 						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 					}
+ 					
+ 				}
+ 				
  			}	
+ 			
  		} else {
  			$html .= '<li>Add a category to begin</li>';
  		}
