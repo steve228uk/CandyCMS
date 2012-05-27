@@ -54,8 +54,6 @@
  		
  		$cats = addslashes($categories);
  		
- 		echo $cats;
- 	
  		$dbh = new CandyDB();
  		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id) VALUES ('$post_title', '".addslashes($post_body)."', '$cats')");
  		$sth->execute();	
