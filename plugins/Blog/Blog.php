@@ -15,7 +15,9 @@
  	public static function install() {
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`) post_body TEXT NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, cat_id INT(11) NOT NULL)");
+ 		
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
  	}
  
@@ -133,6 +135,15 @@
  
  	$dbh = new CandyDB();
  	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_title` = "'. $uri .'"');
+ 	$sth->execute();
+ 	
+ 	return $sth->fetchAll(PDO::FETCH_CLASS);
+ }
+ 
+ function getBlogPostById($id){
+ 
+ 	$dbh = new CandyDB();
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_id` = "'. $id .'"');
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
