@@ -1,9 +1,7 @@
-/* @override 
-	http://jquerycandy.com/cms-admin/css/admin.css */
-
 /**
 * @package CandyCMS
-* @version 0.3
+* @version 0.5
+* @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CSS for admin panel
@@ -695,6 +693,111 @@ table td{
 	text-decoration: none;
 	padding: 10px;
 	float: left;
+}
+
+/* @end */
+
+/* @group Blog */
+
+#post-info{
+	float: left;
+	width: 700px;
+	margin: 0 0 20px;
+}
+
+#post-title{
+	margin: 0 0 10px;
+}
+
+#blog-cats{
+	background-color: #eeeeee;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(238, 238, 238)), to(rgb(211, 211, 211)));
+	background-image: -webkit-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
+	background-image: -moz-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
+	background-image: -o-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
+	background-image: -ms-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
+	background-image: linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#eeeeee', EndColorStr='#d3d3d3');
+	
+	float: right;
+	width: 230px;
+	border: 5px solid #eee;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+	
+	overflow: hidden;
+	-moz-box-shadow: -1px -1px 0 #D3D3D3, 1px 1px 0 #D3D3D3;
+	-webkit-box-shadow: -1px -1px 0 #D3D3D3, 1px 1px 0 #D3D3D3;
+	box-shadow: -1px -1px 0 #D3D3D3, 1px 1px 0 #D3D3D3;
+	padding: 5px;
+	
+	margin: 50px 0 0;
+}
+
+#blog-cats ul{
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	height: 120px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#blog-cats ul li{
+	padding: 5px;
+	border-bottom: 1px solid #e4e4e4;
+}
+
+#blog-cats li input{
+	float: right;
+}
+
+#blog-cats ul li:last-child{
+	border: none;
+}
+
+#blog-cats h3{
+	margin: 0 0 10px;
+}
+
+#post-btn{
+	margin: 10px 0 0;
+}
+
+#newcat{
+	
+	background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+	
+	background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+	border: 1px solid #ccc;
+	padding: 6px;
+	font-size: 1.2em;
+	font-weight: lighter;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 150px;
+
+	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	-moz-box-shadow: inset 0 1px 0 #ffffff;
+	box-shadow: inset 0 1px 0 #ffffff;
+
+	margin: 0 5px 0 0;
+}
+
+#blog-cats div{
+	padding: 10px 0 5px;
 }
 
 /* @end */

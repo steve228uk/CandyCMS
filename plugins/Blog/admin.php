@@ -16,18 +16,19 @@
 
 <h1>Add New Post</h1>	
 <form action="dashboard.php?page=blog" method="post">
-	<ul>
-		<li>
+	<ul id="post-info">
+		<li id="post-title">
 			<input type="text" class="inputstyle" name="title" placeholder="Title" />
 		</li>
 		<li><textarea class="ckeditor" name="body"></textarea></li>
-		<li><input type="submit" name="addnew" value="Add New Post" class="button" /></li>
+		<li id="post-btn"><input type="submit" name="addnew" value="Add New Post" class="button" /></li>
 	</ul>
+	<?php Blog::adminCats() ?>
 </form>
 
 <?php elseif(isset($_GET['edit'])) : ?>
 
-<?php $post = getBlogPost($_GET['edit']) ?>
+<?php $post = getBlogPostById($_GET['edit']) ?>
 	
 <h1>Edit Post</h1>	
 <form action="dashboard.php?page=blog" method="post">

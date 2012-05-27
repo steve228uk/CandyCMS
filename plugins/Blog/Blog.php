@@ -119,6 +119,40 @@
  		
  	}
  	
+ 	public static function getCats(){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT * FROM ". DB_PREFIX ."categories");
+ 		$sth->execute();
+ 		
+ 		return $sth->fetchAll(PDO::FETCH_CLASS);
+ 		
+ 	}
+ 	
+ 	public static function adminCats(){
+ 		
+ 		$cats = self::getCats();
+ 		
+ 		$html = '<div id="blog-cats">';
+ 		$html .= '<h3>Categories</h3>';
+ 		$html .= '<ul>';
+ 		
+ 		if (!empty($cats)) {
+ 			foreach ($cats as $cat) {
+ 				$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 			}	
+ 		} else {
+ 			$html .= '<li>Add a category to begin</li>';
+ 		}
+ 		
+ 		$html .= '</ul>';
+ 		
+ 		$html .= '<div><input type="text" name="addcat" placeholder="Category" id="newcat" /><button id="addcat" class="button">Add +</button></div>';
+ 		
+ 		echo $html;
+ 			
+ 	}
+ 	
  }
  
  function listBlogPosts(){

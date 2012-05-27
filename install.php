@@ -237,7 +237,7 @@ if (file_exists('core/config.php')) {
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
-			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)$ ".$dir."index.php?page=$1&post=$2 [QSA,L]";
+			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."/index.php?page=$1&category=$2&post=$3 [QSA,L]";
 				
 			$fp = fopen('.htaccess', 'w');
 			fwrite($fp, $htaccess);
@@ -299,7 +299,7 @@ if (file_exists('core/config.php')) {
 			<fieldset>
 				<h3>Site Information</h3>
 				<ul>
-					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo $_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
+					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo$_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
 					<li><label>Site Title</label><input type="text" name="title" placeholder="Site TItle" /></li>
 				</ul>
 			</fieldset>
