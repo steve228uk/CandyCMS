@@ -6,7 +6,8 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * 
+ * @version 0.5
+ * @since 0.1
  */
  
  class Blog {
@@ -15,10 +16,6 @@
  		
  		$dbh = new CandyDB();
  		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL)");
- 	
- 		# todo: ensure the unique is working
- 		
- 		# echo '<p class="message success">The blog can be accessed from the top navigation</p>';	
  		
  	}
  
@@ -26,26 +23,6 @@
  		return array('blog' => 'Blog');
  	}
  
- 	
-// 	public static function adminSettings(){
-// 		
-// 		$ddown = Pages::dropdownPages('blog');
-// 		
-// 		$html = "<ul>";
-// 		$html .= "<li>";
-// 		$html .= "<label>Blog Page</label>";
-// 		
-// 		$html .= $ddown;
-// 		
-// 		$html .= "</li>";
-// 		$html .= "</ul>";
-// 		
-// 		return $html;
-// 	}
-// 	
-// 	public static function saveSettings(){
-// 	
-// 	}
  	
  	public static function postsTable(){
  	
@@ -113,7 +90,16 @@
  	
  	public static function addShorttag(){
  		$replace = self::latestPost();
- 		return array('{{latestpost}}' => $replace);	
+ 		
+ 		// Include frontend
+ 		
+		ob_start();
+		include 'frontend.php';
+		$include = ob_get_clean();
+	  
+ 		
+ 		return array('{{latestpost}}' => $replace, '{{blog}}' => $include);	
+ 		
  	}
  	
  }
