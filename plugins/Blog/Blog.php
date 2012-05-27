@@ -2,7 +2,7 @@
 
 /**
  * @plugin Blog
- * @description A simple blog for CandyCMS
+ * @description A simple blog for CandyCMS. Use {{blog}}
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
@@ -69,36 +69,13 @@
  		
  	}
  	
- 	public static function latestPost(){
- 		
- 		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT 1');
- 		$sth->execute();
- 		
- 		$array = $sth->fetchAll(PDO::FETCH_CLASS);
- 		
- 		$html = '';
- 		foreach ($array as $value) {
- 			$html .= "<h2><a href='{$value->post_id}'>{$value->post_title}</a></h2>";
- 			$pieces = explode('.', $value->post_body);
- 			$html .= $pieces[0].'&hellip;';
- 		}
- 		
- 		return $html;
- 	
- 	}
- 	
  	public static function addShorttag(){
- 		$replace = self::latestPost();
- 		
- 		// Include frontend
  		
 		ob_start();
 		include 'frontend.php';
 		$include = ob_get_clean();
 	  
- 		
- 		return array('{{latestpost}}' => $replace, '{{blog}}' => $include);	
+ 		return array('{{blog}}' => $include);	
  		
  	}
  	
