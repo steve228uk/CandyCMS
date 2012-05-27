@@ -58,7 +58,7 @@
 
 if (isset($_POST['editpost'])) {
 	
-	Blog::editPost($_POST['title'], $_POST['body'], $_POST['pid']);
+	Blog::editPost($_POST['title'], $_POST['body'], $_POST['categories'], $_POST['pid']);
 	echo '<p class="message success">Post Edited Sucessfully</p>';
 	
 }

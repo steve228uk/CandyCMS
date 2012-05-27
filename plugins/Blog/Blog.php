@@ -60,10 +60,16 @@
  	
  	}
  
- 	public static function editPost($post_title, $post_body, $pid){
+ 	public static function editPost($post_title, $post_body, $categories, $pid){
+ 		
+ 		$categories = json_encode($categories);
+ 		
+ 		$cats = addslashes($categories);
+ 		
+ 		var_dump($cats);
  		
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'posts SET post_title="'. $post_title .'", post_body="'. addslashes($post_body) .'" WHERE post_id="' . $pid . '"');
+ 		$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
  		$sth->execute();	
  		
  	}
@@ -103,8 +109,18 @@
  		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
  		$title = $sth->fetchColumn();
- 	
- 		echo $_SERVER['REQUEST_URI'].'/'.str_replace(' ', '-', strtolower($title));
+ 		
+ 		$sth = $dbh->prepare("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$cats = $sth->fetchColumn();
+ 		
+ 		$cats = json_decode($cats);
+ 		
+ 		$sth = $dbh->prepare("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id='". $cats[0] ."'");
+ 		$sth->execute();
+ 		$catname = str_replace(' ', '-', strtolower($sth->fetchColumn()));
+ 		
+ 		echo $_SERVER['REQUEST_URI'].'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
  	
@@ -152,12 +168,9 @@
  					
  				} else {
  					
- 					$selected = json_decode($selected);	
+ 					$cats = json_decode($selected);	
  					
- 					if (in_array($cat->cat_id, $selected)) {
- 						
- 					
- 					
+ 					if (in_array($cat->cat_id, $cats)) {
  						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' checked='checked' /></li>";	
  					} else {
  						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";

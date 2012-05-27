@@ -33,9 +33,12 @@
 					<?php Blog::postDate($post->post_id, "d/m/Y") ?>
 				</div>
 				
-				<?php Blog::postExcerpt($post->post_id); ?>
+				<?php Blog::postExcerpt($post->post_id, 400); ?>
 				
+				<div class="divide"></div>
+					
 			</div>
+			
 			
 		<?php endforeach; else : ?>
 		
