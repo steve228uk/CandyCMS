@@ -237,3 +237,34 @@
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
+ 
+
+// The following will generate and rss feed in the root of the CandyCMS install
+
+$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+$xml .= '<rss version="2.0">';
+$xml .=	'<channel>';
+$xml .= '<title>'.Options::candytitle().'</title>';
+$xml .=	'<link>'.Options::siteUrl().'</link>';
+$xml .= '<description>'.Options::candytitle().' Blog</description>';
+
+$posts = listBlogPosts();
+
+foreach ($posts as $post) {
+	
+	$xml .= '<item>';
+	$xml .= '<title>'.$post->post_title.'</title>';
+	$xml .= '<date>'.$post->post_date.'</date>';
+	$xml .= '<body>'.$post->post_body.'</body>';
+	$xml .= '</item>';
+}
+
+$xml .= '</channel>';
+$xml .= '</rss>';
+		
+ 
+# Write the sitemap to sitemap file!
+
+$fp = fopen(CMS_PATH.'rss.xml', 'w');
+fwrite($fp, $xml);
+fclose($fp);
