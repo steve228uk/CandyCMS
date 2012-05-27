@@ -1,8 +1,17 @@
 <?php if (isset($_GET['post']) && $_GET['post'] != '') { ?>
 	
 	<?php $post = getBlogPost($_GET['post']);?>
-	<h1><?php echo $post[0]->post_title ?></h1>
-	<?php echo $post[0]->post_body ?>
+	
+	<?php if (!empty($post)) : ?>
+		
+		<h1><?php echo $post[0]->post_title ?></h1>
+		<?php echo $post[0]->post_body ?>
+	
+	<?php else : ?>
+	
+		<?php include THEME_PATH.Options::currentTheme().'/404.php' ?>
+	
+	<?php endif ?>
 	
 <?php } else { ?>
 
