@@ -15,7 +15,7 @@
  	public static function install() {
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`) post_body TEXT NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, cat_id INT(11) NOT NULL)");
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`) post_body TEXT NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, cat_id VARCHAR(256) NOT NULL)");
  		
  		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
@@ -48,10 +48,16 @@
  		
  	}
  	
- 	public static function addPost($post_title, $post_body){
+ 	public static function addPost($post_title, $post_body, $categories){
  		
+ 		$categories = json_encode($categories);
+ 		
+ 		$cats = addslashes($categories);
+ 		
+ 		echo $cats;
+ 	
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'posts (post_title, post_body) VALUES ("'. $post_title .'", "'. addslashes($post_body) .'")');
+ 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id) VALUES ('$post_title', '".addslashes($post_body)."', '$cats')");
  		$sth->execute();	
  	
  	}
