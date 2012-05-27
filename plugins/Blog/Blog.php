@@ -29,11 +29,12 @@
  		$posts = listBlogPosts();
  		
  		$html = '<table>';
- 		$html .= '<thead><tr><th>Post Title</th><th></th><th></th></tr></thead>';
+ 		$html .= '<thead><tr><th>Post Title</th><th>Posted</th><th></th><th></th></tr></thead>';
  		
  		foreach ($posts as $post) {
  			$html .= '<tr>';
  			$html .= '<td>'.$post->post_title.'</td>';
+ 			$html .= '<td>'.date('d/m/Y H:i:s', strtotime($post->post_date)).'</td>';
  			$html .= '<td><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page">Edit</a></td>';
  			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="Delete Page">[x]</a></td>';
  			$html .= '</tr>';	
@@ -69,6 +70,17 @@
  		
  	}
  	
+ 	public static function postDate($id, $format = "d/m/Y H:i:s"){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT post_date FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$dbdate = $sth->fetchColumn();
+ 	
+ 		echo date($format, strtotime($dbdate));
+ 	
+ 	}
+ 	
  	public static function addShorttag(){
  		
 		ob_start();
@@ -81,10 +93,6 @@
  	
  }
  
- /**
-  * @returns array
-  */
- 
  function listBlogPosts(){
  	$dbh = new CandyDB();
  	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC');
@@ -92,11 +100,7 @@
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
- 
- /**
-  * @returns array
-  */
- 
+
  function getBlogPost($uri){
  
  	$uri = str_replace('-', ' ', $uri);
