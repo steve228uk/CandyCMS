@@ -2,11 +2,12 @@
 
 /**
  * @plugin Blog
- * @description A simple blog for CandyCMS
+ * @description A simple blog for CandyCMS. Use {{blog}}
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * 
+ * @version 0.5
+ * @since 0.1
  */
  
  class Blog {
@@ -14,11 +15,10 @@
  	public static function install() {
  		
  		$dbh = new CandyDB();
- 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, post_body TEXT NOT NULL)");
  	
- 		# todo: ensure the unique is working
- 		
- 		# echo '<p class="message success">The blog can be accessed from the top navigation</p>';	
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`), post_body TEXT NOT NULL, cat_id VARCHAR(256) NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+ 	
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
  	}
  
@@ -27,36 +27,17 @@
  	}
  
  	
-// 	public static function adminSettings(){
-// 		
-// 		$ddown = Pages::dropdownPages('blog');
-// 		
-// 		$html = "<ul>";
-// 		$html .= "<li>";
-// 		$html .= "<label>Blog Page</label>";
-// 		
-// 		$html .= $ddown;
-// 		
-// 		$html .= "</li>";
-// 		$html .= "</ul>";
-// 		
-// 		return $html;
-// 	}
-// 	
-// 	public static function saveSettings(){
-// 	
-// 	}
- 	
  	public static function postsTable(){
  	
  		$posts = listBlogPosts();
  		
  		$html = '<table>';
- 		$html .= '<thead><tr><th>Post Title</th><th></th><th></th></tr></thead>';
+ 		$html .= '<thead><tr><th>Post Title</th><th>Posted</th><th></th><th></th></tr></thead>';
  		
  		foreach ($posts as $post) {
  			$html .= '<tr>';
  			$html .= '<td>'.$post->post_title.'</td>';
+ 			$html .= '<td>'.date('d/m/Y H:i:s', strtotime($post->post_date)).'</td>';
  			$html .= '<td><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page">Edit</a></td>';
  			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="Delete Page">[x]</a></td>';
  			$html .= '</tr>';	
@@ -68,18 +49,28 @@
  		
  	}
  	
- 	public static function addPost($post_title, $post_body){
+ 	public static function addPost($post_title, $post_body, $categories){
+ 		
+ 		$categories = json_encode($categories);
+ 		
+ 		$cats = addslashes($categories);
  		
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'posts (post_title, post_body) VALUES ("'. $post_title .'", "'. addslashes($post_body) .'")');
+ 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id) VALUES ('$post_title', '".addslashes($post_body)."', '$cats')");
  		$sth->execute();	
  	
  	}
  
- 	public static function editPost($post_title, $post_body, $pid){
+ 	public static function editPost($post_title, $post_body, $categories, $pid){
+ 		
+ 		$categories = json_encode($categories);
+ 		
+ 		$cats = addslashes($categories);
+ 		
+ 		var_dump($cats);
  		
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'posts SET post_title="'. $post_title .'", post_body="'. addslashes($post_body) .'" WHERE post_id="' . $pid . '"');
+ 		$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
  		$sth->execute();	
  		
  	}
@@ -92,35 +83,133 @@
  		
  	}
  	
- 	public static function latestPost(){
- 		
+ 	public static function postDate($id, $format = "d/m/Y H:i:s"){
+ 	
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT 1');
+ 		$sth = $dbh->prepare("SELECT post_date FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
- 		
- 		$array = $sth->fetchAll(PDO::FETCH_CLASS);
- 		
- 		$html = '';
- 		foreach ($array as $value) {
- 			$html .= "<h2><a href='{$value->post_id}'>{$value->post_title}</a></h2>";
- 			$pieces = explode('.', $value->post_body);
- 			$html .= $pieces[0].'&hellip;';
- 		}
- 		
- 		return $html;
+ 		$dbdate = $sth->fetchColumn();
+ 	
+ 		echo date($format, strtotime($dbdate));
  	
  	}
  	
  	public static function addShorttag(){
- 		$replace = self::latestPost();
- 		return array('{{latestpost}}' => $replace);	
+ 		
+		ob_start();
+		include 'frontend.php';
+		$include = ob_get_clean();
+	  
+ 		return array('{{blog}}' => $include);	
+ 		
+ 	}
+ 	
+ 	public static function postUri($id){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$title = $sth->fetchColumn();
+ 		
+ 		$sth = $dbh->prepare("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$cats = $sth->fetchColumn();
+ 		
+ 		$cats = json_decode($cats);
+ 		
+ 		$sth = $dbh->prepare("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id='". $cats[0] ."'");
+ 		$sth->execute();
+ 		$catname = str_replace(' ', '-', strtolower($sth->fetchColumn()));
+ 		
+ 		echo $_SERVER['REQUEST_URI'].'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 	
+ 	}
+ 	
+ 	public static function postExcerpt($id, $length = 200){
+ 		
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT post_body FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth->execute();
+ 		$body = $sth->fetchColumn();
+ 		
+ 		if (strlen($body) >= 200) {
+ 			echo substr($body, 0, $length).'&hellip;';
+ 		} else {
+ 			echo $body;
+ 		}
+ 		
+ 	}
+ 	
+ 	public static function getCats(){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT * FROM ". DB_PREFIX ."categories");
+ 		$sth->execute();
+ 		
+ 		return $sth->fetchAll(PDO::FETCH_CLASS);
+ 		
+ 	}
+ 	
+ 	public static function adminCats($selected = false){
+ 		
+ 		$cats = self::getCats();
+ 		
+ 		$html = '<div id="blog-cats">';
+ 		$html .= '<h3>Categories</h3>';
+ 		$html .= '<ul>';
+ 		
+ 
+ 		if (!empty($cats)) {
+ 		
+ 			foreach ($cats as $cat) {
+ 				
+ 				if ($selected == false) {
+ 			
+ 					$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 					
+ 				} else {
+ 					
+ 					$cats = json_decode($selected);	
+ 					
+ 					if (in_array($cat->cat_id, $cats)) {
+ 						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' checked='checked' /></li>";	
+ 					} else {
+ 						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
+ 					}
+ 					
+ 				}
+ 				
+ 			}	
+ 			
+ 		} else {
+ 			$html .= '<li>Add a category to begin</li>';
+ 		}
+ 		
+ 		$html .= '</ul>';
+ 		
+ 		$html .= '<div><input type="text" name="addcat" placeholder="Category" id="newcat" /><a href="javascript:void(0);" id="addcat" class="button">Add +</a></div>';
+ 		
+ 		echo $html;
+ 			
+ 	}
+ 	
+ 	public static function adminHead(){
+ 	 	return '<script type="text/javascript" src="'.PLUGIN_URL.'Blog/js/admin.jquery.js"></script>';
+ 	}
+ 	
+ 	public static function ajax(){
+ 		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."categories (`cat_name`) VALUES ('{$_POST['catname']}')");
+		$sth->execute();
+		
+		$sth = $dbh->prepare("SELECT cat_id FROM ".DB_PREFIX."categories WHERE cat_name='{$_POST['catname']}'");
+		$sth->execute();
+		echo $sth->fetchColumn();
+			
  	}
  	
  }
- 
- /**
-  * @returns array
-  */
  
  function listBlogPosts(){
  	$dbh = new CandyDB();
@@ -129,15 +218,51 @@
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
+
+ function getBlogPost($uri){
  
- /**
-  * @returns array
-  */
+ 	$uri = str_replace('-', ' ', $uri);
  
- function getBlogPost($id){
  	$dbh = new CandyDB();
- 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE post_id = '. $id .'');
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_title` = "'. $uri .'"');
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
+ 
+ function getBlogPostById($id){
+ 
+ 	$dbh = new CandyDB();
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_id` = "'. $id .'"');
+ 	$sth->execute();
+ 	
+ 	return $sth->fetchAll(PDO::FETCH_CLASS);
+ }
+ 
+
+// The following will generate and rss feed in the root of the CandyCMS install
+
+$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+$xml .= '<rss version="2.0">';
+$xml .=	'<channel>';
+$xml .= '<title>'.Options::candytitle().'</title>';
+$xml .=	'<link>'.Options::siteUrl().'</link>';
+$xml .= '<description>'.Options::candytitle().' Blog</description>';
+
+$posts = listBlogPosts();
+
+foreach ($posts as $post) {
+	
+	$xml .= '<item>';
+	$xml .= '<title>'.$post->post_title.'</title>';
+	$xml .= '<date>'.$post->post_date.'</date>';
+	$xml .= '<body>'.$post->post_body.'</body>';
+	$xml .= '</item>';
+}
+
+$xml .= '</channel>';
+$xml .= '</rss>';
+
+$fp = fopen(CMS_PATH.'rss.xml', 'w');
+fwrite($fp, $xml);
+fclose($fp);
