@@ -3,7 +3,8 @@
 /**
 * @package CandyCMS
 * @subpackage Blog
-* @version 0.1
+* @version 0.5
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * This file generates the pages for the blog admin
@@ -42,7 +43,7 @@
 <?php else: ?>
 
 <h1 class="left">Blog</h1>
-<a href="dashboard.php?page=blog&new" class="addnew right">Add New Post +</a>
+<a href="dashboard.php?page=blog&new" class="button addnew right">Add New Post +</a>
 
 <?php if (isset($_POST['addnew'])) {
 	
