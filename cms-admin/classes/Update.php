@@ -1,7 +1,8 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.5
+* @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Update class for CandyCMS
@@ -10,7 +11,7 @@
 class Update {
 
 	private static function xml(){
-		$xml = simplexml_load_file('http://www.jquerycandy.com/update.xml'); 
+		$xml = simplexml_load_file('http://www.jquerycandy.com/cmsupdate.xml'); 
 		return $xml;
 	}
 
@@ -19,15 +20,24 @@ class Update {
 		$xml = self::xml();
 		$curver = CANDYVERSION;
 		
-		foreach ($xml as $xml) {
-			$newver = $xml->item->version;
+		echo '<pre>';
+		
+		print_r();
+		
+		echo '</pre>';
+		
+		foreach ($xml->channel->item as $item) {
+			$newver = $item->version;
+			
+			if(version_compare($curver, $newver, '>=')){
+				$return = false;
+			} else {
+				$return = "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
+				break;
+			}
 		}
-				
-		if(version_compare($curver, $newver, '>=')){
-			return false;
-		} else {
-			return "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
-		}
+		
+		return $return;	
 				
 	}
 	
@@ -35,12 +45,20 @@ class Update {
 		
 		$xml = self::xml();
 		
-		foreach ($xml as $xml) {
-			$version = 'CandyCMS v'.$xml->item->version; 
-			$changelog = $xml->item->changelog;
-			$updateurl = $xml->item->updateurl;
-			$downloadurl = $xml->item->downloadurl;
+		$curver = CANDYVERSION;
+		
+		foreach ($xml->channel->item as $item) {
+			$newver = $item->version;
+			
+			if(!version_compare($curver, $newver, '>=')){
+				$version = 'CandyCMS v'.$item->version; 
+				$changelog = $item->changelog;
+				$updateurl = $item->updateurl;
+				$downloadurl = $item->downloadurl;
+				break;
+			}
 		}
+	
 		
 		if (self::checkUpdate() == false) {
 			echo '<p class="leadin">CandyCMS is up to date!</p>';
@@ -58,11 +76,20 @@ class Update {
 	
 		$xml = self::xml();
 		
-		foreach ($xml as $xml) {
-			$updateurl = $xml->item->updateurl;
+		$curver = CANDYVERSION;
+		
+		foreach ($xml->channel->item as $item) {
+			$newver = $item->version;
+			
+			if(version_compare($curver, $newver, '>=')){
+				$return = false;
+			} else {
+				$return = $item->updateurl;
+				break;
+			}
 		}
 		
-		return $updateurl;
+		return $return;
 		
 	}
 
