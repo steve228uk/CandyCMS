@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.5
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The main functions file, contains the biggies!
@@ -74,4 +75,9 @@ function candyCss($filename){
 function candyScript($filename){
 	$theme = Options::currentTheme();
 	echo '<script type="text/javascript" src="'.THEME_URL.$theme.'/js/'.$filename.'"></script>';
+}
+
+function candyImg($filename, $alt){
+	$theme = Options::currentTheme();
+	echo '<img src="'.THEME_URL.$theme.'/images/'.$filename.'" alt="'.$alt.'" />';
 }
