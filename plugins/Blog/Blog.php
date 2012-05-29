@@ -248,6 +248,7 @@ $xml .=	'<channel>';
 $xml .= '<title>'.Options::candytitle().'</title>';
 $xml .=	'<link>'.Options::siteUrl().'</link>';
 $xml .= '<description>'.Options::candytitle().' Blog</description>';
+$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
 
 $posts = listBlogPosts();
 
@@ -255,8 +256,8 @@ foreach ($posts as $post) {
 	
 	$xml .= '<item>';
 	$xml .= '<title>'.$post->post_title.'</title>';
-	$xml .= '<date>'.$post->post_date.'</date>';
-	$xml .= '<body>'.$post->post_body.'</body>';
+	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
+	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
 	$xml .= '</item>';
 }
 
