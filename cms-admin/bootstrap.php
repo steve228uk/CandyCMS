@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.5
+* @version 0.5.2
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -12,7 +12,7 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.5');
+define('CANDYVERSION', '0.5.2-dev1');
 
 require_once '../core/config.php';
 
