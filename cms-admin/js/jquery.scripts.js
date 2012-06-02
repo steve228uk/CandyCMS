@@ -1,5 +1,6 @@
 $(function() {
-
+	
+	$('.ckeditor').redactor();
 		
 	$('#sortable').sortable({
 		opacity: 0.6,

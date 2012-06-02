@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.5
+* @version 0.5.2
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -24,12 +24,13 @@ require('bootstrap.php');
 	<?php $array = adminNav();?>
 	<title>CandyCMS &raquo; Admin</title>
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
+		<link rel="stylesheet" href="../core/plugins/redactor/css/redactor.css" type="text/css" />
 	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
+	<script type="text/javascript" src="../core/plugins/redactor/redactor.min.js"></script>
 	<script type="text/javascript" src="js/jquery.scripts.js"></script>
-	<script type="text/javascript" src="../core/plugins/ckeditor/ckeditor.js"></script>
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
