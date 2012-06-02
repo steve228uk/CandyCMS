@@ -14,6 +14,8 @@
 	
 	<?php endif ?>
 	
+	<?php Blog::commentForm() ?>
+	
 <?php } else { ?>
 
 	<?php $posts = listBlogPosts(); 

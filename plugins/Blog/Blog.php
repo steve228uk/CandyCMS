@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.5
+ * @version 0.5.2
  * @since 0.1
  */
  
@@ -207,6 +207,67 @@
 		$sth->execute();
 		echo $sth->fetchColumn();
 			
+ 	}
+ 	
+ 	public static function disqusAccount(){
+ 	
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT option_value FROM ". DB_PREFIX ."options WHERE option_key='disqus'");
+ 		$sth->execute();
+ 		return $sth->fetchColumn();
+ 	
+ 	}
+ 	
+ 	public static function commentForm(){
+ 	
+ 		$post = getBlogPost($_GET['post']);
+ 	
+ 		$url = Options::siteUrl();
+ 	
+ 		$html = '<div id="disqus_thread"></div>'."\n";
+ 		$html .= '<script type="text/javascript">'."\n";
+ 		   
+ 		   
+ 		$html .= "var disqus_shortname = '".self::disqusAccount()."';\n";
+ 		$html .= "var disqus_identifier = '".$post[0]->post_id."';\n";
+ 		
+ 		$html .= "var disqus_url = '/".$_GET['page']."/".$_GET['category']."/".$_GET['post']."';\n";
+ 		   
+ 		   
+ 		$html .= "(function() {\n";
+ 		$html .= "var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;\n";
+ 		$html .= "dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';\n";
+ 		$html .= "(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);\n";
+ 		$html .= "})();\n";
+ 		$html .= "</script>";
+ 
+ 		
+ 		echo $html;
+ 		
+ 	}
+ 	
+ 	public static function adminSettings(){
+ 		
+ 		$disqus = self::disqusAccount();
+ 		
+ 		$html = "<ul>";
+ 		$html .= "<li>";
+ 		$html .= "<label>Disqus Account</label>";
+ 		
+ 		$html .= "<input type='text' name='disqus' value='$disqus'/>";
+ 		
+ 		$html .= "</li>";
+ 		$html .= "</ul>";
+ 		
+ 		return $html;
+ 	}
+ 	
+ 	public static function saveSettings(){
+ 		$account = $_POST['disqus'];
+ 		
+ 		$dbh = new CandyDB();
+ 		$dbh->exec('UPDATE '. DB_PREFIX .'options SET option_value="'. $account .'" WHERE option_key="disqus"');
+ 		
  	}
  	
  }
