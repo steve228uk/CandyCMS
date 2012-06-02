@@ -24,7 +24,7 @@ $(function() {
 		
 		var url = $(this).attr('href');
 		var page = $(this).attr('title');
-		var message = confirm('Are you sure you want to delete the page "'+ page +'"? This cannot be undone.');
+		var message = confirm('Are you sure you want to delete the following: "'+ page +'"? This cannot be undone.');
 		
 		if (message) {
 			window.location = url;

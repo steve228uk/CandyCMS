@@ -39,7 +39,7 @@
  			$html .= '<td>'.$post->post_title.'</td>';
  			$html .= '<td>'.date('d/m/Y H:i:s', strtotime($post->post_date)).'</td>';
  			$html .= '<td><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page">Edit</a></td>';
- 			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="Delete Page">[x]</a></td>';
+ 			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="'.$post->post_title.'" class="delete">[x]</a></td>';
  			$html .= '</tr>';	
  		}
  		
@@ -248,15 +248,22 @@
  	
  	public static function adminSettings(){
  		
+ 		
+ 		
  		$disqus = self::disqusAccount();
  		
- 		$html = "<ul>";
+ 		$html = "<h3>Blog Settings</h3>";
+ 		
+ 		$html .= "<ul>";
  		$html .= "<li>";
  		$html .= "<label>Disqus Account</label>";
- 		
  		$html .= "<input type='text' name='disqus' value='$disqus'/>";
- 		
  		$html .= "</li>";
+ 		
+ 		$html .= "<label>Posts Per Page</label>";
+ 		$html .= "<input type='text' name='perpage' value=''/>";
+ 		$html .= "</li>";
+ 		
  		$html .= "</ul>";
  		
  		return $html;
