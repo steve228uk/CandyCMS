@@ -3,12 +3,11 @@ html {
 	margin: 0;
 }
 body {
-	font-family: "PT Sans", "Trebuchet MS", Verdana, Arial, Tahoma, sans-serif;      
-	font-size: 17px;
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
 	background: #fff;
+	font: 300 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 #page {
 	margin: 20px;	
