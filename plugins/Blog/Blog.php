@@ -125,7 +125,11 @@
  		$sth->execute();
  		$catname = str_replace(' ', '-', strtolower($sth->fetchColumn()));
  		
- 		echo $_SERVER['REQUEST_URI'].'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		$uri = explode('/', $_SERVER['REQUEST_URI']);
+ 		$uri = $uri[1];
+ 		
+ 		
+ 		echo Options::siteUrl().$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
  	
