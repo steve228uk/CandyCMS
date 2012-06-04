@@ -288,15 +288,85 @@
  		
  	}
  	
- 	public static function pagination(){
- 		
+ 	public static function nextLink($text = 'Next', $class = false){
+ 	
  		$dbh = new CandyDB();
  		$sth = $dbh->prepare("SELECT COUNT(*) FROM `".DB_PREFIX."posts`");
  		$sth->execute();
  		$count = $sth->fetchColumn();
- 	
+ 		
+ 		$sth = $dbh->prepare("SELECT option_value FROM ".DB_PREFIX."options WHERE option_key='perpage'");
+ 		$sth->execute();
+ 		$limit = $sth->fetchColumn();
+
+ 		$uri = explode('/', $_SERVER['REQUEST_URI']);
+ 		$uri = $uri[1];
+ 
+ 		if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+ 			$offset = $_GET['category']+1;
+ 			$offset = $offset*$limit;
+ 			$offset = $offset-$limit;
+ 			
+ 			$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '. $limit . ' OFFSET ' . $offset);
+ 			$sth->execute();
+ 			$posts = $sth->fetchAll();
+ 			
+ 			$page = $_GET['category']+1;
+ 			
+ 			
+ 			if ($posts != false) {
+ 				if ($class !=false) {
+ 					echo "<a href='".Options::siteUrl()."$uri/$page' class='$class'>$text</a>";	
+ 				} else {
+ 					echo "<a href='".Options::siteUrl()."$uri/$page'>$text</a>";
+ 				}
+ 			}
+ 			
+ 		} elseif ($count > $limit) {
+ 			if ($class !=false) {
+ 				echo "<a href='".Options::siteUrl()."$uri/2' class='$class'>$text</a>";
+ 			} else {
+ 				echo "<a href='".Options::siteUrl()."$uri/2'>$text</a>";
+ 			}
+ 		}
+
  	}
- 	
+	
+	
+	public static function prevLink($text = 'Prev', $class = false){
+		
+		if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+			
+			$dbh = new CandyDB();
+			
+			$sth = $dbh->prepare("SELECT option_value FROM ".DB_PREFIX."options WHERE option_key='perpage'");
+			$sth->execute();
+			$limit = $sth->fetchColumn();
+			
+			$uri = explode('/', $_SERVER['REQUEST_URI']);
+			$uri = $uri[1];
+			
+			if ($_GET['category'] == 2) {
+				if ($class !=false) {
+					echo "<a href='".Options::siteUrl()."$uri' class='$class'>$text</a>";
+				} else {
+					echo "<a href='".Options::siteUrl()."$uri'>$text</a>";
+				}
+			} else {
+				
+				$page = $_GET['category']-1;
+				
+				if ($class !=false) {
+					echo "<a href='".Options::siteUrl()."$uri/$page' class='$class'>$text</a>";
+				} else {
+					echo "<a href='".Options::siteUrl()."$uri/$page'>$text</a>";
+				}
+			}
+			
+		}
+	
+	}
+	
  }
  
  function listBlogPosts(){
