@@ -29,7 +29,11 @@
  	
  	public static function postsTable(){
  	
- 		$posts = listBlogPosts();
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC');
+ 		$sth->execute();
+ 		
+ 		$posts = $sth->fetchAll(PDO::FETCH_CLASS);
  		
  		$html = '<table>';
  		$html .= '<thead><tr><th>Post Title</th><th>Posted</th><th></th><th></th></tr></thead>';
@@ -277,14 +281,43 @@
  		
  	}
  	
+ 	public static function pagination(){
+ 		
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare("SELECT COUNT(*) FROM `".DB_PREFIX."posts`");
+ 		$sth->execute();
+ 		$count = $sth->fetchColumn();
+ 	
+ 	}
+ 	
  }
  
  function listBlogPosts(){
+ 	
  	$dbh = new CandyDB();
- 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC');
+ 	
+ 	$sth = $dbh->prepare("SELECT `option_value` FROM `".DB_PREFIX."options` WHERE `option_key` = 'perpage'");
+ 	$sth->execute();
+ 	$limit = $sth->fetchColumn();
+ 	
+ 	if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+ 		
+ 		$page = $_GET['category'];
+ 		
+		$offset = $page*$limit;
+		$offset = $offset-$limit;
+ 		
+ 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '. $limit . ' OFFSET ' . $offset);
+ 		
+ 	} else {
+ 
+	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '. $limit);
+ 	}
+ 	
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
+
  }
 
  function getBlogPost($uri){
