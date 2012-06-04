@@ -252,7 +252,11 @@
  	
  	public static function adminSettings(){
  		
+ 		$dbh = new CandyDB();
  		
+ 		$sth = $dbh->prepare("SELECT `option_value` FROM `".DB_PREFIX."options` WHERE `option_key` = 'perpage'");
+ 		$sth->execute();
+ 		$limit = $sth->fetchColumn();
  		
  		$disqus = self::disqusAccount();
  		
@@ -265,7 +269,7 @@
  		$html .= "</li>";
  		
  		$html .= "<label>Posts Per Page</label>";
- 		$html .= "<input type='text' name='perpage' value=''/>";
+ 		$html .= "<input type='text' name='perpage' value='$limit'/>";
  		$html .= "</li>";
  		
  		$html .= "</ul>";
@@ -275,9 +279,12 @@
  	
  	public static function saveSettings(){
  		$account = $_POST['disqus'];
- 		
+ 		$limit = $_POST['perpage'];
+ 		 		
  		$dbh = new CandyDB();
  		$dbh->exec('UPDATE '. DB_PREFIX .'options SET option_value="'. $account .'" WHERE option_key="disqus"');
+ 		
+ 		$dbh->exec('UPDATE '. DB_PREFIX .'options SET option_value="'. $limit .'" WHERE option_key="perpage"');
  		
  	}
  	
