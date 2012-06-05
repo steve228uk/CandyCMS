@@ -1,6 +1,6 @@
 /**
 * @package CandyCMS
-* @version 0.5
+* @version 0.5.2
 * @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -234,6 +234,9 @@ fieldset input:focus, .inputstyle:focus {
 	font-weight: lighter;
 }
 
+.ckeditor{
+	height: 300px;
+}
 
 /* @end */
 
@@ -796,6 +799,10 @@ table td{
 
 #blog-cats div{
 	padding: 10px 0 5px;
+}
+
+input.error{
+	border-color: red!important;
 }
 
 /* @end */
