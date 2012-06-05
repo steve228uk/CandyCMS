@@ -24,7 +24,7 @@
  		$sth->execute();
  		
  		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."options (option_key, option_value) VALUES ('perpage', '5')");
- 		
+ 		$sth->execute();
  	}
  
  	public static function adminNav(){
