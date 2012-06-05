@@ -89,7 +89,11 @@
 <div id="box2" class="boxes">
 
 	<h3 class="left">Categories</h3>
-
+	
+	<a href="javascript:void(0);" id="addcategory" class="button right">Add +</a>
+	<input type="text" name="addcategory" placeholder="Category" id="newcat" class="right">
+	
+	
 	<?php Blog::catsTable() ?>
 
 </div>
