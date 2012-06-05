@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.5.2
+ * @version 0.5.3
  * @since 0.1
  */
  
@@ -101,8 +101,6 @@
  		$categories = json_encode($categories);
  		
  		$cats = addslashes($categories);
- 		
- 		var_dump($cats);
  		
  		$dbh = new CandyDB();
  		$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
