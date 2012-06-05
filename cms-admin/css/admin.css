@@ -818,15 +818,11 @@ input.error{
 }
 
 #links{
-	z-index: 2;
-	position: relative;	
 	border-bottom: 1px solid #ccc;
 	margin: 0 0 20px;
 }
 
 a.box-link{
-	z-index: 2;
-	position: relative;
 	border: 1px solid #ccc;
 	border-bottom: none;
 	float: right;
