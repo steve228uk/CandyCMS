@@ -57,6 +57,8 @@
 
 <div id="box1" class="boxes active">
 	
+	<h3 class="left">Posts</h3>
+	
 	<a href="dashboard.php?page=blog&new" class="button addnew right">Add New Post +</a>
 	
 	<?php if (isset($_POST['addnew'])) {
@@ -84,6 +86,12 @@
 	
 </div>
 
-<div id="box2" class="boxes">Something else</div>
+<div id="box2" class="boxes">
+
+	<h3 class="left">Categories</h3>
+
+	<?php Blog::catsTable() ?>
+
+</div>
 
 <?php endif; ?>

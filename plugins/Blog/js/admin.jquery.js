@@ -1,5 +1,7 @@
 $(function(){
 
+	// Add category
+	
 	$('#addcat').click(function() {
 		
 			var cat = jQuery('#newcat').val();
@@ -31,6 +33,7 @@ $(function(){
 		
 	});
 	
+	// Tabs
 	
 	$('.box-link').click(function tabbedbox() {
 		
@@ -45,5 +48,36 @@ $(function(){
 		return false
 		
 	});
-
+	
+	// Delete Categories
+	
+	$('.delcat').click(function(e) {
+	
+		var question = 'Are you sure you wish to delete this category?';
+	
+		var hashed = $(this).attr('href');
+		var id = hashed.replace('#', ' ');
+		
+		var row = $(this);
+		
+		if (confirm(question)) {
+			
+			jQuery.post("../core/ajax.php", { action: "Blog", id: id},
+				
+				function(data) {
+					
+					$(row).parent().parent().fadeOut();
+					
+				}
+				
+			);
+			
+				
+		}
+		
+	
+		e.preventDefault();
+	
+	});
+	
 });

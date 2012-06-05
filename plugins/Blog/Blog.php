@@ -53,6 +53,32 @@
  		
  	}
  	
+ 	public static function catsTable(){
+ 		
+ 		$dbh = new CandyDB();
+ 		$sth = $dbh->prepare('SELECT * FROM '.DB_PREFIX.'categories ORDER BY cat_id DESC');
+ 		$sth->execute();
+ 		
+ 		$cats = $sth->fetchAll(PDO::FETCH_CLASS);
+ 		
+ 		$html = '<table>';
+ 		$html .= '<thead><tr><th>ID</th><th>Category Name</th><th></th><th></th></tr></thead>';
+ 		
+ 		foreach ($cats as $cat) {
+ 			$html .= '<tr>';
+ 			$html .= '<td>'.$cat->cat_id.'</td>';
+ 			$html .= '<td>'.$cat->cat_name.'</td>';
+ 			$html .= '<td><!--Edit--></td>';
+ 			$html .= '<td><a href="#'.$cat->cat_id.'" title="'.$cat->cat_name.'" class="delcat">[x]</a></td>';
+ 			$html .= '</tr>';
+ 		}
+ 		
+ 		$html .= '</table>';
+ 		
+ 		echo $html;
+ 		
+ 	}
+ 	
  	public static function addPost($post_title, $post_body, $categories){
  		
  		$categories = json_encode($categories);
@@ -210,14 +236,26 @@
  	
  	public static function ajax(){
  		
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."categories (`cat_name`) VALUES ('{$_POST['catname']}')");
-		$sth->execute();
-		
-		$sth = $dbh->prepare("SELECT cat_id FROM ".DB_PREFIX."categories WHERE cat_name='{$_POST['catname']}'");
-		$sth->execute();
-		echo $sth->fetchColumn();
-			
+ 		if (isset($_POST['catname'])) {
+ 			
+ 			$dbh = new CandyDB();
+ 			$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."categories (`cat_name`) VALUES ('{$_POST['catname']}')");
+ 			$sth->execute();
+ 			
+ 			$sth = $dbh->prepare("SELECT cat_id FROM ".DB_PREFIX."categories WHERE cat_name='{$_POST['catname']}'");
+ 			$sth->execute();
+ 			echo $sth->fetchColumn();
+ 			
+ 		} else {
+ 			
+ 			$id = $_POST['id'];
+ 			
+ 			$dbh = new CandyDB();
+ 			$sth = $dbh->prepare("DELETE FROM ".DB_PREFIX."categories WHERE cat_id=$id");
+ 			$sth->execute();
+ 				
+ 		}
+ 		
  	}
  	
  	public static function disqusAccount(){
