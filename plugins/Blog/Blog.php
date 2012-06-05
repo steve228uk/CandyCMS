@@ -123,7 +123,10 @@
  		
  		$sth = $dbh->prepare("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id='". $cats[0] ."'");
  		$sth->execute();
- 		$catname = str_replace(' ', '-', strtolower($sth->fetchColumn()));
+ 		
+ 		$cat = $sth->fetchColumn();
+ 		
+ 		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
  		$uri = explode('/', $_SERVER['REQUEST_URI']);
  		$uri = $uri[1];
@@ -400,6 +403,40 @@
  	return $sth->fetchAll(PDO::FETCH_CLASS);
 
  }
+ 
+ function listCategoryPosts(){
+  	
+  	$category = str_replace('-', ' ', $_GET['category']);
+  	
+  	$dbh = new CandyDB();
+  	
+  	$sth = $dbh->prepare('SELECT cat_id FROM '.DB_PREFIX.'categories WHERE cat_name="'.$category.'"');
+	$sth->execute();
+	$catid = $sth->fetchColumn();
+  
+  	$sth = $dbh->prepare('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts');
+  	$sth->execute();
+  	$posts = $sth->fetchAll(PDO::FETCH_CLASS);
+  	
+  	$return = array();
+  	
+  	foreach ($posts as $post) {
+  		$ids = json_decode($post->cat_id);
+  		
+  		if (in_array($catid, $ids)) {
+  			$return[] = $post->post_id;
+  		}
+  	}
+  	
+  	$ids = join(',', $return);
+ 
+ 	
+ 	$sth = $dbh->prepare("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN ($ids) ORDER BY post_id DESC");
+  	$sth->execute();
+  	
+  	return $sth->fetchAll(PDO::FETCH_CLASS);
+ 
+  }
 
  function getBlogPost($uri){
  
