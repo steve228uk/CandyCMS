@@ -20,6 +20,11 @@
  	
  		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
+ 		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."options (option_key, option_value) VALUES ('disqus', '')");
+ 		$sth->execute();
+ 		
+ 		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."options (option_key, option_value) VALUES ('perpage', '5')");
+ 		
  	}
  
  	public static function adminNav(){
