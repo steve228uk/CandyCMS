@@ -66,7 +66,7 @@
  		
  		$cats = $sth->fetchAll(PDO::FETCH_CLASS);
  		
- 		$html = '<table>';
+ 		$html = '<table id="catstable">';
  		$html .= '<thead><tr><th>ID</th><th>Category Name</th><th></th><th></th></tr></thead>';
  		
  		foreach ($cats as $cat) {

@@ -51,7 +51,7 @@ $(function(){
 	
 	// Delete Categories
 	
-	$('.delcat').click(function(e) {
+	$('.delcat').live('click', function(e) {
 	
 		var question = 'Are you sure you wish to delete this category?';
 	
@@ -78,6 +78,38 @@ $(function(){
 	
 		e.preventDefault();
 	
+	});
+	
+	// Add category
+	
+	$('#addcategory').click(function(e) {
+		
+		var category = jQuery('#newcat').val();
+		
+		if (jQuery('#newcat').val() == '') {
+			jQuery('#newcat').addClass('error');
+		} else if(isNaN(jQuery('#newcat').val())) {
+		
+			jQuery('#newcat').removeClass('error');
+		
+			jQuery.post("../core/ajax.php", { action: "Blog", catname: category},
+				
+				function(data) {
+					
+					$('#catstable tbody').append('<tr><td>' + data + '</td><td>' + category + '</td><td></td><td><a href="#' + data + '" title="' + category + '" class="delcat">[x]</a></td></tr>');
+					
+					jQuery('#newcat').val('');
+					
+				}
+				
+			);
+			
+		} else {
+			jQuery('#newcat').addClass('error');
+		}
+		
+		e.preventDefault();
+		
 	});
 	
 });
