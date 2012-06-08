@@ -154,8 +154,9 @@ class Plugins {
 				$i++;
 				
 				echo "<div class='widget-ttl'>$title</div>";
+				echo "<div class='widget-cont'>";
 				include_once $file;
-				echo "</div>";
+				echo "</div></div>";
 			}
 		}
 		
