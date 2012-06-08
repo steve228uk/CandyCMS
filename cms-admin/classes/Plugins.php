@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.5.3
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Methods for loading and enabling plugins
@@ -110,6 +111,31 @@ class Plugins {
 		
 	}
 	
+	private function getWidgetTitle($plugin){
+		
+		$file = PLUGIN_PATH."$plugin/widget.php";
+		
+		$conts = file_get_contents($file);
+		
+		$pieces = explode('*/', $conts);
+		
+		$info = explode('*', $pieces[0]);
+		
+		array_shift($info);
+		array_shift($info);
+		array_shift($info);
+		
+		$title = explode(' ', $info[0]);
+		
+		array_shift($title);
+		array_shift($title);
+		
+		$title = implode(' ', $title);
+		
+		return $title;
+		
+	}
+	
 	public static function getWidgets(){
 		
 		$plugins = self::enabledPlugins();
@@ -120,11 +146,14 @@ class Plugins {
 			$file = PLUGIN_PATH."$plugin/widget.php";
 			if (file_exists($file)) {
 				
+				$title = self::getWidgetTitle($plugin);
+				
+				
 				echo ($i%2 == 0) ? "<div class='widget right clearr'>" : "<div class='widget left clearl'>";
 				
 				$i++;
 				
-				echo "<div class='widget-ttl'>$plugin</div>";
+				echo "<div class='widget-ttl'>$title</div>";
 				include_once $file;
 				echo "</div>";
 			}

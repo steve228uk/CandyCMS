@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @title Blog Posts
+ */
+
 $posts = listBlogPosts();
 
 if (!empty($posts)) {

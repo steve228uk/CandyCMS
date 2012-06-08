@@ -1,5 +1,6 @@
 <?php
 /**
+ * @title Latest Tweet 
  * @plugin Twitter Widget
  * @author Cocoon Design
  * @description Adds a Twitter account feed to the dashboard

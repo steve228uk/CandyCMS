@@ -1,5 +1,6 @@
 <?php
 /**
+ * @title Pages 
  * @plugin Pages Widget
  * @author Cocoon Design
  * @copyright 2012 (C) Cocoon Design  
