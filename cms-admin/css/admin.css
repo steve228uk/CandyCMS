@@ -563,9 +563,8 @@ table td{
 
 .widget {
 	background: #fff;
-	padding: 10px;
 	border: 1px solid #ccc;
-	width: 47%;
+	width: 49%;
 	margin: 0 0 15px;
 	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.11);
 	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.11);
@@ -573,15 +572,28 @@ table td{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	overflow: hidden;
+}
+
+.widget-cont{
+	padding: 10px;
 }
 
 .widget-ttl{
+	background-color: #ffffff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(225, 225, 225)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#e1e1e1');
+		
 	font-size: 1.3em;
 	font-weight: lighter;
 	border-bottom: 1px solid #ccc;
-	margin-bottom: 10px;
-	padding-bottom: 5px;
 	color: #666;
+	padding: 10px;
 }
 
 .widget p{
