@@ -1,5 +1,14 @@
 <?php
 
+/**
+* @package CandyCMS
+* @version 0.5.3
+* @since 0.1
+* @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
+* 
+* Methods to get users and user info
+*/
+
 class User {
 	
 	public static function getUserInfo($user){
@@ -126,6 +135,16 @@ class User {
 		
 		
 		mail($email, 'Your New CandyCMS Password', "Your new password is\n\n$password\n\nPlease change this after logging in.");
+		
+	}
+	
+	public static function getGravatar($username, $size = 32){
+		
+		$info = self::getUserInfo($username);
+
+		$hash = md5( strtolower( trim($info[0]->email) ) );
+		
+		echo '<img src="http://www.gravatar.com/avatar/'.$hash.'?s='.$size.'" />';
 		
 	}
 	
