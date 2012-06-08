@@ -1,7 +1,7 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.5
+* @version 0.5.3
 * @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -19,12 +19,6 @@ class Update {
 		
 		$xml = self::xml();
 		$curver = CANDYVERSION;
-		
-		echo '<pre>';
-		
-		print_r();
-		
-		echo '</pre>';
 		
 		foreach ($xml->channel->item as $item) {
 			$newver = $item->version;
