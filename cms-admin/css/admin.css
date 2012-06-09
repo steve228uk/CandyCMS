@@ -540,6 +540,10 @@ table td{
 	padding: 0 10px 0 0;
 }
 
+.redactor_box{
+	margin: 0 0 10px;
+}
+
 /* @end */
 
 /* @group Messages */

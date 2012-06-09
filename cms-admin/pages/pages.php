@@ -1,8 +1,7 @@
 <?php 
 /**
 * @package CandyCMS
-* @version 0.6
-* @since 0.1
+* @version 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The view for the pages page in the admin dashboard
@@ -45,7 +44,7 @@
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST">
 		<ul>
 			<li class="left">
-				<input type="text" class="inputstyle" name="title" placeholder="Title" />
+				<input type="text" class="inputstyle" name="title" placeholder="Title" id="page-title" />
 			</li>
 			<li class="right">
 				<label for="innav">Display In Navigation?</label><input type="checkbox" id="innav" name="innav" checked="checked" />

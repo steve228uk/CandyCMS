@@ -40,4 +40,14 @@ $(function() {
 		$('#usernav').hide();
 	});
 	
+	$('#page-title').keyup(function() {
+		
+		var text = $('#page-title').val();
+		text = text.toLowerCase();
+		text = text.replace(' ', '-');
+		
+		$('#rewrite').val(text);
+		
+	});
+	
 });
