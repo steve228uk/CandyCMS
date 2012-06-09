@@ -12,7 +12,16 @@
 function candytitle($separator = '|'){
 	$title = Options::candytitle();
 	$page = (isset($_GET['page'])) ? $_GET['page'] : Options::homePage();
-	echo $title, ' ', $separator, ' ', Pages::pageTitle($page);
+	
+	if (isset($_GET['post'])) {
+		
+		echo $title, ' ', $separator, ' ', Pages::pageTitle($page), ' ', $separator, ' ', ucwords($_GET['post']);
+		
+	} else {
+	
+		echo $title, ' ', $separator, ' ', Pages::pageTitle($page);
+	
+	}
 }
 
 function candyHead(){
@@ -57,6 +66,8 @@ function theNav($class = 'nav'){
 
 		$html .= '</li>';
 	}
+	
+	$html .= '<li><a class="open-contact" href="javascript:void(0);">Contact</a></li>';
 	
 	$html .= '</ul>';
 	echo $html;
