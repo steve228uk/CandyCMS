@@ -283,7 +283,7 @@
  		$html .= "var disqus_shortname = '".self::disqusAccount()."';\n";
  		$html .= "var disqus_identifier = '".$post[0]->post_id."';\n";
  		
- 		$html .= "var disqus_url = '/".$_GET['page']."/".$_GET['category']."/".$_GET['post']."';\n";
+ 		$html .= "var disqus_url = '$url".$_GET['page']."/".$_GET['category']."/".$_GET['post']."';\n";
  		   
  		   
  		$html .= "(function() {\n";
