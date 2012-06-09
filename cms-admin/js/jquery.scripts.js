@@ -49,4 +49,26 @@ $(function() {
 		
 	});
 	
+	function modal(title, file) {
+	
+		$('body').append('<div id="overlay"></div><div id="modal"><div id="modal-title">' + title + '<button class="icon-remove close-btn"></button></div><div id="modal-cont"></div></div>');
+		
+		$('#modal-cont').load('/cms-admin/modals/' + file);
+	}
+	
+	function closeModal() {
+	
+		$('#modal').remove();
+		$('#overlay').remove();
+	
+	}
+	
+	$('#cfbtn').click(function() {
+		modal('Custom Fields', 'customfields.html');
+	});
+	
+	$('#overlay, .close-btn').live('click', function() {
+		closeModal();
+	});
+		
 });

@@ -40,8 +40,9 @@
 	
 <?php elseif ( isset($_GET['new']) ) :?>
 	
-	<h1>Add New Page</h1>
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST">
+	<h1 class="left">Add New Page</h1>
+	<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
 				<input type="text" class="inputstyle" name="title" placeholder="Title" id="page-title" />
