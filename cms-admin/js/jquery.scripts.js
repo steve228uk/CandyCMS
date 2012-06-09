@@ -43,10 +43,9 @@ $(function() {
 	$('#page-title').keyup(function() {
 		
 		var text = $('#page-title').val();
-		text = text.toLowerCase();
-		text = text.replace(' ', '-');
+		var rewrite = text.replace(/\s+/g, '-').toLowerCase();
 		
-		$('#rewrite').val(text);
+		$('#rewrite').val(rewrite);
 		
 	});
 	
