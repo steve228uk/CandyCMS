@@ -516,7 +516,28 @@ table td{
 	float: right;
 	padding: 5px;
 	border: 1px solid #dab163;
-	margin: 0 0 10px;
+	margin: 20px 0 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #8a5e09;
+}
+
+.viewed-at input{
+	background: none;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #dab163;
+	color: #8a5e09 !important;
+	font-weight: bold !important;
+}
+
+.p-templates{
+	margin: 10px 0;
+}
+
+.p-templates label{
+	padding: 0 10px 0 0;
 }
 
 /* @end */

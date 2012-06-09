@@ -1,7 +1,8 @@
 <?php 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.6
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The view for the pages page in the admin dashboard
@@ -31,7 +32,7 @@
 				<?php endif; ?>
 				<a href="<?php echo Options::siteUrl().$page[0]['rewrite'] ?>" title="View Page" target="_blank">View</a>
 			</li>
-			<li class="left clearl"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
+			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
 			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]['page_body'] ?></textarea></li>
 			<li><input name="update" type="submit" value="Save Page" class="button" /></li>
 		</ul>
@@ -55,7 +56,7 @@
 				<?php echo Options::siteUrl()?>
 				<input type="text" name="rewrite" class="url-box" id="rewrite" />
 			</li>
-			<li class="left clearl"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
+			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
 			<li class="clear"><textarea name="body" class="ckeditor"></textarea></li>
 			<li><input type="submit" value="Add Page" name="addnew" class="button" /></li> 
 		</ul>
