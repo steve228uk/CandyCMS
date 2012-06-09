@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.5
+* @version 0.5.3
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -13,7 +13,7 @@ function candytitle($separator = '|'){
 	$title = Options::candytitle();
 	$page = (isset($_GET['page'])) ? $_GET['page'] : Options::homePage();
 	
-	if (isset($_GET['post'])) {
+	if (isset($_GET['post']) && $_GET['post'] != '') {
 		
 		echo $title, ' ', $separator, ' ', Pages::pageTitle($page), ' ', $separator, ' ', ucwords($_GET['post']);
 		
