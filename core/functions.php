@@ -89,8 +89,6 @@ function theNav($class = 'nav'){
 		$html .= '</li>';
 	}
 	
-	$html .= '<li><a class="open-contact" href="javascript:void(0);">Contact</a></li>';
-	
 	$html .= '</ul>';
 	echo $html;
 }
