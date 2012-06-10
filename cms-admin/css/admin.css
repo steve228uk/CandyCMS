@@ -1,9 +1,6 @@
-/* @override 
-	http://www.stephenradford.me/cms-admin/css/admin.css */
-
 /**
 * @package CandyCMS
-* @version 0.5.2
+* @version 0.6
 * @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -1022,6 +1019,19 @@ a.active-tab{
 	width: 120px;
 	margin: 5px 0 0;
 	float: left;
+}
+
+#cf-area > li{
+	margin: 15px 0 0;
+}
+
+#cf-area h3{
+	margin: 0 0 5px;
+}
+
+#cf-area p{
+	color: #666;
+	padding: 0 0 15px;
 }
 
 /* @end */
