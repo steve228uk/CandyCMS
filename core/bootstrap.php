@@ -9,7 +9,7 @@
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.6');
+define('CANDYVERSION', '0.6.0.1');
 
 /**
  * Set the development enviornment

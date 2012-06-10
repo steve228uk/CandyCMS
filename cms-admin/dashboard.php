@@ -26,6 +26,9 @@ require('bootstrap.php');
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
 		<link rel="stylesheet" href="../core/plugins/redactor/css/redactor.css" type="text/css" />
 	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
+	<script type="text/javascript">
+		var adminpath = '<?php echo URL_PATH.'cms-admin/' ?>';
+	</script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
