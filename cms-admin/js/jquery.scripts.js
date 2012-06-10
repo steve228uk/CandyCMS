@@ -64,11 +64,55 @@ $(function() {
 	}
 	
 	$('#cfbtn').click(function() {
-		modal('Custom Fields', 'customfields.html');
+		modal('Custom Fields', 'customfields.php');
 	});
 	
 	$('#overlay, .close-btn').live('click', function() {
 		closeModal();
+	});
+	
+	$('.field-btn').live('click', function() {
+	
+		var id = $(this).attr('id');
+		
+		var key = id.replace('field-', '');
+
+		$('#cf-types').fadeOut('fast', function() {
+		
+			$('#cf-addinfo').fadeIn('fast');
+			
+			$('#cf-key').val(key);
+		});
+		
+	});
+	
+	$('#cf-title').live('keyup', function() {
+		
+		var text = $(this).val();
+		var name = text.replace(/\s+/g, '_').toLowerCase();
+		
+		$('#cf-name').val(name);
+		
+	});
+	
+	$('#cf-addinfo').live('submit', function(e) {
+	
+		var key = $('#cf-key').val();
+		var title = $('#cf-title').val();
+		var name = $('#cf-name').val();
+		var desc = $('#cf-desc').val();
+		
+		$.post('/cms-admin/ajax/getcustomfields.php', { key: key, name: name }, function(data) {
+		
+		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "</li>");
+		  closeModal();
+		  
+		  $('.ckeditor').redactor();
+		  
+		});
+	
+		e.preventDefault();
+	
 	});
 		
 });

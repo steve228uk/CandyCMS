@@ -58,6 +58,7 @@
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
 			<li class="clear"><textarea name="body" class="ckeditor"></textarea></li>
+			<li><ul id="cf-area"></ul></li>
 			<li><input type="submit" value="Add Page" name="addnew" class="button" /></li> 
 		</ul>
 	</form>

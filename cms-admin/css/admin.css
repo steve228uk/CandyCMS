@@ -257,6 +257,8 @@ header{
 	background-image: linear-gradient(top, rgb(78, 82, 84), rgb(35, 40, 43));
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#4e5254', EndColorStr='#23282b');
 	
+	z-index: 9998;
+	
 	position: fixed;
 	width: 100%;
 	height: 55px;
@@ -887,6 +889,8 @@ a.active-tab{
 
 /* @end */
 
+/* @group Modal Window */
+
 #overlay{
 	background: rgba(0,0,0,0.7);
 	width: 100%;
@@ -940,3 +944,84 @@ a.active-tab{
 	cursor: pointer;
 	margin: -2px -2px 0 0;
 }
+
+/* @end */
+
+/* @group Custom Fields Modal */
+
+#cf-types li{
+	cursor: pointer;
+	float: left;
+	width: 193px;
+	padding: 10px 0;
+}
+
+#cf-types li:hover{
+	background: #eee;
+}
+
+#cf-types li div{
+	float: left;
+	color: #666;
+}
+
+#cf-types{
+	margin: 10px 0 0;
+}
+
+#cf-types p{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #333;
+	float: left;
+}
+
+#cf-types span{
+	display: block;
+	font-weight: 300;
+	color: #666;
+}
+
+#cf-types div{
+	font-size: 3.5em;
+	line-height: 0.8;
+}
+
+#cf-addinfo input[type=text]{
+	background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+		
+	background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
+	background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+	border: 1px solid #ccc;
+	padding: 6px;
+	font-size: 1.2em;
+	font-weight: lighter;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 440px;
+
+	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	-moz-box-shadow: inset 0 1px 0 #ffffff;
+	box-shadow: inset 0 1px 0 #ffffff;
+
+	outline: none;
+
+	margin: 0 5px 0 0;
+}
+
+#cf-addinfo li{
+	margin: 0 0 10px;
+}
+
+#cf-addinfo label{
+	width: 120px;
+	margin: 5px 0 0;
+	float: left;
+}
+
+/* @end */
