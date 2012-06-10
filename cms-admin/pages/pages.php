@@ -12,8 +12,9 @@
 	
 	<?php $page = Pages::pageInfo($_GET['edit']) ?>
 	
-	<h1>Edit Page</h1>
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST">
+	<h1 class="left">Edit Page</h1>
+	<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
 				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $page[0]['page_title'] ?>" />
@@ -33,6 +34,7 @@
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
 			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]['page_body'] ?></textarea></li>
+			<li><ul id="cf-area"><?php CustomFields::getAdminFields($_GET['edit']) ?></ul></li>
 			<li><input name="update" type="submit" value="Save Page" class="button" /></li>
 		</ul>
 		<input type="hidden" name="id" value="<?php echo $_GET['edit'] ?>" />
@@ -75,7 +77,13 @@
 		} else {
 			$innav = 'off';
 		}
-		Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite'], $innav);
+		
+		if (isset($_POST['cfield'])) {
+			Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite'], $innav, $_POST['cfield']);
+		} else {
+			Pages::addPage($_POST['title'], $_POST['body'], $_POST['template'], $_POST['rewrite'], $innav);	
+		}
+		
 	} ?>
 	
 	<?php if (isset($_POST['update'])) {
@@ -84,7 +92,13 @@
 		} else {
 			$innav = 'off';
 		}
-		Pages::updatePage($_POST['title'], $_POST['body'], $_POST['rewrite'], $_POST['template'], $innav, $_POST['id']);
+		
+		if (isset($_POST['cfield'])) {
+			Pages::updatePage($_POST['title'], $_POST['body'], $_POST['rewrite'], $_POST['template'], $innav, $_POST['id'], $_POST['cfield']);
+		} else {
+			Pages::updatePage($_POST['title'], $_POST['body'], $_POST['rewrite'], $_POST['template'], $innav, $_POST['id']);
+		}	
+			
 		echo '<p class="message success">Post Updated</p>';
 	} ?>
 	

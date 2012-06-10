@@ -104,7 +104,7 @@ $(function() {
 		
 		$.post('/cms-admin/ajax/getcustomfields.php', { key: key, name: name }, function(data) {
 		
-		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "</li>");
+		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "<input type='hidden' name='cfield[" + name + "]' value='" + key + "' /><input type='hidden' name='cf-title["+name+"]' value='" + title + "' /><input type='hidden' name='cf-desc["+name+"]' value='" + desc + "' /></li>");
 		  closeModal();
 		  
 		  $('.ckeditor').redactor();

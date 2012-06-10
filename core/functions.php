@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.5.3
+* @version 0.6
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -40,6 +40,28 @@ function theContent(){
 	echo Pages::theContent($page);	
 }
 
+function theField($field){
+	$page = (isset($_GET['page'])) ? $_GET['page'] : Options::homePage();
+	$id = Pages::getPageId($page);
+	
+	$dbh = new CandyDB();
+	$sth = $dbh->prepare("SELECT field_value FROM ".DB_PREFIX."fields WHERE field_name='$field' AND post_id=$id");
+	$sth->execute();
+	
+	echo $sth->fetchColumn();	
+}
+
+function getField($field){
+	$page = (isset($_GET['page'])) ? $_GET['page'] : Options::homePage();
+	$id = Pages::getPageId($page);
+	
+	$dbh = new CandyDB();
+	$sth = $dbh->prepare("SELECT field_value FROM ".DB_PREFIX."fields WHERE field_name='$field' AND post_id=$id");
+	$sth->execute();
+	
+	return $sth->fetchColumn();	
+}
+
 function theTitle(){
 	$page = (isset($_GET['page'])) ? $_GET['page'] : Options::homePage();
 	echo Pages::theTitle($page);	
@@ -66,6 +88,8 @@ function theNav($class = 'nav'){
 
 		$html .= '</li>';
 	}
+	
+	$html .= '<li><a class="open-contact" href="javascript:void(0);">Contact</a></li>';
 	
 	$html .= '</ul>';
 	echo $html;

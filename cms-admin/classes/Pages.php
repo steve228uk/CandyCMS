@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.6
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Methods for editing pages in the admin panel
@@ -102,7 +103,7 @@ class Pages {
 		
 	}
 	
-	public static function updatePage($title, $body, $rewrite, $template, $innav, $id){
+	public static function updatePage($title, $body, $rewrite, $template, $innav, $id, $cfields = false){
 	
 		$innav = ($innav == 'on') ? 1 : 0;
 	
@@ -111,16 +112,54 @@ class Pages {
 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'", innav="'. $innav .'" WHERE page_id="' . $id . '"');
 		$sth->execute();
 		
+		// Insert the custom fields
+		if ($cfields != false) {
+			foreach ($cfields as $key => $value) {
+			
+				$data = addslashes($_POST[$key]);
+				
+				$title = addslashes($_POST['cf-title'][$key]);
+				
+				$desc = addslashes($_POST['cf-desc'][$key]);
+				
+				$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES ($id, '$key', '$value', '$data', '$title', '$desc')");
+				$sth->execute();
+				
+			}
+		}
 
 	}
 
-	public static function addPage($title, $body, $template, $rewrite, $innav){
+	public static function addPage($title, $body, $template, $rewrite, $innav, $cfields = false){
 		
 		$innav = ($innav == 'on') ? 1 : 0;
 		
+		// Insert the post
 		$dbh = new CandyDB();
 		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, innav, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $innav .'", "'. $rewrite .'")');
 		$sth->execute();	
+		
+		// Get the last inserted ID
+		
+		$sth = $dbh->prepare("SELECT page_id FROM ".DB_PREFIX."pages WHERE page_title='$title' AND rewrite='$rewrite' AND page_template='$template'");
+		$sth->execute();
+		$id = $sth->fetchColumn();
+		
+		// Insert the custom fields
+		if ($cfields != false) {
+			foreach ($cfields as $key => $value) {
+			
+				$data = addslashes($_POST[$key]);
+				
+				$title = addslashes($_POST['cf-title'][$key]);
+				
+				$desc = addslashes($_POST['cf-desc'][$key]);
+				
+				$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES ($id, '$key', '$value', '$data', '$title', '$desc')");
+				$sth->execute();
+				
+			}
+		}
 		
 	}
 	
