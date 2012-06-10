@@ -1,7 +1,8 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.4
+* @version 0.6
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CandyCMS installer. Creates config.php and creates db structure
@@ -274,6 +275,9 @@ if (file_exists('core/config.php')) {
 			
 			#Populate the Pages table with a default Page
 			$dbh->exec($sql);
+			
+			# Create the Fields table if not exists
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."fields` (`field_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`field_id`), `post_id` int(11), `field_name` varchar(256) NOT NULL, `field_type` varchar(256) NOT NULL, `field_title` varchar(256) NOT NULL, `field_desc` varchar(256) NOT NULL, `field_value` text NOT NULL)");
 			
 			#Create user table
 			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."users` (`userid` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`userid`), `username` varchar(256) NOT NULL, `password` varchar(256) NOT NULL, `email` varchar(256) NOT NULL, `name` varchar(256) NOT NULL, `role` varchar(256) NOT NULL, UNIQUE KEY(`username`, `email`))");
