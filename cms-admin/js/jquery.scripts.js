@@ -53,7 +53,7 @@ $(function() {
 	
 		$('body').append('<div id="overlay"></div><div id="modal"><div id="modal-title">' + title + '<button class="icon-remove close-btn"></button></div><div id="modal-cont"></div></div>');
 		
-		$('#modal-cont').load(adminpath + 'modals/' + file);
+		$('#modal-cont').load('/cms-admin/modals/' + file);
 	}
 	
 	function closeModal() {
@@ -102,7 +102,7 @@ $(function() {
 		var name = $('#cf-name').val();
 		var desc = $('#cf-desc').val();
 		
-		$.post(adminpath + 'ajax/getcustomfields.php', { key: key, name: name }, function(data) {
+		$.post('/cms-admin/ajax/getcustomfields.php', { key: key, name: name }, function(data) {
 		
 		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "<input type='hidden' name='cfield[" + name + "]' value='" + key + "' /><input type='hidden' name='cf-title["+name+"]' value='" + title + "' /><input type='hidden' name='cf-desc["+name+"]' value='" + desc + "' /></li>");
 		  closeModal();
