@@ -13,6 +13,10 @@ CandyCMS is an easy to use CMS written in PHP.
 * Follow the instructions.
 * Done!
 
+## Troubleshooting
+
+If you encounter an issues with the path and files not working remove the `$_SERVER['DOCUMENT_ROOT']` from the core/config.php CMS_PATH constant.
+
 ## Documentation
 See the Github wiki for documentation
 
