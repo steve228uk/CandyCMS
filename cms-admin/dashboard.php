@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.5.2
+* @version 0.6.1
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -22,7 +22,7 @@ require('bootstrap.php');
 <head>
 	<meta charset="utf-8">
 	<?php $array = adminNav();?>
-	<title>CandyCMS &raquo; Admin</title>
+	<title><?php echo (isset($_GET['page'])) ? ucfirst($_GET['page']) : 'Dashboard' ?> &raquo; Admin &raquo; <?php echo Options::candytitle() ?></title>
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
 		<link rel="stylesheet" href="../core/plugins/redactor/css/redactor.css" type="text/css" />
 	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
@@ -95,7 +95,7 @@ require('bootstrap.php');
 		<?php endif; ?>
 	</div>
 	<footer>
-		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - Built with CandyCMS v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
+		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - Built with Candy v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
 		<a href="http://www.wearecocoon.co.uk" title="Made By Cocoon" target="_blank" class="footer-logo"> </a>
 	</footer>
 </body>
