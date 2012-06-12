@@ -1,6 +1,6 @@
 /**
 * @package CandyCMS
-* @version 0.6
+* @version 0.6.1
 * @since 0.3
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -273,13 +273,14 @@ header #head-cont{
 
 header #head-logo{
 	background: url(../images/header-logo.png) no-repeat;
-	width: 130px;
-	height: 24px;
+	width: 83px;
+	height: 36px;
 	float: left;
+	margin-top: -5px;
 }
 
 header #head-logo:active{
-	margin-top: 1px;
+	margin-top: -4px;
 	opacity: 0.8;
 }
 
