@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.6.1
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Methods for listing and changing the theme
@@ -108,7 +109,7 @@ class Theme {
 				
 				$temparr[$key] = $value;
 				
-				$temparr['file'] = trim($template, '.php');
+				$temparr['file'] = str_replace('.php', '', $template);
 			}
 			
 			$templateinfo[] = $temparr;
