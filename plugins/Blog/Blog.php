@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.5.3
+ * @version 0.6.1
  * @since 0.1
  */
  
@@ -477,6 +477,19 @@
   	
   	return $sth->fetchAll(PDO::FETCH_CLASS);
  
+  }
+  
+  function searchBlog($query){
+  	
+  	$search = addslashes($query);
+  	
+  	$dbh = new CandyDB();
+  	
+  	$sth = $dbh->prepare("SELECT * FROM ".DB_PREFIX."posts WHERE (`post_title` LIKE ?) OR (`post_body` LIKE ?)");
+  	$sth->execute(array("%$search%", "%$search%"));
+  	
+  	return $sth->fetchAll(PDO::FETCH_CLASS);
+  	
   }
 
  function getBlogPost($uri){

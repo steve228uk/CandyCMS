@@ -19,6 +19,22 @@
 		include THEME_PATH.Options::currentTheme().'/404.php';
 	
 	} ?>
+
+<?php } elseif (isset($_GET['category']) && $_GET['category'] == 'search') { ?>
+
+	<?php $posts = searchBlog($_GET['q']);
+		
+		// Include search
+		
+		$themeSearch = THEME_PATH.Options::currentTheme().'/blog/search.php';
+		
+		if (file_exists($themeSearch)) {
+			include $themeSearch;
+		} else {
+			include 'templates/search.php';
+		}
+		
+	?>
 	
 <?php } elseif (isset($_GET['category']) && !is_numeric($_GET['category']) && $_GET['category'] != '' ) { ?>
 	
