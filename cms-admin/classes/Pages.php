@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.6
+* @version 0.6.1
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -111,8 +111,6 @@ class Pages {
 		
 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'", innav="'. $innav .'" WHERE page_id="' . $id . '"');
 		$sth->execute();
-		
-		var_dump($_POST);
 		
 		if (isset($_POST['cf-update'])) {
 			foreach ($_POST['cf-update'] as $key => $value) {
