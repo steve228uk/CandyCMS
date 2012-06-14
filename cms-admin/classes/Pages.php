@@ -112,6 +112,20 @@ class Pages {
 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'", innav="'. $innav .'" WHERE page_id="' . $id . '"');
 		$sth->execute();
 		
+		var_dump($_POST);
+		
+		if (isset($_POST['cf-update'])) {
+			foreach ($_POST['cf-update'] as $key => $value) {
+			
+				$value = addslashes($value);
+				
+				$sth = $dbh->prepare("UPDATE ".DB_PREFIX."fields SET field_value='$value' WHERE field_name='$key'");
+				$sth->execute();
+				
+			}
+		}
+		
+		
 		// Insert the custom fields
 		if ($cfields != false) {
 			foreach ($cfields as $key => $value) {

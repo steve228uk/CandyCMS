@@ -2,7 +2,7 @@
 
 /**
 * @class CustomFields
-* @version 0.6
+* @version 0.6.1
 * @since 0.6
 * 
 * Methods for Custom Fields
@@ -14,9 +14,9 @@ class CustomFields {
 		
 		$fields = array();
 		
-		$fields['wysi'] = array('title' => 'WYSIWYG', 'desc' => 'WYSIWYG Text Area', 'icon' => 'icon-pencil', 'input' => '<textarea class="ckeditor" name="'.$name.'">'.$value.'</textarea>');
-		$fields['box'] = array('title' => 'Text Box', 'desc' => 'Single Line Text Field', 'icon' => 'icon-font', 'input' => '<textarea name="'.$name.'">'.$value.'</textarea>');
-		$fields['field'] = array('title' => 'Text Field', 'desc' => 'A Blank Text Field', 'icon' => 'icon-text-width', 'input' => '<input type="text" name="'.$name.'" value="'.$value.'" />');
+		$fields['wysi'] = array('title' => 'WYSIWYG', 'desc' => 'WYSIWYG Text Area', 'icon' => 'icon-pencil', 'input' => '<textarea class="ckeditor" name="cf-update['.$name.']">'.$value.'</textarea>');
+		$fields['box'] = array('title' => 'Text Box', 'desc' => 'Single Line Text Field', 'icon' => 'icon-font', 'input' => '<textarea name="cf-update['.$name.']">'.$value.'</textarea>');
+		$fields['field'] = array('title' => 'Text Field', 'desc' => 'A Blank Text Field', 'icon' => 'icon-text-width', 'input' => '<input type="text" name="cf-update['.$name.']" value="'.$value.'" />');
 		
 		return $fields;
 	}
