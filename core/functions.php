@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.6
+* @version 0.6.1
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -83,7 +83,7 @@ function theNav($class = 'nav'){
 			$html .= '<li>';
 		}
 		
-		$html .= ($homepage == $page->rewrite) ? '<a href="'. $path .'">'. $page->page_title .'</a>' : '<a href="'. $path . $page->rewrite .'">'. $page->page_title .'</a>';
+		$html .= ($homepage == $page->rewrite) ? '<a href="'. $path .'" title="'.$page->page_title.'">'. $page->page_title .'</a>' : '<a href="'. $path . $page->rewrite .'">'. $page->page_title .'</a>';
 	
 
 		$html .= '</li>';
