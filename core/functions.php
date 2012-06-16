@@ -48,7 +48,25 @@ function theField($field){
 	$sth = $dbh->prepare("SELECT field_value FROM ".DB_PREFIX."fields WHERE field_name='$field' AND post_id=$id");
 	$sth->execute();
 	
-	echo $sth->fetchColumn();	
+	$content = $sth->fetchColumn();	
+	
+	$plugins = Plugins::enabledPlugins();
+	
+	foreach ($plugins as $plugin) {
+		
+		if (method_exists($plugin, 'addShorttag')) {
+			$replace = $plugin::addShorttag();
+			
+			foreach ($replace as $key => $value) {
+				$content = str_replace($key, $value, $content);	
+			}
+			
+		}
+		
+	}
+	
+	echo $content;
+	
 }
 
 function getField($field){
@@ -59,7 +77,24 @@ function getField($field){
 	$sth = $dbh->prepare("SELECT field_value FROM ".DB_PREFIX."fields WHERE field_name='$field' AND post_id=$id");
 	$sth->execute();
 	
-	return $sth->fetchColumn();	
+	$content = $sth->fetchColumn();	
+	
+	$plugins = Plugins::enabledPlugins();
+	
+	foreach ($plugins as $plugin) {
+		
+		if (method_exists($plugin, 'addShorttag')) {
+			$replace = $plugin::addShorttag();
+			
+			foreach ($replace as $key => $value) {
+				$content = str_replace($key, $value, $content);	
+			}
+			
+		}
+		
+	}
+	
+	return $content;
 }
 
 function theTitle(){
