@@ -15,7 +15,7 @@ function candytitle($separator = '|'){
 	
 	if (isset($_GET['post']) && $_GET['post'] != '') {
 		
-		echo $title, ' ', $separator, ' ', Pages::pageTitle($page), ' ', $separator, ' ', ucwords($_GET['post']);
+		echo $title, ' ', $separator, ' ', Pages::pageTitle($page), ' ', $separator, ' ', ucwords(str_replace('-', ' ', $_GET['post']));
 		
 	} else {
 	
