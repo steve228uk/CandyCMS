@@ -98,9 +98,9 @@ function theNav($class = 'nav'){
 function cmsPage($title, $page, $class=false){
 	$path = URL_PATH;
 	if ($class == false) {
-		echo '<a href="'.$path.'/'. $page .'" title="'. $title .'">'. $title .'</a>';	
+		echo '<a href="'.$path. $page .'" title="'. $title .'">'. $title .'</a>';	
 	} else {
-		echo '<a href="'.$path.'/'. $page .'" title="'. $title .'" class="'.$class.'">'. $title .'</a>';
+		echo '<a href="'.$path. $page .'" title="'. $title .'" class="'.$class.'">'. $title .'</a>';
 	}	
 }
 
