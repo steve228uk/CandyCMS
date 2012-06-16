@@ -132,8 +132,17 @@
 		ob_start();
 		include 'frontend.php';
 		$include = ob_get_clean();
+		
+		ob_start();
+		$sidebar = THEME_PATH.Options::currentTheme().'/blog/sidebar.php';
+		if (file_exists($sidebar)) {
+			include($sidebar);
+		} else {
+			include('templates/sidebar.php');
+		}
+		$sidebar = ob_get_clean();
 	  
- 		return array('{{blog}}' => $include);	
+ 		return array('{{blog}}' => $include, '{{sidebar}}' => $sidebar);	
  		
  	}
  	
@@ -413,6 +422,33 @@
 			
 		}
 	
+	}
+	
+	public static function theCategories(){
+		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('SELECT cat_name FROM '.DB_PREFIX.'categories ORDER BY cat_id DESC');
+		$sth->execute();
+		
+		$cats = $sth->fetchAll(PDO::FETCH_CLASS);
+		
+		$html = '';
+		
+		if (!empty($cats)) {
+			
+			$path = URL_PATH;
+			
+			$html .= '<ul>';
+		
+			foreach ($cats as $cat) {
+				$html .= "<li><a href='".$path.$_GET['page']."/".str_replace(' ', '-', strtolower($cat->cat_name))."'>".$cat->cat_name."</a></li>";
+			}	
+			
+			$html .= '</ul>';
+		}
+		
+		echo $html;
+		
 	}
 	
  }
