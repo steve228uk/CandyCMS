@@ -257,6 +257,11 @@
  			$sth = $dbh->prepare("SELECT cat_id FROM ".DB_PREFIX."categories WHERE cat_name='{$_POST['catname']}'");
  			$sth->execute();
  			echo $sth->fetchColumn();
+ 		
+ 		} elseif (isset($_POST['search'])) {
+ 		
+ 			$posts = searchBlog($_POST['q']['term']);
+ 			echo json_encode($posts);
  			
  		} else {
  			
