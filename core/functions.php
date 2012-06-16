@@ -89,13 +89,19 @@ function theNav($class = 'nav'){
 		$html .= '</li>';
 	}
 	
+	$html .= '<li><a href="/download" title="download" class="button">Download <span>v0.6.1</span></a>';
+	
 	$html .= '</ul>';
 	echo $html;
 }
 
-function cmsPage($title, $page){
+function cmsPage($title, $page, $class=false){
 	$path = URL_PATH;
-	echo '<a href="'. $page .'" title="'. $title .'">'. $title .'</a>';	
+	if ($class == false) {
+		echo '<a href="'.$path.'/'. $page .'" title="'. $title .'">'. $title .'</a>';	
+	} else {
+		echo '<a href="'.$path.'/'. $page .'" title="'. $title .'" class="'.$class.'">'. $title .'</a>';
+	}	
 }
 
 function candyCss($filename){
