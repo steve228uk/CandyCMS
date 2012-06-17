@@ -22,7 +22,7 @@ if (file_exists('core/config.php')) {
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>CandyCMS Install</title>
+	<title>Candy Installer</title>
 	<style type="text/css">
 		/* @group Reset */
 		/* http://meyerweb.com/eric/tools/css/reset/ 
@@ -177,14 +177,16 @@ if (file_exists('core/config.php')) {
 	<div id="container">
 		<?php if (isset($_GET['install'])) : ?>
 		
-		<h1>CandyCMS Installer</h1>
+		<h1>Candy Installer</h1>
 		<p class="leadin">
-			Thanks for installing CandyCMS!
+			Thanks for installing Candy!
 		</p>
 		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
 		
 		<?php 
-		
+			
+			chmod("/core", 0755);
+			
 			$dir = trim($_SERVER['PHP_SELF'], 'install.php');
 		
 			$dbhost = $_POST['dbhost'];
@@ -295,9 +297,9 @@ if (file_exists('core/config.php')) {
 		
 		<?php else : ?>
 		
-		<h1>CandyCMS Installer</h1>
+		<h1>Candy Installer</h1>
 		<p class="leadin">
-			Hello, welcome to CandyCMS! Follow the steps below to install it.
+			Hello, welcome to Candy! Follow the steps below to install it.
 		</p>
 		<form action="install.php?install" method="post">
 			<fieldset>
