@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.6.1
+* @version 0.6
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -117,7 +117,7 @@ class Pages {
 			
 				$value = addslashes($value);
 				
-				$sth = $dbh->prepare("UPDATE ".DB_PREFIX."fields SET field_value='$value' WHERE field_name='$key'");
+				$sth = $dbh->prepare("UPDATE ".DB_PREFIX."fields SET field_value='$value' WHERE field_name='$key' AND post_id='$id'");
 				$sth->execute();
 				
 			}
