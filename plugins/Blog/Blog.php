@@ -170,7 +170,7 @@
  		$uri = $uri[1];
  		
  		
- 		echo Options::siteUrl().$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		echo '/'.$uri.'/'.$_GET['page'].'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
  	
