@@ -10,7 +10,7 @@
 
 class CandyCMS {
 	
-	public static function run(){
+	public function run(){
 		
 		$theme = Options::currentTheme();
 		

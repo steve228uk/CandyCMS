@@ -58,4 +58,5 @@ if (is_array($plugins)) {
 
 # RUN!
 
-CandyCMS::run();
+$candy = new CandyCMS();
+$candy->run();
