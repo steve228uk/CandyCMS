@@ -1,3 +1,10 @@
+<?php
+
+	global $Candy;
+	$theme = $Candy['options']->getOption('theme');
+
+?>
+
 <?php if (isset($_GET['post']) && $_GET['post'] != '') { ?>
 	
 	<?php $post = getBlogPost($_GET['post']);
@@ -6,7 +13,7 @@
 	
 		// Include the single.php template from theme if it's there!
 		
-		$themeSingle = THEME_PATH.Options::currentTheme().'/blog/single.php';
+		$themeSingle = THEME_PATH.$theme.'/blog/single.php';
 		
 		if (file_exists($themeSingle)) {
 			include $themeSingle;
@@ -16,7 +23,7 @@
 		
 	} else {
 	
-		include THEME_PATH.Options::currentTheme().'/404.php';
+		include THEME_PATH.$theme.'/404.php';
 	
 	} ?>
 
@@ -26,7 +33,7 @@
 		
 		// Include search
 		
-		$themeSearch = THEME_PATH.Options::currentTheme().'/blog/search.php';
+		$themeSearch = THEME_PATH.$theme.'/blog/search.php';
 		
 		if (file_exists($themeSearch)) {
 			include $themeSearch;
@@ -42,7 +49,7 @@
 	
 		// Include the category.php template from theme if it's there!
 		
-		$themeCategory = THEME_PATH.Options::currentTheme().'/blog/category.php';
+		$themeCategory = THEME_PATH.$theme.'/blog/category.php';
 		
 		if (file_exists($themeCategory)) {
 			include $themeCategory;
@@ -58,7 +65,7 @@
 	
 		// Include the main.php template from theme if it's there!
 			
-		$themeMain = THEME_PATH.Options::currentTheme().'/blog/main.php';
+		$themeMain = THEME_PATH.$theme.'/blog/main.php';
 		
 		if (file_exists($themeMain)) {
 			include $themeMain;
@@ -69,16 +76,3 @@
 	?>
 	
 <?php } ?>
-
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = '<?php echo Blog::disqusAccount() ?>'; // required: replace example with your forum shortname
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>

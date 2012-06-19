@@ -2,14 +2,14 @@
 
 /**
 * @package CandyCMS
-* @version 0.6.1
+* @version 0.7
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.6.1');
+define('CANDYVERSION', '0.7');
 
 /**
  * Set the development enviornment
@@ -43,6 +43,12 @@ function __autoload($class_name) {
 	include 'classes/'. $class_name . '.php';
 }
 
+# Load the core classes into an array
+
+$Candy = array();
+$Candy['options'] = new Options;
+$Candy['pages'] = new Pages;
+
 # Let's load in our functions file. It's gonna be big!
 
 require_once 'functions.php';
@@ -57,6 +63,5 @@ if (is_array($plugins)) {
 }
 
 # RUN!
-
 $candy = new CandyCMS();
 $candy->run();

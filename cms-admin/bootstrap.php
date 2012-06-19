@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.6.1
+* @version 0.7
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -12,7 +12,7 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.6.1');
+define('CANDYVERSION', '0.7');
 
 require_once '../core/config.php';
 
@@ -21,11 +21,14 @@ require_once '../core/config.php';
 function __autoload($class_name) {
 	
 	if (file_exists("classes/$class_name.php")) {
-		include 'classes/'. $class_name . '.php';	
+		include 'classes/'. $class_name . '.php';
 	} else {
 		include CMS_PATH.'core/classes/'. $class_name . '.php';
 	}
 }
+
+$Candy = array();
+$Candy['options'] = new Options;
 
 # Include our admin functions file
 

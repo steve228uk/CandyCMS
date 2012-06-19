@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.6.1
+ * @version 0.7
  * @since 0.1
  */
  
@@ -129,12 +129,15 @@
  	
  	public static function addShorttag(){
  		
+ 		global $Candy;
+ 		$theme = $Candy['options']->getOption('theme');
+ 		
 		ob_start();
 		include 'frontend.php';
 		$include = ob_get_clean();
 		
 		ob_start();
-		$sidebar = THEME_PATH.Options::currentTheme().'/blog/sidebar.php';
+		$sidebar = THEME_PATH.$theme.'/blog/sidebar.php';
 		if (file_exists($sidebar)) {
 			include($sidebar);
 		} else {
@@ -147,6 +150,8 @@
  	}
  	
  	public static function postUri($id){
+ 	
+ 		global $Candy;
  	
  		$dbh = new CandyDB();
  		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
@@ -170,7 +175,7 @@
  		$uri = $uri[1];
  		
  		
- 		echo '/'.$uri.'/'.$_GET['page'].'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		echo $Candy['options']->getOption('site_url').$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
  	
@@ -285,10 +290,12 @@
  	}
  	
  	public static function commentForm(){
+ 		
+ 		global $Candy;
  	
  		$post = getBlogPost($_GET['post']);
  	
- 		$url = Options::siteUrl();
+ 		$url = $Candy['options']->getOption('site_url');
  	
  		$html = '<div id="disqus_thread"></div>'."\n";
  		$html .= '<script type="text/javascript">'."\n";
@@ -352,6 +359,9 @@
  	
  	public static function nextLink($text = 'Next', $class = false){
  	
+ 		global $Candy;
+ 		$site_url = $Candy['options']->getOption('site_url');
+ 	
  		$dbh = new CandyDB();
  		$sth = $dbh->prepare("SELECT COUNT(*) FROM `".DB_PREFIX."posts`");
  		$sth->execute();
@@ -378,17 +388,17 @@
  			
  			if ($posts != false) {
  				if ($class !=false) {
- 					echo "<a href='".Options::siteUrl()."$uri/$page' class='$class'>$text</a>";	
+ 					echo "<a href='".$site_url."$uri/$page' class='$class'>$text</a>";	
  				} else {
- 					echo "<a href='".Options::siteUrl()."$uri/$page'>$text</a>";
+ 					echo "<a href='".$site_url."$uri/$page'>$text</a>";
  				}
  			}
  			
  		} elseif ($count > $limit) {
  			if ($class !=false) {
- 				echo "<a href='".Options::siteUrl()."$uri/2' class='$class'>$text</a>";
+ 				echo "<a href='".$site_url."$uri/2' class='$class'>$text</a>";
  			} else {
- 				echo "<a href='".Options::siteUrl()."$uri/2'>$text</a>";
+ 				echo "<a href='".$site_url."$uri/2'>$text</a>";
  			}
  		}
 
@@ -396,6 +406,9 @@
 	
 	
 	public static function prevLink($text = 'Prev', $class = false){
+		
+		global $Candy;
+		$site_url = $Candy['options']->getOption('site_url');
 		
 		if (isset($_GET['category']) && is_numeric($_GET['category'])) {
 			
@@ -410,18 +423,18 @@
 			
 			if ($_GET['category'] == 2) {
 				if ($class !=false) {
-					echo "<a href='".Options::siteUrl()."$uri' class='$class'>$text</a>";
+					echo "<a href='".$site_url."$uri' class='$class'>$text</a>";
 				} else {
-					echo "<a href='".Options::siteUrl()."$uri'>$text</a>";
+					echo "<a href='".$site_url."$uri'>$text</a>";
 				}
 			} else {
 				
 				$page = $_GET['category']-1;
 				
 				if ($class !=false) {
-					echo "<a href='".Options::siteUrl()."$uri/$page' class='$class'>$text</a>";
+					echo "<a href='".$site_url."$uri/$page' class='$class'>$text</a>";
 				} else {
-					echo "<a href='".Options::siteUrl()."$uri/$page'>$text</a>";
+					echo "<a href='".$site_url."$uri/$page'>$text</a>";
 				}
 			}
 			
@@ -513,7 +526,7 @@
   	$ids = join(',', $return);
  
  	
- 	$sth = $dbh->prepare("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN ($ids) ORDER BY post_id DESC");
+ 	$sth = $dbh->prepare("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN ($ids) ORDER BY post_title ASC");
   	$sth->execute();
   	
   	return $sth->fetchAll(PDO::FETCH_CLASS);
@@ -552,32 +565,35 @@
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
- 
+
+// Disabled RSS feed due to not working with new options class
+
+// global $Candy;
 
 // The following will generate and rss feed in the root of the CandyCMS install
 
-$xml = '<?xml version="1.0" encoding="UTF-8"?>';
-$xml .= '<rss version="2.0">';
-$xml .=	'<channel>';
-$xml .= '<title>'.Options::candytitle().'</title>';
-$xml .=	'<link>'.Options::siteUrl().'</link>';
-$xml .= '<description>'.Options::candytitle().' Blog</description>';
-$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
-
-$posts = listBlogPosts();
-
-foreach ($posts as $post) {
-	
-	$xml .= '<item>';
-	$xml .= '<title>'.$post->post_title.'</title>';
-	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
-	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
-	$xml .= '</item>';
-}
-
-$xml .= '</channel>';
-$xml .= '</rss>';
-
-$fp = fopen(CMS_PATH.'rss.xml', 'w');
-fwrite($fp, $xml);
-fclose($fp);
+//$xml = '<?xml version="1.0" encoding="UTF-8"';
+//$xml .= '<rss version="2.0">';
+//$xml .=	'<channel>';
+//$xml .= '<title>'.$Candy['options']->getOption('site_title').'</title>';
+//$xml .=	'<link>'.$Candy['options']->getOption('site_url').'</link>';
+//$xml .= '<description>'.$Candy['options']->getOption('site_title').' Blog</description>';
+//$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
+//
+//$posts = listBlogPosts();
+//
+//foreach ($posts as $post) {
+//	
+//	$xml .= '<item>';
+//	$xml .= '<title>'.$post->post_title.'</title>';
+//	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
+//	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
+//	$xml .= '</item>';
+//}
+//
+//$xml .= '</channel>';
+//$xml .= '</rss>';
+//
+//$fp = fopen(CMS_PATH.'rss.xml', 'w');
+//fwrite($fp, $xml);
+//fclose($fp);

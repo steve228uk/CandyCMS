@@ -28,8 +28,8 @@
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=settings" method="post" class="clear">
 	<fieldset>
 		<ul>
-			<li><label>Site Title</label><input type="text" name="site_title" placeholder="Site Title" value="<?php echo Options::candytitle() ?>" /></li>
-			<li><label>Site URL</label><input type="text" name="site_url" placeholder="Site URL" value="<?php echo Options::siteUrl() ?>" /></li>
+			<li><label>Site Title</label><input type="text" name="site_title" placeholder="Site Title" value="<?php echo $Candy['options']->getOption('site_title') ?>" /></li>
+			<li><label>Site URL</label><input type="text" name="site_url" placeholder="Site URL" value="<?php echo $Candy['options']->getOption('site_url') ?>" /></li>
 		</ul>
 	</fieldset>
 	<fieldset>
@@ -42,7 +42,7 @@
 						$themes = $themes = Theme::listThemes();
 						foreach ($themes as $value) {
 							
-							if (Options::currentTheme() == $value['dir']) {
+							if ($Candy['options']->getOption('theme') == $value['dir']) {
 								echo '<option value="'. $value['dir'] .'" selected="selected">' . $value['theme'] . ' By ' . $value['author'] . '</option>';
 							} else {
 								echo '<option value="'. $value['dir'] .'">' . $value['theme'] . ' By ' . $value['author'] . '</option>';
@@ -58,7 +58,7 @@
 	<fieldset>
 		<ul>
 			<li>
-				<?php $homepage = Options::homePage() ?>
+				<?php $homepage = $Candy['options']->getOption('homepage') ?>
 				<label>Homepage</label><?php Pages::dropdownPages('pages', $homepage) ?>
 			</li>
 		</ul>

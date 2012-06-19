@@ -14,7 +14,7 @@
 <body>
 <div id="container">
 	<header>
-		<?php echo Options::candytitle() ?>
+		<?php echo $Candy['options']->getOption('site_title'); ?>
 	</header>
 	<?php theNav() ?>
 	
