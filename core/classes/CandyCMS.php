@@ -11,7 +11,7 @@
 
 class CandyCMS {
 	
-	public function run(){
+	public function __construct(){
 		
 		global $Candy;
 		
