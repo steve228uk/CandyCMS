@@ -1,2 +1,0 @@
-[21-Apr-2012 21:58:16] PHP Fatal error:  Class 'ContactForm' not found in /home/jqueryca/public_html/cms/plugins/ContactForm/mailer.php on line 5
-[21-Apr-2012 22:00:21] PHP Fatal error:  Class 'CandyDB' not found in /home/jqueryca/public_html/cms/plugins/ContactForm/ContactForm.php on line 18
