@@ -1,5 +1,17 @@
 <?php $info = User::getUserInfo($_SESSION['username']) ?>
-<h1>Account Settings</h1>
+
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Account Settings</h1>
+		
+	</div>
+
+</div>
+
+<div id="container">
+
 <?php if (isset($_POST['save'])) : ?>
 	<?php User::saveUserInfo($_SESSION['username'], $_POST['name'], $_POST['email']) ?>
 	<p class="message success">Account Settings Saved</p>
@@ -46,3 +58,4 @@
 	</fieldset>
 	<input type="submit" name="save" value="Save Settings" class="button settings-btn" />
 </form>
+</div>

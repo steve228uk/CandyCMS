@@ -3,7 +3,19 @@
  exit(1);
 }?>
 
-<h1>Plugins</h1>
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Plugins</h1>
+		
+		<button class="button right icon-wrench">Find More Plugins</button>
+		
+	</div>
+
+</div>
+
+<div id="container">
 
 <?php if (isset($_POST['save'])) :?>
 <p class="message success">Plugins Saved</p>
@@ -35,3 +47,4 @@
 	}
 ?>
 </form>
+</div>

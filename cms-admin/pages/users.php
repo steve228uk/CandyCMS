@@ -5,7 +5,17 @@
 
 <?php if(isset($_GET['addnew'])) :?>
 	
-	<h1>Add New User</h1>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Add New User</h1>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
 	
 	<form action="dashboard.php?page=users" method="post">
 		<fieldset>
@@ -45,11 +55,22 @@
 		</fieldset>
 		<input type="submit" name="adduser" value="Add New User" class="button settings-btn" />
 	</form>
+	</div>
 <?php elseif(isset($_GET['edit'])) : ?>
 	
 	<?php $info = User::getUserInfo($_GET['edit']); ?>
 	
-	<h1>Edit User</h1>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Edit User</h1>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
 	
 	<form action="dashboard.php?page=users" method="post">
 		<fieldset>
@@ -83,13 +104,23 @@
 		<input type="submit" name="edituser" value="Edit User" class="button settings-btn" />
 	</form>
 	
+	</div>
+	
 <?php else : ?>
 
-	<h1 class="left">User Settings</h1>
-	<a href="dashboard.php?page=users&addnew" class="button right">Add New User +</a>
-	<p class="leadin left clearl">
-		Add, edit or delete.
-	</p>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">User Settings</h1>
+			<a href="dashboard.php?page=users&addnew" class="button right">Add New User +</a>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
+	
 	
 	<?php if (isset($_POST['adduser'])) : ?>
 		<?php User::addUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']) ?>
@@ -107,5 +138,7 @@
 	<?php endif; ?>
 	
 	<?php User::getUserTable() ?>
+	
+	</div>
 	
 <?php endif; ?>

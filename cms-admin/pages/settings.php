@@ -14,10 +14,20 @@
  exit(1);
 }?>
 
-<h1 class="left">Settings</h1>
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Settings</h1>
+		
+		<a href="dashboard.php?page=users" class="right button">User Settings</a>
+		<a href="dashboard.php?page=profile" class="right button dl-btn">Account Settings</a>
+		
+	</div>
 
-<a href="dashboard.php?page=users" class="right button">User Settings</a>
-<a href="dashboard.php?page=profile" class="right button dl-btn">Account Settings</a>
+</div>
+
+<div id="container">
 
 
 <?php if (isset($_POST['save'])) {
@@ -66,3 +76,4 @@
 	<?php Settings::pluginSettings() ?>
 	<input type="submit" name="save" class="button settings-btn" value="Save Settings" />
 </form>
+</div>

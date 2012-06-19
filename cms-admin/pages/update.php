@@ -2,8 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.5
-* @since 0.3
+* @version 0.7
+* @since 0.5
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Update page for CandyCMS
@@ -13,7 +13,17 @@
 
 <?php if (isset($_GET['update'])) : ?>
 	
-	<h1>Updating CandyCMS</h1>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Updating Candy&hellip;</h1>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
 	
 	<?php
 	
@@ -43,11 +53,23 @@
 		}
 	
 	?>
-
-
+	
+	</div>
+	
 <?php else : ?>
 
-	<h1>Update CandyCMS</h1>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Update Candy</h1>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
 	<?php Update::getChangelog() ?>
+	</div>
 
 <?php endif; ?>

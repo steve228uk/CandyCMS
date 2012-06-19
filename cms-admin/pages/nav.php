@@ -14,11 +14,23 @@
 	<?php Pages::saveNav($_POST['nav']) ?>
 <?php else : ?>
 
-<h1>Navigation</h1>
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1>Navigation</h1>
+	
+	</div>
+
+</div>
+
+<div id="container">
 
 <p class="leadin">Drag and drop the pages below to rearrange the navigation.</p>
 
 <?php Pages::sortPages() ?>
+
+</div>
 
 <?php endif; ?>
 

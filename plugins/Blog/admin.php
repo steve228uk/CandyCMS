@@ -14,7 +14,17 @@
 
 <?php if (isset($_GET['new'])) : ?>
 
-<h1>Add New Post</h1>	
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Add New Post</h1>
+		
+	</div>
+
+</div>
+
+<div id="container">
 <form action="dashboard.php?page=blog" method="post">
 	<ul id="post-info">
 		<li id="post-title">
@@ -25,12 +35,22 @@
 	</ul>
 	<?php Blog::adminCats() ?>
 </form>
-
+</div>
 <?php elseif(isset($_GET['edit'])) : ?>
 
 <?php $post = getBlogPostById($_GET['edit']) ?>
 	
-<h1>Edit Post</h1>	
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Edit Post</h1>
+		
+	</div>
+
+</div>
+
+<div id="container">	
 <form action="dashboard.php?page=blog" method="post">
 
 	<ul id="post-info">
@@ -44,16 +64,25 @@
 
 	<input type="hidden" name="pid" value="<?php echo $_GET['edit'] ?>" />
 </form>
+</div>
 <?php else: ?>
 
-<h1 class="left">Blog</h1>
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Blog</h1>
+		
+		<div id="links" class="clearfix">
+		<a class="box-link active-tab" href="#box1">Posts</a>
+		<a class="box-link" href="#box2">Categories</a>
+		</div>
+		
+	</div>
 
-
-<div id="links" class="clearfix">
-<a class="box-link active-tab" href="#box1">Posts</a> <!-- THE HREF HAS TO BE THE SAME AS THE ID OF THE BOX -->
-<a class="box-link" href="#box2">Categories</a>
 </div>
 
+<div id="container">
 
 <div id="box1" class="boxes active">
 	
@@ -95,6 +124,8 @@
 	
 	
 	<?php Blog::catsTable() ?>
+
+</div>
 
 </div>
 

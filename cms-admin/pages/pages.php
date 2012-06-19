@@ -16,8 +16,21 @@ $homepage = $Candy['options']->getOption('homepage');
 	
 	<?php $page = Pages::pageInfo($_GET['edit']) ?>
 	
-	<h1 class="left">Edit Page</h1>
-	<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Edit Page</h1>
+			
+			<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
+	
+
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
@@ -44,10 +57,24 @@ $homepage = $Candy['options']->getOption('homepage');
 		<input type="hidden" name="id" value="<?php echo $_GET['edit'] ?>" />
 	</form>
 	
+	</div>
+	
 <?php elseif ( isset($_GET['new']) ) :?>
 	
-	<h1 class="left">Add New Page</h1>
-	<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Add New Page</h1>
+			
+			<button class="button right icon-wrench" id="cfbtn">Custom Fields</button>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
+	
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
@@ -69,11 +96,24 @@ $homepage = $Candy['options']->getOption('homepage');
 		</ul>
 	</form>
 	
+	</div>
+	
 <?php else : ?>
 	
-	<h1 class="left pagesicon">Pages</h1>
-	<a href="dashboard.php?page=pages&new" class="addnew button right">Add New Page +</a>
-	<p class="leadin clear">Add, edit or delete.</p>
+	<div id="title-bar">
+		
+		<div id="title-bar-cont">
+		
+			<h1 class="left">Pages</h1>
+			
+			<a href="dashboard.php?page=pages&new" class="addnew button right">Add New Page +</a>
+			
+		</div>
+	
+	</div>
+	
+	<div id="container">
+	
 	<?php if (isset($_POST['addnew'])) {
 		echo '<p class="message success">Page Added</p>';
 		if (isset($_POST['innav'])) {
@@ -112,5 +152,7 @@ $homepage = $Candy['options']->getOption('homepage');
 	} ?>
 
 	<?php Pages::pagesTable() ?>
-
+	
+	</div>
+	
 <?php endif; ?>

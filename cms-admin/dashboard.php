@@ -64,7 +64,7 @@ require('bootstrap.php');
 			</ul>
  		</div>
 	</header>
-	<div id="container">
+	
 		
 		<?php 
 		
@@ -87,15 +87,27 @@ require('bootstrap.php');
 			?>
 		
 		<?php else :?>
-		
-			<h1>Dashboard</h1>
 			
-			<p class="leadin">Welcome to CandyCMS, use the navigation above to manage your site</p>	
+			<div id="title-bar">
+				
+				<div id="title-bar-cont">
+				
+					<h1>Dashboard</h1>
+				
+				</div>
+			
+			</div>
+			
+			<div id="container">
+			
 			
 			<?php Plugins::getWidgets() ?>
-		
+			
+			
+			</div>
+			
 		<?php endif; ?>
-	</div>
+	
 	<footer>
 		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - Built with Candy v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
 		<a href="http://www.wearecocoon.co.uk" title="Made By Cocoon" target="_blank" class="footer-logo"> </a>

@@ -7,8 +7,18 @@
  exit(1);
 }?>
 
-<h1>Theme Options</h1>
-<p class="leadin">Use the colour pickers below to change the colours on your site</p>
+<div id="title-bar">
+	
+	<div id="title-bar-cont">
+	
+		<h1 class="left">Theme Options</h1>
+		
+	</div>
+
+</div>
+
+<div id="container">
+
 <form id="colorform">
 <?php
 
@@ -53,4 +63,5 @@ foreach($themes as $theme){
 }
 ?>
 </form>
+</div>
 <?php endif; ?>
