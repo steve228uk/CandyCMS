@@ -9,11 +9,7 @@
 * This file is the main bootstrap for CandyCMS
 */
 
-<<<<<<< HEAD
-define('CANDYVERSION', '0.6.0.1');
-=======
 define('CANDYVERSION', '0.7');
->>>>>>> origin/0.6.1
 
 /**
  * Set the development enviornment
@@ -67,9 +63,4 @@ if (is_array($plugins)) {
 }
 
 # RUN!
-<<<<<<< HEAD
 $candy = new CandyCMS();
-=======
-$candy = new CandyCMS();
-$candy->run();
->>>>>>> origin/0.6.1
