@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.7
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Login page for CandyCMS admin
@@ -53,7 +54,7 @@ if (isset($_POST['username'])) {
 				<a href="iforgot.php" class="right">Forgot Your Password?</a>
 			</form>
 		</div>
-		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo Options::candytitle() ?></a>
+		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo $Candy['options']->getOption('site_title') ?></a>
 	</div>
 </body>
 </html>
