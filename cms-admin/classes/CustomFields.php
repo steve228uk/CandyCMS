@@ -2,7 +2,7 @@
 
 /**
 * @class CustomFields
-* @version 0.6.1
+* @version 0.7
 * @since 0.6
 * 
 * Methods for Custom Fields
@@ -52,5 +52,50 @@ class CustomFields {
 		echo $return;
 		
 	}
+	
+	public static function templateFields($template) {
+		
+		global $Candy;
+		
+		$theme = $Candy['options']->getOption('theme');		
+		$file = THEME_PATH.$theme.'/templates/'.$template.'.php';
+		
+		$contents = file_get_contents($file);
+		
+		$pieces = explode('*/', $contents);
+		
+		$info = explode('*', $pieces[0]);
+		
+		array_shift($info);
+		array_shift($info);
+		
+		$temparr = array();
+		
+		foreach ($info as $value) {
+			
+			$trimmed = trim($value);
+			$pieces = explode(' ', $trimmed);
+			$key = trim($pieces[0], '@');
+			
+			array_shift($pieces);
+			
+			$value = implode(' ', $pieces);
+			
+			$temparr[$key] = $value;
+		}
+		
+		$fieldarr = array();
+		
+		$fields = explode(',', $temparr['fields']);
+		
+		foreach ($fields as $key => $value) {
+			$full = trim($value);
+			$pieces = explode('-', $full);
+			$fieldarr[] = array('name' => $pieces[0], 'type' => $pieces[1], 'title' => $pieces[2], 'desc' => $pieces[3]);
+		}
+
+		echo json_encode($fieldarr);
+	
+	}	
 	
 }

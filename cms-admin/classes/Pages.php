@@ -128,7 +128,7 @@ class Pages {
 		if ($cfields != false) {
 			foreach ($cfields as $key => $value) {
 			
-				$data = addslashes($_POST[$key]);
+				$data = addslashes($_POST['cf-update'][$key]);
 				
 				$title = addslashes($_POST['cf-title'][$key]);
 				
@@ -161,7 +161,7 @@ class Pages {
 		if ($cfields != false) {
 			foreach ($cfields as $key => $value) {
 			
-				$data = addslashes($_POST[$key]);
+				$data = addslashes($_POST['cf-update'][$key]);
 				
 				$title = addslashes($_POST['cf-title'][$key]);
 				

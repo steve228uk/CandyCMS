@@ -2,7 +2,6 @@
 /**
 * @package CandyCMS
 * @version 0.7
-* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The view for the pages page in the admin dashboard
