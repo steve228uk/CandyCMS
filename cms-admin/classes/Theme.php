@@ -75,7 +75,11 @@ class Theme {
 	
 	public static function listTemplates(){
 		
-		$templates = THEME_PATH.Options::currentTheme().'/templates';
+		global $Candy;
+		
+		$theme = $Candy['options']->getOption('theme');
+		
+		$templates = THEME_PATH.$theme.'/templates';
 		$templates = scandir($templates);
 		array_shift($templates);
 		array_shift($templates);
@@ -84,7 +88,7 @@ class Theme {
 		
 		foreach ($templates as $template) {
 			
-			$file = file_get_contents(THEME_PATH.Options::currentTheme().'/templates/'.$template);
+			$file = file_get_contents(THEME_PATH.$theme.'/templates/'.$template);
 			
 			$pieces = explode('*/', $file);
 			

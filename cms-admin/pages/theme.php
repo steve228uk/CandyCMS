@@ -13,7 +13,7 @@
 <?php
 
 $themes = Theme::listThemes();
-$current = Options::currentTheme();
+$current = $Candy['options']->getOption('theme');
 
 foreach($themes as $theme){
 
