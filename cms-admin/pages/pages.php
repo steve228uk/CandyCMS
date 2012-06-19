@@ -1,11 +1,16 @@
 <?php 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.7
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The view for the pages page in the admin dashboard
-*/	
+*/
+
+$site_url = $Candy['options']->getOption('site_url');
+$homepage = $Candy['options']->getOption('homepage');	
+	
 ?>
 
 <?php if ( isset($_GET['edit']) ) : ?>
@@ -24,13 +29,13 @@
 			</li>
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
-				<?php echo Options::siteUrl()?>
-				<?php if ($page[0]['rewrite'] != Options::homePage()) : ?>
+				<?php echo $site_url?>
+				<?php if ($page[0]['rewrite'] != $homepage) : ?>
 					<input type="text" name="rewrite" class="url-box" value="<?php echo $page[0]['rewrite'] ?>" /> 
 				<?php else : ?>
 					<input type="hidden" name="rewrite" value="<?php echo $page[0]['rewrite'] ?>" />
 				<?php endif; ?>
-				<a href="<?php echo Options::siteUrl().$page[0]['rewrite'] ?>" title="View Page" target="_blank">View</a>
+				<a href="<?php echo $site_url.$page[0]['rewrite'] ?>" title="View Page" target="_blank">View</a>
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
 			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]['page_body'] ?></textarea></li>
@@ -55,7 +60,7 @@
 			
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
-				<?php echo Options::siteUrl()?>
+				<?php echo $site_url?>
 				<input type="text" name="rewrite" class="url-box" id="rewrite" />
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
