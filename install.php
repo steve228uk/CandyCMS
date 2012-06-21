@@ -1,7 +1,7 @@
 <?php
 /**
 * @package CandyCMS
-* @version 0.6
+* @version 0.7
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -262,7 +262,8 @@ if (file_exists('core/config.php')) {
 							 'theme' => 'default',
 							 'homepage' => 'home',
 							 'enabled_plugins' => '["Sitemap", "PagesWidget"]',
-							 'colors' => '{"bg":"#EEEEEE","link":"#E64C4C","h1":"#E64C4C","nav":"#F2F2F2","hover":"#D9D9D9","active":"#E64C59"}'
+							 'colors' => '{"bg":"#EEEEEE","link":"#E64C4C","h1":"#E64C4C","nav":"#F2F2F2","hover":"#D9D9D9","active":"#E64C59"}',
+							 'nav' => '[{"id:"1}]'
 							 );
 			
 			#Populate the Options table
@@ -271,7 +272,7 @@ if (file_exists('core/config.php')) {
 			}
 			
 			#Create the Pages table if not exists
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL, `innav` int(1) DEFAULT 1, `navpos` int(11))");
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL)");
 			
 			$sql = "INSERT INTO `".DB_PREFIX."pages` (`page_title`, `page_body`, `page_template`, `rewrite`, `innav`, `navpos`) VALUES ('Home', 'Welcome to CandyCMS, this page can be changed in the admin dashboard.', 'onecol', 'home', '1', '1');";
 			
