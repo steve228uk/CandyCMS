@@ -127,8 +127,12 @@ function theTitle(){
 
 function theNav($class = 'nav'){
 	global $Candy;
+	
 	$html = '<ul class="'. $class .'">';
-	$pages = Pages::listPages();
+	$pages = $Candy['options']->getOption('nav');
+	
+	$pages = json_decode($pages);
+	
 	$path = URL_PATH;
 
 	$curpage = (isset($_GET['page'])) ? $_GET['page'] : $Candy['options']->getOption('homepage');
@@ -136,16 +140,44 @@ function theNav($class = 'nav'){
 	$homepage = $Candy['options']->getOption('homepage');
 	
 	foreach ($pages as $page) {
+		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('SELECT page_title, rewrite FROM '. DB_PREFIX .'pages WHERE page_id = '.$page->id);
+		$sth->execute();
+		
+		$pages_info = $sth->fetchAll(PDO::FETCH_CLASS); 
+	
+	
 		if (!empty($info)) {
-			$html .= ($page->page_id == $info[0]->page_id) ? '<li class="active-page">' : '<li>';	
+			$html .= ($page->id == $info[0]->page_id) ? '<li class="active-page">' : '<li>';	
 		} else {
 			$html .= '<li>';
 		}
 		
-		$html .= ($homepage == $page->rewrite) ? '<a href="'. $path .'" title="'.$page->page_title.'">'. $page->page_title .'</a>' : '<a href="'. $path . $page->rewrite .'">'. $page->page_title .'</a>';
-	
+		$html .= ($homepage == $pages_info[0]->rewrite) ? '<a href="'. $path .'" title="'.$pages_info[0]->page_title.'">'. $pages_info[0]->page_title .'</a>' : '<a href="'. $path . $pages_info[0]->rewrite .'">'. $pages_info[0]->page_title .'</a>';
+		
+		
+		if (isset($page->children)) {
+			$html .= '<ul class="candy-dropdown">';
+			foreach ($page->children as $child) {
+				
+				$sth = $dbh->prepare('SELECT page_title, rewrite FROM '. DB_PREFIX .'pages WHERE page_id = '.$child->id);
+				$sth->execute();
+				
+				$child_info = $sth->fetchAll(PDO::FETCH_CLASS); 
+				
+				$html .= '<li>';
+				$html .= '<a href="'. $path . $child_info[0]->rewrite .'">'. $child_info[0]->page_title .'</a>';
+				$html .= '</li>';	
+			}
+			$html .= '</ul>';
+		}
+		
+
 		$html .= '</li>';
 	}
+	
+	$html .= '<li><a href="/download" title="download" class="button">Download <span>v0.7</span></a>';
 	
 	$html .= '</ul>';
 	echo $html;
