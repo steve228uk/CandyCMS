@@ -31,15 +31,56 @@ class Pages {
 	
 	public static function sortPages(){
 		
-		$pages = self::inNav();
-
-		$html = '<ul id="sortable">';
+		global $Candy;
 		
-		foreach ($pages as $page) {
-			$html .= "<li id='nav_{$page->page_id}'>{$page->page_title}<span class='move'></span></li>";
+		$pages = $Candy['options']->getOption('nav');
+		$order = json_decode($pages);
+
+		$html = '<ol>';
+		
+		foreach ($order as $page) {
+			
+			$dbh = new CandyDB();
+			$sth = $dbh->prepare('SELECT page_title FROM '. DB_PREFIX .'pages WHERE page_id = '.$page->id);
+			$sth->execute();
+			
+			$title = $sth->fetchColumn();
+		
+			$html .= "<li class='dd-item' data-id='{$page->id}'><div class='dd-handle'>{$title}<button class='icon-remove rm-nav right' value='{$page->id}'></button></div>";
+			
+				if (isset($page->children)) {
+					$html .= '<ol>';
+					foreach ($page->children as $child) {
+						
+						$sth = $dbh->prepare('SELECT page_title FROM '. DB_PREFIX .'pages WHERE page_id = '.$child->id);
+						$sth->execute();
+						
+						$title = $sth->fetchColumn();
+						
+						$html .= "<li class='dd-item' data-id='{$child->id}'> <div class='dd-handle'>{$title}<button class='icon-remove rm-nav right' value='{$page->id}'></button></div>";
+						
+							if (isset($child->children)) {
+								$html .= '<ol>';
+								foreach ($child->children as $grandchild) {
+									$sth = $dbh->prepare('SELECT page_title FROM '. DB_PREFIX .'pages WHERE page_id = '.$grandchild->id);
+									$sth->execute();
+									
+									$ttl = $sth->fetchColumn();
+									
+									$html .= "<li class='dd-item' data-id='{$child->id}'> <div class='dd-handle'>{$ttl}<button class='icon-remove rm-nav right' value='{$page->id}'></button></div></li>";
+								}
+								$html .= '</ol>';
+							}
+						
+						$html .= "</li>";
+					}
+					$html .= '</ol>';
+				}
+			
+			$html .= "</li>";
 		}
 		
-		$html .= '</ul>';
+		$html .= '</ol>';
 		
 		echo $html;
 	}
@@ -47,10 +88,15 @@ class Pages {
 	public static function saveNav($nav){
 		
 		$dbh = new CandyDB();
-
-		foreach ($nav as $key => $item) {
-			$dbh->exec("UPDATE ". DB_PREFIX ."pages SET navpos='$key' WHERE page_id='$item'");			
-		}
+	
+		$nav = addslashes($nav);
+		
+		$decode = json_decode($nav);
+		
+		var_dump($decode);
+		
+		$dbh->exec("UPDATE ". DB_PREFIX ."options SET option_value='$nav' WHERE option_key='nav'");			
+		
 		
 	}
 	
@@ -181,6 +227,16 @@ class Pages {
 		$sth = $dbh->prepare('DELETE FROM '. DB_PREFIX .'pages WHERE page_id="'. $id .'"');
 		$sth->execute();
 		
+	}
+	
+	public static function listAddPages(){
+		$pages = self::listPages();
+		$html = '<ul class="add-pages-ul">';
+		foreach ($pages as $key => $value) {
+			$html .= '<li><label for="navpage-'.$value->page_id.'">'.$value->page_title.'</label><input type="checkbox" id="navpage-'.$value->page_id.'" value="'.$value->page_id.'" /></li>';
+		}
+		$html .= '</ul>';
+		echo $html;
 	}
 	
 }

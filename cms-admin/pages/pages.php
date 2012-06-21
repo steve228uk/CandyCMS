@@ -30,7 +30,6 @@ $homepage = $Candy['options']->getOption('homepage');
 	
 	<div id="container">
 	
-
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">

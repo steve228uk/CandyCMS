@@ -131,7 +131,7 @@ class Theme {
 		
 		$templates = self::listTemplates();
 		
-		$html = "<select name='$name'>";
+		$html = "<select name='$name' id='$name'>";
 		
 		foreach ($templates as $template) {
 			

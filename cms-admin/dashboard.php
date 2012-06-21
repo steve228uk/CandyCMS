@@ -34,6 +34,7 @@ require('bootstrap.php');
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
+	<script type="text/javascript" src="js/jquery.nestable.js"></script>
 	<script type="text/javascript" src="../core/plugins/redactor/redactor.min.js"></script>
 	<script type="text/javascript" src="js/jquery.scripts.min.js"></script>
 	<!--[if lt IE 9]>

@@ -2,8 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
-* @since 0.1
+* @version 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Login page for CandyCMS admin
