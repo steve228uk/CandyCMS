@@ -176,9 +176,7 @@ function theNav($class = 'nav'){
 
 		$html .= '</li>';
 	}
-	
-	$html .= '<li><a href="/download" title="download" class="button">Download <span>v0.7</span></a>';
-	
+
 	$html .= '</ul>';
 	echo $html;
 }
