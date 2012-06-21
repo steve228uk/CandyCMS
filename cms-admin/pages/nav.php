@@ -2,7 +2,8 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 0.7
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Manage and create navigation for your site
@@ -25,7 +26,9 @@
 </div>
 
 <div id="container" class="clearfix">
-
+	
+	<p class="message success hide">Navigation Saved!</p>
+	
 	<div id="sidebar">
 		
 		<h4>Add Links</h4>
@@ -126,7 +129,11 @@
 		
 			$('#save-nav').click(function() {
 				var order = output.val();
-				$.post("dashboard.php?page=nav&savenavigation", {nav: order});
+				$.post("dashboard.php?page=nav&savenavigation", {nav: order},function() {
+					
+					$('.message.success.hide').fadeIn('fast').delay(1500).fadeOut('fast');
+				
+				});
 			});
 			
 			updateList();
