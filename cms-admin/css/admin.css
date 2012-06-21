@@ -1,7 +1,7 @@
 /**
 * @package CandyCMS
-* @version 0.6.1
-* @since 0.3
+* @version 0.7
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * CSS for admin panel
@@ -64,7 +64,8 @@ table {
 .nav:after,
 footer:after,
 #usernav li:after,
-#title-bar:after  {
+#title-bar:after,
+.module-cont ul li:after  {
 	content: ".";
 	display: block;
 	height: 0;
@@ -72,7 +73,7 @@ footer:after,
 	visibility: hidden;
 }
 /* Trigger has-layout for IE compatibility */
-.clearfix, .nav, footer, #title-bar {
+.clearfix, .nav, footer, #title-bar, .module-cont ul li {
 	zoom: 1;
 }
 
@@ -1010,6 +1011,8 @@ a.dev{
 
 /* @end */
 
+/* @group Nav Page */
+
 #sidebar{
 	width: 295px;
 	min-height: 300px;
@@ -1025,6 +1028,8 @@ a.dev{
 	width: 600px;
 	float: right;
 }
+
+/* @end */
 
 /* @group Nestable */
 
@@ -1083,5 +1088,56 @@ ol ol{
 #nestable-menu { padding: 0; margin: 20px 0; }
 
 #nestable-output { width: 100%; max-width: 600px; font-size: 0.75em; line-height: 1.333333em; height: 10em; padding: 5px; box-sizing: border-box; -moz-box-sizing: border-box; }
+
+/* @end */
+
+/* @group Modules */
+
+.module{
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin: 10px 0;
+}
+
+.module-head{
+	background-color: #ffffff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(225, 225, 225)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	background-image: linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#e1e1e1');
+		
+	font-size: 1.3em;
+	font-weight: 300;
+	border-bottom: 1px solid #ccc;
+	color: #666;
+	padding: 8px;
+	border-radius: 2px 2px 0 0;
+}
+
+.module-cont{
+	padding: 8px;
+	height: 130px;
+	overflow-y: scroll;
+}
+
+.module-cont ul li{
+	padding: 5px;
+	border-bottom: 1px solid #eee;
+	font-size: 1.2em;
+	color: #666;
+}
+
+.module-cont input{
+	float: right;
+}
+
+.module-cont label{
+	width: 250px;
+	float: left;
+}
 
 /* @end */

@@ -2,8 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
-* @since 0.1
+* @version 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Manage and create navigation for your site
@@ -33,9 +32,16 @@
 		
 		<h4>Add Links</h4>
 		
-		<?php Pages::listAddPages() ?>
+		<div class="module">
+			<div class="module-head">
+				Pages
+			</div>
+			<div class="module-cont">
+				<?php Pages::listAddPages() ?>
+			</div>
+		</div>
 		
-		<button class="button" id="add-links">Add Links</button>
+		<button class="button right" id="add-links">Add Links</button>
 		
 	</div>	
 	
@@ -49,7 +55,7 @@
 		
 		<input type="hidden" id="nestable-output" />
 	
-		<button class="button" id="save-nav">Save Navigation</button>
+		<button class="button right" id="save-nav">Save Navigation</button>
 			
 	</div>
 
