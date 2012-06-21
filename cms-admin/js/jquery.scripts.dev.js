@@ -1,6 +1,6 @@
 $(function() {
 	
-	$('.ckeditor').redactor();
+	$('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false });
 	
 	$(".colorpicker").miniColors({
 		letterCase: 'uppercase',
@@ -97,7 +97,7 @@ $(function() {
 		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "<input type='hidden' name='cfield[" + name + "]' value='" + key + "' /><input type='hidden' name='cf-title["+name+"]' value='" + title + "' /><input type='hidden' name='cf-desc["+name+"]' value='" + desc + "' /></li>");
 		  closeModal();
 		  
-		  $('.ckeditor').redactor();
+		  $('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false });
 		  
 		});
 	
@@ -119,13 +119,21 @@ $(function() {
 				var title = data[i].title;
 				var desc = data[i].desc;
 				
-				$.post(adminpath + 'ajax/templatecf.php', {key: data[i].type, name: data[i].name, title: title, desc: desc}, function(field) {
+				if (title != null) {
 				
-					$('#cf-area').append(field);
+					$.post(adminpath + 'ajax/templatecf.php', {key: data[i].type, name: data[i].name, title: title, desc: desc}, function(field) {
 					
-					$('.ckeditor').redactor();
+						
+						$('#cf-area').append(field);
+						
+						$('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false });		
+						
+					
+					});
+					
+				}
 				
-				});
+				
 					
 			}
 			
