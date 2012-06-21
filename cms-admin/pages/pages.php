@@ -35,9 +35,7 @@ $homepage = $Candy['options']->getOption('homepage');
 			<li class="left">
 				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $page[0]['page_title'] ?>" />
 			</li>
-			<li class="right">
-				<label for="innav">Display In Navigation?</label><input type="checkbox" id="innav" name="innav" <?php if($page[0]['innav'] == 1) : ?>checked="checked"<?php endif; ?> />
-			</li>
+			
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
 				<?php echo $site_url?>
@@ -79,10 +77,7 @@ $homepage = $Candy['options']->getOption('homepage');
 			<li class="left">
 				<input type="text" class="inputstyle" name="title" placeholder="Title" id="page-title" />
 			</li>
-			<li class="right">
-				<label for="innav">Display In Navigation?</label><input type="checkbox" id="innav" name="innav" checked="checked" />
-			</li>
-			
+						
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
 				<?php echo $site_url?>
