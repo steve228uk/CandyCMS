@@ -758,7 +758,7 @@ table td{
 	background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
 	background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
 	border: 1px solid #ccc;
-	padding: 6px;
+	padding: 7px;
 	font-size: 1.2em;
 	font-weight: 300;
 
@@ -772,6 +772,7 @@ table td{
 	box-shadow: inset 0 1px 0 #ffffff;
 
 	margin: 0 5px 0 0;
+	outline: none;
 }
 
 #blog-cats div{
@@ -1061,8 +1062,9 @@ ol ol{
     -webkit-border-radius: 3px;
     border-radius: 3px;
     box-sizing: border-box; -moz-box-sizing: border-box;
+    cursor: move;
 }
-.dd-item > .dd-handle:hover { color: #2ea8e5; background: #fff; }
+.dd-item > .dd-handle:hover { color: #572665; background: #fff; }
 
 .dd-item > button { cursor: pointer; float: left; border: 0; background: transparent; width: 25px; height: 20px; margin: 5px 0; padding: 0; line-height: 20px; font-size: 12px; text-align: center; font-weight: bold; }
 
