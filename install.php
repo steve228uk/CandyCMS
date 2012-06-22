@@ -263,7 +263,7 @@ if (file_exists('core/config.php')) {
 							 'homepage' => 'home',
 							 'enabled_plugins' => '["Sitemap", "PagesWidget"]',
 							 'colors' => '{"bg":"#EEEEEE","link":"#E64C4C","h1":"#E64C4C","nav":"#F2F2F2","hover":"#D9D9D9","active":"#E64C59"}',
-							 'nav' => '[{"id:"1}]'
+							 'nav' => '[]'
 							 );
 			
 			#Populate the Options table
@@ -274,7 +274,7 @@ if (file_exists('core/config.php')) {
 			#Create the Pages table if not exists
 			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL)");
 			
-			$sql = "INSERT INTO `".DB_PREFIX."pages` (`page_title`, `page_body`, `page_template`, `rewrite`, `innav`, `navpos`) VALUES ('Home', 'Welcome to CandyCMS, this page can be changed in the admin dashboard.', 'onecol', 'home', '1', '1');";
+			$sql = "INSERT INTO `".DB_PREFIX."pages` (`page_title`, `page_body`, `page_template`, `rewrite`) VALUES ('Home', 'Welcome to CandyCMS, this page can be changed in the admin dashboard.', 'onecol', 'home');";
 			
 			#Populate the Pages table with a default Page
 			$dbh->exec($sql);
