@@ -9,7 +9,7 @@
 	
 		<h1 class="left">Plugins</h1>
 		
-		<button class="button right icon-wrench">Find More Plugins</button>
+		<a href="http://www.candycms.org/plugin-gallery" class="button right icon-wrench" target="_blank">Find More Plugins</a>
 		
 	</div>
 
