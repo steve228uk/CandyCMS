@@ -76,28 +76,20 @@ body{
 	font: 1em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
-.button {
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#013fab), to(#117cff));
-
-	background-image: -webkit-linear-gradient(90deg, #013fab 0%, #117cff 100%);
-	background-image: -moz-linear-gradient(90deg, #013fab 0%, #117cff 100%);
-	background-image: -o-linear-gradient(90deg, #013fab 0%, #117cff 100%);
-	background-image: -ms-linear-gradient(90deg, #013fab 0%, #117cff 100%);
-	background-image: linear-gradient(90deg, #013fab 0%, #117cff 100%);
-	border: 1px solid #013fab;
-	color: #fff;
-	font-size: 1em;
-	font-weight: lighter;
-	text-shadow: 0 1px 1px #000;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	padding: 5px;
-	width: auto !important;
-	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
-	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+.button{
+	background: #662479;
+	color: #fff !important;
+	padding: 8px;
+	font-size: 1.2em;
+	border-radius: 3px;
+	text-decoration: none;
+	border: none;
 	cursor: pointer;
+	width: auto !important;
+}
+
+.button:hover{
+	background: #572665;
 }
 
 input {
