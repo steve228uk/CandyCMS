@@ -171,10 +171,13 @@
  		
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
- 		$uri = explode('/', $_SERVER['REQUEST_URI']);
- 		$uri = $uri[1];
- 		
- 		
+ 		if (isset($_POST['page'])) {
+ 			$uri = explode('/', $_SERVER['REQUEST_URI']);
+ 			$uri = $uri[1];
+ 		} else {
+ 			$uri = $Candy['options']->getOption('homepage');
+ 		}
+
  		echo $Candy['options']->getOption('site_url').$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
@@ -371,8 +374,12 @@
  		$sth->execute();
  		$limit = $sth->fetchColumn();
 
- 		$uri = explode('/', $_SERVER['REQUEST_URI']);
- 		$uri = $uri[1];
+ 		if (isset($_POST['page'])) {
+ 			$uri = explode('/', $_SERVER['REQUEST_URI']);
+ 			$uri = $uri[1];
+ 		} else {
+ 			$uri = $Candy['options']->getOption('homepage');
+ 		}
  
  		if (isset($_GET['category']) && is_numeric($_GET['category'])) {
  			$offset = $_GET['category']+1;
@@ -418,8 +425,12 @@
 			$sth->execute();
 			$limit = $sth->fetchColumn();
 			
-			$uri = explode('/', $_SERVER['REQUEST_URI']);
-			$uri = $uri[1];
+			if (isset($_POST['page'])) {
+	 			$uri = explode('/', $_SERVER['REQUEST_URI']);
+	 			$uri = $uri[1];
+	 		} else {
+	 			$uri = $Candy['options']->getOption('homepage');
+	 		}
 			
 			if ($_GET['category'] == 2) {
 				if ($class !=false) {
