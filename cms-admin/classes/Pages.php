@@ -155,7 +155,7 @@ class Pages {
 	
 		$dbh = new CandyDB();
 		
-		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'", innav="'. $innav .'" WHERE page_id="' . $id . '"');
+		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'" WHERE page_id="' . $id . '"');
 		$sth->execute();
 		
 		if (isset($_POST['cf-update'])) {
@@ -194,7 +194,7 @@ class Pages {
 		
 		// Insert the post
 		$dbh = new CandyDB();
-		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, innav, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $innav .'", "'. $rewrite .'")');
+		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $rewrite .'")');
 		$sth->execute();	
 		
 		// Get the last inserted ID
