@@ -577,34 +577,32 @@
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
 
-// Disabled RSS feed due to not working with new options class
+//Disabled RSS feed due to not working with new options class
 
-// global $Candy;
+//The following will generate and rss feed in the root of the CandyCMS install
 
-// The following will generate and rss feed in the root of the CandyCMS install
+$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+$xml .= '<rss version="2.0">';
+$xml .=	'<channel>';
+$xml .= '<title>'.$Candy['options']->getOption('site_title').'</title>';
+$xml .=	'<link>'.$Candy['options']->getOption('site_url').'</link>';
+$xml .= '<description>'.$Candy['options']->getOption('site_title').' Blog</description>';
+$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
 
-//$xml = '<?xml version="1.0" encoding="UTF-8"';
-//$xml .= '<rss version="2.0">';
-//$xml .=	'<channel>';
-//$xml .= '<title>'.$Candy['options']->getOption('site_title').'</title>';
-//$xml .=	'<link>'.$Candy['options']->getOption('site_url').'</link>';
-//$xml .= '<description>'.$Candy['options']->getOption('site_title').' Blog</description>';
-//$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
-//
-//$posts = listBlogPosts();
-//
-//foreach ($posts as $post) {
-//	
-//	$xml .= '<item>';
-//	$xml .= '<title>'.$post->post_title.'</title>';
-//	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
-//	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
-//	$xml .= '</item>';
-//}
-//
-//$xml .= '</channel>';
-//$xml .= '</rss>';
-//
-//$fp = fopen(CMS_PATH.'rss.xml', 'w');
-//fwrite($fp, $xml);
-//fclose($fp);
+$posts = listBlogPosts();
+
+foreach ($posts as $post) {
+	
+	$xml .= '<item>';
+	$xml .= '<title>'.$post->post_title.'</title>';
+	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
+	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
+	$xml .= '</item>';
+}
+
+$xml .= '</channel>';
+$xml .= '</rss>';
+
+$fp = fopen(CMS_PATH.'rss.xml', 'w');
+fwrite($fp, $xml);
+fclose($fp);
