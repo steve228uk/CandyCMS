@@ -62,5 +62,4 @@ if (is_array($plugins)) {
 	}	
 }
 
-# RUN!
-$candy = new CandyCMS();
+$Candy['system'] = new CandyCMS();
