@@ -31,7 +31,7 @@ class Pages {
 	 public function listPages(){
 	 
 	 	$dbh = new CandyDB();
-	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'pages WHERE innav = "1" ORDER BY navpos');
+	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'pages');
 	 	$sth->execute();
 	 	
 	 	return $sth->fetchAll(PDO::FETCH_CLASS);
