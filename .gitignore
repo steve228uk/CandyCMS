@@ -1,3 +1,7 @@
 .htaccess
 .DS_STORE
 sftp-config.json
+
+CandyCMS.sublime-project
+
+CandyCMS.sublime-workspace
