@@ -12,7 +12,7 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.7.1');
+define('CANDYVERSION', '0.7.1.1');
 
 require_once '../core/config.php';
 
