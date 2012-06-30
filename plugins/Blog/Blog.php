@@ -171,7 +171,7 @@
  		
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
- 		if (isset($_POST['page'])) {
+ 		if (isset($_GET['page'])) {
  			$uri = explode('/', $_SERVER['REQUEST_URI']);
  			$uri = $uri[1];
  		} else {
@@ -374,7 +374,7 @@
  		$sth->execute();
  		$limit = $sth->fetchColumn();
 
- 		if (isset($_POST['page'])) {
+ 		if (isset($_GET['page'])) {
  			$uri = explode('/', $_SERVER['REQUEST_URI']);
  			$uri = $uri[1];
  		} else {
@@ -425,7 +425,7 @@
 			$sth->execute();
 			$limit = $sth->fetchColumn();
 			
-			if (isset($_POST['page'])) {
+			if (isset($_GET['page'])) {
 	 			$uri = explode('/', $_SERVER['REQUEST_URI']);
 	 			$uri = $uri[1];
 	 		} else {
