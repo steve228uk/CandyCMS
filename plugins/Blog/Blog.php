@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.7
+ * @version 0.7.2
  * @since 0.1
  */
  
@@ -179,21 +179,12 @@
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
  		if (isset($_GET['page'])) {
-<<<<<<< HEAD
- 			$uri = explode('/', $_SERVER['REQUEST_URI']);
- 			$uri = $uri[1];
-=======
  			$uri = $_GET['page'];
->>>>>>> dev
  		} else {
  			$uri = $Candy['options']->getOption('homepage');
  		}
 
-<<<<<<< HEAD
- 		echo $Candy['options']->getOption('site_url').$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
-=======
  		echo URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
->>>>>>> dev
  	
  	}
  	
@@ -390,12 +381,7 @@
  		$limit = $sth->fetchColumn();
 
  		if (isset($_GET['page'])) {
-<<<<<<< HEAD
- 			$uri = explode('/', $_SERVER['REQUEST_URI']);
- 			$uri = $uri[1];
-=======
  			$uri = $_GET['page'];
->>>>>>> dev
  		} else {
  			$uri = $Candy['options']->getOption('homepage');
  		}
@@ -596,37 +582,6 @@
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
 
-<<<<<<< HEAD
-//Disabled RSS feed due to not working with new options class
-
-//The following will generate and rss feed in the root of the CandyCMS install
-
-$xml = '<?xml version="1.0" encoding="UTF-8"?>';
-$xml .= '<rss version="2.0">';
-$xml .=	'<channel>';
-$xml .= '<title>'.$Candy['options']->getOption('site_title').'</title>';
-$xml .=	'<link>'.$Candy['options']->getOption('site_url').'</link>';
-$xml .= '<description>'.$Candy['options']->getOption('site_title').' Blog</description>';
-$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
-
-$posts = listBlogPosts();
-
-foreach ($posts as $post) {
-	
-	$xml .= '<item>';
-	$xml .= '<title>'.$post->post_title.'</title>';
-	$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
-	$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
-	$xml .= '</item>';
-}
-
-$xml .= '</channel>';
-$xml .= '</rss>';
-
-$fp = fopen(CMS_PATH.'rss.xml', 'w');
-fwrite($fp, $xml);
-fclose($fp);
-=======
 $uri = $_SERVER['REQUEST_URI'];
 
 if (!stristr($uri, 'cms-admin')) {
@@ -659,4 +614,3 @@ if (!stristr($uri, 'cms-admin')) {
 	fwrite($fp, $xml);
 	fclose($fp);
 }
->>>>>>> dev
