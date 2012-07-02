@@ -584,7 +584,7 @@
 
 $uri = $_SERVER['REQUEST_URI'];
 
-if (!stristr($uri, 'cms-admin')) {
+if (!stristr($uri, 'cms-admin') && !stristr($uri, 'ajax.php')) {
 
 	//The following will generate and rss feed in the root of the CandyCMS install
 
