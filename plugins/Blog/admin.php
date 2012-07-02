@@ -3,7 +3,7 @@
 /**
 * @package CandyCMS
 * @subpackage Blog
-* @version 0.5.2
+* @version 0.7.2
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -31,7 +31,7 @@
 			<input type="text" class="inputstyle" name="title" placeholder="Title" />
 		</li>
 		<li><textarea class="ckeditor" name="body"></textarea></li>
-		<li id="post-btn"><input type="submit" name="addnew" value="Add New Post" class="button" /></li>
+		<li id="post-btn"><input type="submit" name="addnew" value="Add New Post" class="button" /><input type="submit" name="draft" value="Save As Draft" class="button" /></li>
 	</ul>
 	<?php Blog::adminCats() ?>
 </form>
@@ -58,7 +58,12 @@
 			<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $post[0]->post_title ?>" />
 		</li>
 		<li><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
-		<li id="post-btn"><input type="submit" name="editpost" value="Save Post" class="button" /></li>
+		<li id="post-btn">
+			<input type="submit" name="editpost" value="Save Changes" class="button" />
+			<?php if ($post[0]->status == 'draft') : ?>
+				<input type="submit" name="publish" value="Publish Post" class="button" />
+			<?php endif ?>
+		</li>
 	</ul>
 	<?php Blog::adminCats($post[0]->cat_id) ?>
 
@@ -91,17 +96,43 @@
 	<a href="dashboard.php?page=blog&new" class="button addnew right">Add New Post +</a>
 	
 	<?php if (isset($_POST['addnew'])) {
-		
-		Blog::addPost($_POST['title'], $_POST['body'], $_POST['categories']);
+		if (isset($_POST['categories'])) {
+			$categories = $_POST['categories'];
+		} else {
+			$categories = '';
+		}
+		Blog::addPost($_POST['title'], $_POST['body'], $categories, 'published');
 		echo '<p class="message success">Post Added Successfully</p>';
-			
+	}
+
+	if (isset($_POST['draft'])) {
+		if (isset($_POST['categories'])) {
+			$categories = $_POST['categories'];
+		} else {
+			$categories = '';
+		}
+	 	Blog::addPost($_POST['title'], $_POST['body'], $categories, 'draft');
+		echo '<p class="message success">Post Saved As Draft</p>';
 	} 
 	
 	if (isset($_POST['editpost'])) {
-		
-		Blog::editPost($_POST['title'], $_POST['body'], $_POST['categories'], $_POST['pid']);
+		if (isset($_POST['categories'])) {
+			$categories = $_POST['categories'];
+		} else {
+			$categories = '';
+		}
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid']);
 		echo '<p class="message success">Post Edited Sucessfully</p>';
-		
+	}
+
+	if (isset($_POST['publish'])) {
+		if (isset($_POST['categories'])) {
+			$categories = $_POST['categories'];
+		} else {
+			$categories = '';
+		}	
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid'], 'published');
+		echo '<p class="message success">Post Published Sucessfully</p>';
 	}
 	
 	if (isset($_GET['delete'])) {

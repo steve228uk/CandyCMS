@@ -519,7 +519,9 @@ table td{
 
 
 .message.update{
-	margin: 0 0 30px;
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
 }
 
 /* @end */

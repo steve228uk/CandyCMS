@@ -16,7 +16,7 @@
  		
  		$dbh = new CandyDB();
  	
- 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`), post_body TEXT NOT NULL, cat_id VARCHAR(256) NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`), post_body TEXT NOT NULL, cat_id VARCHAR(256) NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, status TEXT NOT NULL)");
  	
  		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
@@ -25,6 +25,7 @@
  		
  		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."options (option_key, option_value) VALUES ('perpage', '5')");
  		$sth->execute();
+ 		
  	}
  
  	public static function adminNav(){
@@ -41,12 +42,13 @@
  		$posts = $sth->fetchAll(PDO::FETCH_CLASS);
  		
  		$html = '<table>';
- 		$html .= '<thead><tr><th>Post Title</th><th>Posted</th><th></th><th></th></tr></thead>';
+ 		$html .= '<thead><tr><th>Post Title</th><th>Posted</th><th>Status</th><th></th><th></th></tr></thead>';
  		
  		foreach ($posts as $post) {
  			$html .= '<tr>';
  			$html .= '<td>'.$post->post_title.'</td>';
  			$html .= '<td>'.date('d/m/Y H:i:s', strtotime($post->post_date)).'</td>';
+ 			$html .= '<td>'.ucwords($post->status).'</td>';
  			$html .= '<td><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page">Edit</a></td>';
  			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="'.$post->post_title.'" class="delete">[x]</a></td>';
  			$html .= '</tr>';	
@@ -84,26 +86,31 @@
  		
  	}
  	
- 	public static function addPost($post_title, $post_body, $categories){
+ 	public static function addPost($post_title, $post_body, $categories, $status){
  		
  		$categories = json_encode($categories);
  		
  		$cats = addslashes($categories);
  		
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id) VALUES ('$post_title', '".addslashes($post_body)."', '$cats')");
+ 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, status) VALUES ('$post_title', '".addslashes($post_body)."', '$cats', '$status')");
  		$sth->execute();	
  	
  	}
  
- 	public static function editPost($post_title, $post_body, $categories, $pid){
+ 	public static function editPost($post_title, $post_body, $categories, $pid, $status=false){
  		
  		$categories = json_encode($categories);
  		
  		$cats = addslashes($categories);
  		
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
+ 		if ($status == false) {
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
+ 		} else {
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats', status='$status' WHERE post_id='$pid'");
+ 		}
+ 		
  		$sth->execute();	
  		
  	}
@@ -172,13 +179,21 @@
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
  		if (isset($_GET['page'])) {
+<<<<<<< HEAD
  			$uri = explode('/', $_SERVER['REQUEST_URI']);
  			$uri = $uri[1];
+=======
+ 			$uri = $_GET['page'];
+>>>>>>> dev
  		} else {
  			$uri = $Candy['options']->getOption('homepage');
  		}
 
+<<<<<<< HEAD
  		echo $Candy['options']->getOption('site_url').$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+=======
+ 		echo URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+>>>>>>> dev
  	
  	}
  	
@@ -375,8 +390,12 @@
  		$limit = $sth->fetchColumn();
 
  		if (isset($_GET['page'])) {
+<<<<<<< HEAD
  			$uri = explode('/', $_SERVER['REQUEST_URI']);
  			$uri = $uri[1];
+=======
+ 			$uri = $_GET['page'];
+>>>>>>> dev
  		} else {
  			$uri = $Candy['options']->getOption('homepage');
  		}
@@ -497,11 +516,11 @@
 		$offset = $page*$limit;
 		$offset = $offset-$limit;
  		
- 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '. $limit . ' OFFSET ' . $offset);
+ 		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `status`="published" ORDER BY post_id DESC LIMIT '. $limit . ' OFFSET ' . $offset);
  		
  	} else {
  
-	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '. $limit);
+	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `status`="published" ORDER BY post_id DESC LIMIT '. $limit);
  	}
  	
  	$sth->execute();
@@ -577,6 +596,7 @@
  	return $sth->fetchAll(PDO::FETCH_CLASS);
  }
 
+<<<<<<< HEAD
 //Disabled RSS feed due to not working with new options class
 
 //The following will generate and rss feed in the root of the CandyCMS install
@@ -606,3 +626,37 @@ $xml .= '</rss>';
 $fp = fopen(CMS_PATH.'rss.xml', 'w');
 fwrite($fp, $xml);
 fclose($fp);
+=======
+$uri = $_SERVER['REQUEST_URI'];
+
+if (!stristr($uri, 'cms-admin')) {
+
+	//The following will generate and rss feed in the root of the CandyCMS install
+
+	$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+	$xml .= '<rss version="2.0">';
+	$xml .=	'<channel>';
+	$xml .= '<title>'.$Candy['options']->getOption('site_title').'</title>';
+	$xml .=	'<link>'.$Candy['options']->getOption('site_url').'</link>';
+	$xml .= '<description>'.$Candy['options']->getOption('site_title').' Blog</description>';
+	$xml .= '<pubDate>'.date('Y-m-d H:i:s').'</pubDate>';
+
+	$posts = listBlogPosts();
+
+	foreach ($posts as $post) {
+		
+		$xml .= '<item>';
+		$xml .= '<title>'.$post->post_title.'</title>';
+		$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
+		$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
+		$xml .= '</item>';
+	}
+
+	$xml .= '</channel>';
+	$xml .= '</rss>';
+
+	$fp = fopen(CMS_PATH.'rss.xml', 'w');
+	fwrite($fp, $xml);
+	fclose($fp);
+}
+>>>>>>> dev
