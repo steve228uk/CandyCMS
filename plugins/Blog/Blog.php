@@ -536,7 +536,7 @@
 	$sth->execute();
 	$catid = $sth->fetchColumn();
   
-  	$sth = $dbh->prepare('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts');
+  	$sth = $dbh->prepare('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts WHERE status="published"');
   	$sth->execute();
   	$posts = $sth->fetchAll(PDO::FETCH_CLASS);
   	
