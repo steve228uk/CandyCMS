@@ -155,8 +155,8 @@
  		
  	}
  	
- 	public static function postUri($id){
- 	
+ 	public static function getPostUri($id){
+ 		
  		global $Candy;
  	
  		$dbh = new CandyDB();
@@ -179,8 +179,14 @@
  		
  		$uri = self::getBlogPage();
 
- 		echo URL_PATH.$uri.''.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		return URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		
+ 	}
  	
+ 	public static function postUri($id){
+ 	 	
+ 	 	echo self::getPostUri($id);
+ 	 	
  	}
  	
  	public static function postExcerpt($id, $length = 200){
@@ -488,7 +494,7 @@
 		
 		$id = $sth->fetchColumn();
 		
-		echo $id;
+		return $id;
 		
 	}
 	
@@ -606,9 +612,9 @@ if (!stristr($uri, 'cms-admin') && !stristr($uri, 'ajax.php')) {
 	$posts = listBlogPosts();
 
 	foreach ($posts as $post) {
-		
 		$xml .= '<item>';
 		$xml .= '<title>'.$post->post_title.'</title>';
+		$xml .= '<link>'.Blog::getPostUri($post->post_id).'</link>';
 		$xml .= '<pubDate>'.$post->post_date.'</pubDate>';
 		$xml .= '<description><![CDATA['.$post->post_body.']]></description>';
 		$xml .= '</item>';
