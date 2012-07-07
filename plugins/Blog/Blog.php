@@ -32,7 +32,6 @@
  		return array('blog' => 'Blog');
  	}
  
- 	
  	public static function postsTable(){
  	
  		$dbh = new CandyDB();
@@ -178,13 +177,9 @@
  		
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
- 		if (isset($_GET['page'])) {
- 			$uri = $_GET['page'];
- 		} else {
- 			$uri = $Candy['options']->getOption('homepage');
- 		}
+ 		$uri = self::getBlogPage();
 
- 		echo URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		echo URL_PATH.$uri.''.$catname.'/'.str_replace(' ', '-', strtolower($title));
  	
  	}
  	
@@ -482,6 +477,18 @@
 		}
 		
 		echo $html;
+		
+	}
+	
+	public static function getBlogPage() {
+		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('SELECT rewrite FROM '.DB_PREFIX.'pages WHERE page_body LIKE "%{{blog}}%"');
+		$sth->execute();
+		
+		$id = $sth->fetchColumn();
+		
+		echo $id;
 		
 	}
 	
