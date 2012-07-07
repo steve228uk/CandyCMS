@@ -3,14 +3,26 @@
 	global $Candy;
 	$theme = $Candy['options']->getOption('theme');
 
+	$siteurl = $Candy['options']->getOption('site_url');
+
 ?>
 
 <?php if (isset($_GET['post']) && $_GET['post'] != '') { ?>
 	
-	<?php $post = getBlogPost($_GET['post']);
-
-	if (!empty($post)) {
+	<?php 
 	
+	$pieces = explode('-', $_GET['post']);
+	
+	$refer = (isset($_SERVER['HTTP_REFERER'])) ? explode('?', $_SERVER['HTTP_REFERER']) : array('');
+	
+	if (count($pieces) == 2 && $pieces[0] == 'preview' && is_numeric($pieces[1]) && $refer[0] == $siteurl.'cms-admin/dashboard.php') {
+		$post = getBlogPostById($pieces[1]);
+	} else {
+		$post = getBlogPost($_GET['post']);
+	}
+	
+	if (!empty($post)) {
+			
 		// Include the single.php template from theme if it's there!
 		
 		$themeSingle = THEME_PATH.$theme.'/blog/single.php';

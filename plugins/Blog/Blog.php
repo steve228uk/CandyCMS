@@ -306,16 +306,15 @@
  		$post = getBlogPost($_GET['post']);
  	
  		$url = $Candy['options']->getOption('site_url');
- 	
+ 		
  		$html = '<div id="disqus_thread"></div>'."\n";
  		$html .= '<script type="text/javascript">'."\n";
- 		   
- 		   
+ 		      
  		$html .= "var disqus_shortname = '".self::disqusAccount()."';\n";
- 		$html .= "var disqus_identifier = '".$post[0]->post_id."';\n";
+ 		
+ 		if (!empty($post)) $html .= "var disqus_identifier = '".$post[0]->post_id."';\n";
  		
  		$html .= "var disqus_url = '$url".$_GET['page']."/".$_GET['category']."/".$_GET['post']."';\n";
- 		   
  		   
  		$html .= "(function() {\n";
  		$html .= "var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;\n";
@@ -324,7 +323,6 @@
  		$html .= "})();\n";
  		$html .= "</script>";
  
- 		
  		echo $html;
  		
  	}
