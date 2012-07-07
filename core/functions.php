@@ -30,9 +30,10 @@ function candyHead(){
 	$return = '';
 	foreach ($plugins as $plugin) {
 		if (method_exists($plugin, 'candyHead')) {
-			$return .= $plugin::candyHead();
+			$return .= $plugin::candyHead()."\n";
 		}
 	}
+	$return .= '<meta name="generator" content="Candy '.CANDYVERSION.'" />'."\n";
 	echo $return;
 }
 
@@ -176,7 +177,7 @@ function theNav($class = 'nav'){
 
 		$html .= '</li>';
 	}
-
+	
 	$html .= '</ul>';
 	echo $html;
 }
