@@ -16,7 +16,7 @@ if ($_FILES['file']['type'] == 'image/png'
 || $_FILES['file']['type'] == 'image/pjpeg')
 {	
     // setting file's mysterious name
-    $file = md5(date('YmdHis')).'-test.jpg';
+    $file = md5(date('YmdHis')).'.jpg';
  
     // copying
     copy($_FILES['file']['tmp_name'], $dir.$file);
