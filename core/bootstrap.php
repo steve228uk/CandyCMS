@@ -9,14 +9,14 @@
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.7.3');
+define('CANDYVERSION', '0.7.3.1');
 
 /**
  * Set the development enviornment
  * @options development or production
  */
 
-define('ENVIRONMENT', 'dev');
+define('ENVIRONMENT', 'production');
 
 if (ENVIRONMENT == 'dev') {
 	ini_set('display_errors', 1);
