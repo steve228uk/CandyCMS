@@ -187,11 +187,17 @@ function diehard($msg) {
 		
 		<?php 
 			
-			$result = @chmod("./core", 0755);
+			$currentmodal = substr(sprintf('%o', fileperms('./core')), -4);
 			
-			if (!$result) {
+			if ($currentmodal != "0755" && $currentmodal != "0777") {
 			
-				diehard("Sorry, we couldn't modify the directory permissions of /core.");
+				$result = @chmod("./core", 0755);
+				
+				if (!$result) {
+				
+					diehard("Sorry, we couldn't modify the directory permissions of /core.");
+				
+				}
 			
 			}
 			
@@ -259,7 +265,7 @@ function diehard($msg) {
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
 			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."/index.php?page=$1&category=$2&post=$3 [QSA,L]";
 				
-			$fp = @fopen('.htaccess', 'w');
+			$fp = @fopen('./.htaccess', 'w');
 			
 			if (!$fp) {
 			
