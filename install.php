@@ -16,6 +16,15 @@ if (version_compare(phpversion(), '5.3', '<=')) {
 if (file_exists('core/config.php')) {
 	header('Location: index.php');
 }
+
+function diehard($msg) {
+	echo $msg;
+	echo "<Br/><Br/><a href=\"index.php\" class=\"button\">Well, at least we tried</a>";
+	die();
+}
+
+$path = $_SERVER['DOCUMENT_ROOT'].trim($_SERVER['PHP_SELF'], 'install.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -178,14 +187,22 @@ if (file_exists('core/config.php')) {
 		<?php if (isset($_GET['install'])) : ?>
 		
 		<h1>Candy Installer</h1>
-		<p class="leadin">
-			Thanks for installing Candy!
-		</p>
-		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
 		
 		<?php 
 			
-			chmod("/core", 0755);
+			$currentmodal = substr(sprintf('%o', fileperms('./core')), -4);
+			
+			if ($currentmodal != "0755" && $currentmodal != "0777") {
+			
+				$result = @chmod($path."core", 0755);
+				
+				if (!$result) {
+				
+					diehard("Sorry, we couldn't modify the directory permissions of /core.");
+				
+				}
+			
+			}
 			
 			$dir = trim($_SERVER['PHP_SELF'], 'install.php');
 		
@@ -229,9 +246,18 @@ if (file_exists('core/config.php')) {
 			$config .= "define('PLUGIN_URL', URL_PATH.'plugins/');";
 			
 			
-			$fp = fopen('core/config.php', 'w');
-			fwrite($fp, $config);
-			fclose($fp);
+			$fp = @fopen('core/config.php', 'w');
+			
+			if (!$fp) {
+			
+				diehard("Sorry, we couldn't write to core/config.php.");
+			
+			} else {
+			
+				fwrite($fp, $config);
+				fclose($fp);
+			
+			}
 			
 			#Write the HTACCESS file
 			$dir = (trim($_SERVER['PHP_SELF'], '/install.php') == '') ? '/' : trim($_SERVER['PHP_SELF'], 'install.php');
@@ -242,14 +268,27 @@ if (file_exists('core/config.php')) {
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
 			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."/index.php?page=$1&category=$2&post=$3 [QSA,L]";
 				
-			$fp = fopen('.htaccess', 'w');
-			fwrite($fp, $htaccess);
-			fclose($fp);
+			$fp = @fopen('./.htaccess', 'w');
 			
+			if (!$fp) {
 			
+				diehard("Sorry, we couldn't write to ~/.htaccess");
 			
+			} else {
+			
+				fwrite($fp, $htaccess);
+				fclose($fp);
+			
+			}
+						
 			#Include the file once we've created it!
-			include('core/config.php');
+			$configfinal = @include('core/config.php');
+			
+			if (!$configfinal) {
+			
+				diehard("Sorry, we couldn't create core/config.php properly.");
+			
+			}
 			
 			$dbh = new PDO(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
 			
@@ -295,6 +334,11 @@ if (file_exists('core/config.php')) {
 		
 			
 		?>
+		
+		<p class="leadin">
+			Thanks for installing Candy!
+		</p>
+		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
 		
 		<?php else : ?>
 		
