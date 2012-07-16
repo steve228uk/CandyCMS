@@ -267,19 +267,37 @@ $path = $_SERVER['DOCUMENT_ROOT'].trim($_SERVER['PHP_SELF'], 'install.php');
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
 			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
 			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."/index.php?page=$1&category=$2&post=$3 [QSA,L]";
+			
+			
+			$currentmodal = substr(sprintf('%o', fileperms($path)), -4);
+			
+			if ($currentmodal != "0755" && $currentmodal != "0777") {
+			
+				$result = @chmod($path, 0755);
 				
-			$fp = @fopen('./.htaccess', 'w');
-			
-			if (!$fp) {
-			
-				diehard("Sorry, we couldn't write to ~/.htaccess");
-			
-			} else {
-			
-				fwrite($fp, $htaccess);
-				fclose($fp);
+				if (!$result) {
+				
+					diehard("Sorry, we couldn't modify the install directory permissions");
+				
+				} else {
+				
+					$fp = @fopen('./.htaccess', 'w');
+					
+					if (!$fp) {
+					
+						diehard("Sorry, we couldn't write to ~/.htaccess");
+					
+					} else {
+					
+						fwrite($fp, $htaccess);
+						fclose($fp);
+					
+					}
+				
+				}
 			
 			}
+			
 						
 			#Include the file once we've created it!
 			$configfinal = @include('core/config.php');
