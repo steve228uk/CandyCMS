@@ -187,7 +187,7 @@ function diehard($msg) {
 		
 		<?php 
 			
-			$result = @chmod("/core", 0755);
+			$result = @chmod("./core", 0755);
 			
 			if (!$result) {
 			
