@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.7.2
+ * @version 0.7.4
  * @since 0.1
  */
  
@@ -85,15 +85,15 @@
  		
  	}
  	
- 	public static function addPost($post_title, $post_body, $categories, $status){
+ 	public static function addPost($post_title, $post_body, $categories, $permalink, $status){
  		
  		$categories = json_encode($categories);
  		
  		$cats = addslashes($categories);
  		
- 		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, status) VALUES ('$post_title', '".addslashes($post_body)."', '$cats', '$status')");
- 		$sth->execute();	
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, permalink, status) VALUES ('".addslashes($post_title)."', '".addslashes($post_body)."', '$cats', '$permalink', '$status')");
+		$sth->execute();
  	
  	}
  
@@ -160,9 +160,9 @@
  		global $Candy;
  	
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth = $dbh->prepare("SELECT permalink FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
- 		$title = $sth->fetchColumn();
+ 		$permalink = $sth->fetchColumn();
  		
  		$sth = $dbh->prepare("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
@@ -179,7 +179,7 @@
  		
  		$uri = self::getBlogPage();
 
- 		return URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		return URL_PATH.$uri.'/'.$catname.'/'.$permalink;
  		
  	}
  	
@@ -575,10 +575,8 @@
 
  function getBlogPost($uri){
  
- 	$uri = str_replace('-', ' ', $uri);
- 
  	$dbh = new CandyDB();
- 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_title` = "'. $uri .'"');
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `permalink` = "'. $uri .'"');
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
