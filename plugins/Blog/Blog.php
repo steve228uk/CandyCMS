@@ -474,7 +474,7 @@
 			$html .= '<ul>';
 		
 			foreach ($cats as $cat) {
-				$html .= "<li><a href='".$path.$_GET['page']."/".str_replace(' ', '-', strtolower($cat->cat_name))."'>".$cat->cat_name."</a></li>";
+				$html .= "<li><a href='".$path.self::getBlogPage()."/".str_replace(' ', '-', strtolower($cat->cat_name))."'>".$cat->cat_name."</a></li>";
 			}	
 			
 			$html .= '</ul>';
