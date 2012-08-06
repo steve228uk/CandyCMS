@@ -19,7 +19,10 @@ function candytitle($separator = '|'){
 	$page_title = $Candy['pages']->getInfo('page_title', $page);
 	
 	if (isset($_GET['post']) && $_GET['post'] != '') {
-		echo $title, ' ', $separator, ' ', $page_title, ' ', $separator, ' ', ucwords(str_replace('-', ' ', $_GET['post']));
+
+		$postTitle = Blog::getPostTitle($_GET['post']);
+
+		echo $title, ' ', $separator, ' ', $page_title, ' ', $separator, ' ', $postTitle;
 	} else {
 		echo $title, ' ', $separator, ' ', $page_title;
 	}

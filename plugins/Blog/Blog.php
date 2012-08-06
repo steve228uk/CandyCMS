@@ -495,6 +495,16 @@
 		return $id;
 		
 	}
+
+	public static function getPostTitle($permalink){
+
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('SELECT post_title FROM '.DB_PREFIX.'posts WHERE permalink="'.$permalink.'"');
+		$sth->execute();
+
+		return $sth->fetchColumn();
+
+	}
 	
  }
  
