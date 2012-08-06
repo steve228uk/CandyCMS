@@ -27,6 +27,39 @@
  		$sth->execute();
  		
  	}
+
+ 	public static function listCategories($cat_id){
+ 		
+ 		$dbh = new CandyDB();
+ 		
+ 		$cats = array();
+ 		
+ 		$cat_id = json_decode($cat_id);
+ 		
+ 		foreach ($cat_id as $value) {
+ 			$sth = $dbh->prepare("SELECT cat_name FROM ".DB_PREFIX."categories WHERE `cat_id` ='$value'");
+ 			$sth->execute();
+ 			$cats[] = $sth->fetchColumn();
+ 		}
+ 		
+ 		$html = '';
+ 		
+ 		if (!empty($cats)) {
+ 			
+ 			$html .= '<ul class="category-list">';
+ 			
+ 			foreach ($cats as $value) {
+ 				$catlink = str_replace(' ', '-', strtolower($value));
+ 				$html .= '<li class="cat-'.strtolower($value).'"><a href="'.URL_PATH.self::getBlogPage().'/'.$catlink.'" title="'.$value.'">'.$value.'</a></li>';
+ 			}
+ 			
+ 			$html .= '</ul>';
+ 				
+ 		}
+ 		
+ 		echo $html;
+ 		
+ 	}
  
  	public static function adminNav(){
  		return array('blog' => 'Blog');
