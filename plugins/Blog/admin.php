@@ -81,7 +81,7 @@
 	<input type="hidden" name="pid" value="<?php echo $_GET['edit'] ?>" />
 </form>
 </div>
-<a href="<?php echo URL_PATH.Blog::getBlogPage().'/uncategorised/preview-'.$_GET['edit'] ?>" class="button right" style="margin-top:20px;">Preview Post</a>
+<?php /*<a href="<?php echo URL_PATH.Blog::getBlogPage().'/uncategorised/preview-'.$_GET['edit'] ?>" class="button right" style="margin-top:20px;">Preview Post</a>*/ ?>
 <?php else: ?>
 
 <div id="title-bar">
