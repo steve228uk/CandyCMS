@@ -60,11 +60,16 @@
 <form action="dashboard.php?page=blog" method="post">
 
 	<ul id="post-info">
-		<li id="post-title left">
+		<li id="post-title" class="left">
 			<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $post[0]->post_title ?>" />
 		</li>
 
-		<li><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
+		<li class="viewed-at post-perma right">
+			Permalink
+			<input type="text" name="rewrite" class="url-box" id="rewrite" value="<?php echo $post[0]->permalink ?>" />
+		</li>
+
+		<li class="clear"><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
 		<li id="post-btn">
 			<input type="submit" name="editpost" value="Save Changes" class="button" />
 			<?php if ($post[0]->status == 'draft') : ?>
@@ -129,7 +134,7 @@
 		} else {
 			$categories = '';
 		}
-		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid']);
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid']);
 		echo '<p class="message success">Post Edited Sucessfully</p>';
 	}
 
@@ -139,7 +144,7 @@
 		} else {
 			$categories = '';
 		}	
-		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid'], 'published');
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid'], 'published');
 		echo '<p class="message success">Post Published Sucessfully</p>';
 	}
 	

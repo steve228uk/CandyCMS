@@ -97,7 +97,7 @@
  	
  	}
  
- 	public static function editPost($post_title, $post_body, $categories, $pid, $status=false){
+ 	public static function editPost($post_title, $post_body, $categories, $permalink, $pid, $status=false){
  		
  		$categories = json_encode($categories);
  		
@@ -105,9 +105,9 @@
  		
  		$dbh = new CandyDB();
  		if ($status == false) {
- 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='".addslashes($post_title)."', post_body='".addslashes($post_body)."', cat_id='$cats', permalink='$permalink' WHERE post_id='$pid'");
  		} else {
- 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats', status='$status' WHERE post_id='$pid'");
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='".addslashes($post_title)."', post_body='".addslashes($post_body)."', cat_id='$cats', status='$status', permalink='$permalink' WHERE post_id='$pid'");
  		}
  		
  		$sth->execute();	
