@@ -30,10 +30,10 @@ $(function() {
 		$('#usernav').hide();
 	});
 	
-	$('#page-title').keyup(function() {
+	$('#page-title, #post-title input').change(function() {
 		
-		var text = $('#page-title').val();
-		var rewrite = text.replace(/\s+/g, '-').toLowerCase();
+		var text = $(this).val();
+		var rewrite = text.replace(/&/g, 'and').replace(/[^a-zA-Z0-9 -]+/g, '').replace(/\s+/g, '-').toLowerCase();
 		
 		$('#rewrite').val(rewrite);
 		
