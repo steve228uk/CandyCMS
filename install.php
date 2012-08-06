@@ -277,7 +277,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].trim($_SERVER['PHP_SELF'], 'install.php');
 				
 			}
 		
-			$fp = @fopen('./.htaccess', 'w');
+			$fp = @fopen('./.htaccess', 'a');
 			
 			if (!$fp) {
 			
