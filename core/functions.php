@@ -206,8 +206,8 @@ function candyScript($filename){
 	echo '<script type="text/javascript" src="'.THEME_URL.$theme.'/js/'.$filename.'"></script>';
 }
 
-function candyImg($filename, $alt){
+function candyImg($filename, $alt, $class=false, $width=false, $height=false){
 	global $Candy;
 	$theme = $Candy['options']->getOption('theme');
-	echo '<img src="'.THEME_URL.$theme.'/images/'.$filename.'" alt="'.$alt.'" />';
+	echo '<img src="'.THEME_URL.$theme.'/images/'.$filename.'" alt="'.$alt.'" class="'.$class.'" width="'.$width.'" height="'.$height.'"/>';
 }
