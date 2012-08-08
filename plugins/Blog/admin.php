@@ -3,7 +3,7 @@
 /**
 * @package CandyCMS
 * @subpackage Blog
-* @version 0.7.2
+* @version 0.7.4
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -27,10 +27,16 @@
 <div id="container">
 <form action="dashboard.php?page=blog" method="post">
 	<ul id="post-info">
-		<li id="post-title">
+		<li id="post-title" class="left">
 			<input type="text" class="inputstyle" name="title" placeholder="Title" />
 		</li>
-		<li><textarea class="ckeditor" name="body"></textarea></li>
+
+		<li class="viewed-at post-perma right">
+			Permalink
+			<input type="text" name="rewrite" class="url-box" id="rewrite" />
+		</li>
+
+		<li class="clear"><textarea class="ckeditor" name="body"></textarea></li>
 		<li id="post-btn"><input type="submit" name="addnew" value="Add New Post" class="button" /><input type="submit" name="draft" value="Save As Draft" class="button" /></li>
 	</ul>
 	<?php Blog::adminCats() ?>
@@ -54,10 +60,16 @@
 <form action="dashboard.php?page=blog" method="post">
 
 	<ul id="post-info">
-		<li id="post-title">
+		<li id="post-title" class="left">
 			<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $post[0]->post_title ?>" />
 		</li>
-		<li><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
+
+		<li class="viewed-at post-perma right">
+			Permalink
+			<input type="text" name="rewrite" class="url-box" id="rewrite" value="<?php echo $post[0]->permalink ?>" />
+		</li>
+
+		<li class="clear"><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
 		<li id="post-btn">
 			<input type="submit" name="editpost" value="Save Changes" class="button" />
 			<?php if ($post[0]->status == 'draft') : ?>
@@ -69,7 +81,7 @@
 	<input type="hidden" name="pid" value="<?php echo $_GET['edit'] ?>" />
 </form>
 </div>
-<a href="<?php echo URL_PATH.Blog::getBlogPage().'/uncategorised/preview-'.$_GET['edit'] ?>" class="button right" style="margin-top:20px;">Preview Post</a>
+<?php /*<a href="<?php echo URL_PATH.Blog::getBlogPage().'/uncategorised/preview-'.$_GET['edit'] ?>" class="button right" style="margin-top:20px;">Preview Post</a>*/ ?>
 <?php else: ?>
 
 <div id="title-bar">
@@ -101,7 +113,8 @@
 		} else {
 			$categories = '';
 		}
-		Blog::addPost($_POST['title'], $_POST['body'], $categories, 'published');
+
+		Blog::addPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], 'published');
 		echo '<p class="message success">Post Added Successfully</p>';
 	}
 
@@ -121,7 +134,7 @@
 		} else {
 			$categories = '';
 		}
-		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid']);
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid']);
 		echo '<p class="message success">Post Edited Sucessfully</p>';
 	}
 
@@ -131,7 +144,7 @@
 		} else {
 			$categories = '';
 		}	
-		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['pid'], 'published');
+		Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid'], 'published');
 		echo '<p class="message success">Post Published Sucessfully</p>';
 	}
 	
