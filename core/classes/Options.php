@@ -18,7 +18,7 @@ class Options {
 		$sth = $dbh->prepare('SELECT option_value FROM '. DB_PREFIX .'options WHERE option_key = "'.$option.'"');
 		$sth->execute();
 		
-		return $sth->fetchColumn();
+		return stripslashes($sth->fetchColumn());
 	
 	}	
 }

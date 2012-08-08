@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 0.7.4
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -19,7 +19,10 @@ function candytitle($separator = '|'){
 	$page_title = $Candy['pages']->getInfo('page_title', $page);
 	
 	if (isset($_GET['post']) && $_GET['post'] != '') {
-		echo $title, ' ', $separator, ' ', $page_title, ' ', $separator, ' ', ucwords(str_replace('-', ' ', $_GET['post']));
+
+		$postTitle = Blog::getPostTitle($_GET['post']);
+
+		echo $title, ' ', $separator, ' ', $page_title, ' ', $separator, ' ', $postTitle;
 	} else {
 		echo $title, ' ', $separator, ' ', $page_title;
 	}
@@ -126,7 +129,7 @@ function theTitle(){
 	echo $Candy['pages']->getInfo('page_title', $page);
 }
 
-function theNav($class = 'nav'){
+function theNav($class = 'nav', $active = 'active-page'){
 	global $Candy;
 	
 	$html = '<ul class="'. $class .'">';
@@ -150,7 +153,7 @@ function theNav($class = 'nav'){
 	
 	
 		if (!empty($info)) {
-			$html .= ($page->id == $info[0]->page_id) ? '<li class="active-page">' : '<li>';	
+			$html .= ($page->id == $info[0]->page_id) ? '<li class="'.$active.'">' : '<li>';	
 		} else {
 			$html .= '<li>';
 		}

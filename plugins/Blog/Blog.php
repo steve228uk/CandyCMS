@@ -6,7 +6,7 @@
  * @author Cocoon Design
  * @authorURI http://www.wearecocoon.co.uk/
  * @copyright 2012 (C) Cocoon Design  
- * @version 0.7.2
+ * @version 0.7.4
  * @since 0.1
  */
  
@@ -16,7 +16,7 @@
  		
  		$dbh = new CandyDB();
  	
- 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`), post_body TEXT NOT NULL, cat_id VARCHAR(256) NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, status TEXT NOT NULL)");
+ 		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."posts (post_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(post_id), post_title VARCHAR(64) NOT NULL, UNIQUE KEY (`post_title`), post_body TEXT NOT NULL, permalink TEXT NOT NULL, cat_id VARCHAR(256) NOT NULL, post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, status TEXT NOT NULL)");
  	
  		$dbh->exec("CREATE TABLE IF NOT EXISTS ". DB_PREFIX ."categories (cat_id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (cat_id), cat_name VARCHAR(256), UNIQUE KEY (`cat_name`))");
  		
@@ -25,6 +25,39 @@
  		
  		$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."options (option_key, option_value) VALUES ('perpage', '5')");
  		$sth->execute();
+ 		
+ 	}
+
+ 	public static function listCategories($cat_id){
+ 		
+ 		$dbh = new CandyDB();
+ 		
+ 		$cats = array();
+ 		
+ 		$cat_id = json_decode($cat_id);
+ 		
+ 		foreach ($cat_id as $value) {
+ 			$sth = $dbh->prepare("SELECT cat_name FROM ".DB_PREFIX."categories WHERE `cat_id` ='$value'");
+ 			$sth->execute();
+ 			$cats[] = $sth->fetchColumn();
+ 		}
+ 		
+ 		$html = '';
+ 		
+ 		if (!empty($cats)) {
+ 			
+ 			$html .= '<ul class="category-list">';
+ 			
+ 			foreach ($cats as $value) {
+ 				$catlink = str_replace(' ', '-', strtolower($value));
+ 				$html .= '<li class="cat-'.strtolower($value).'"><a href="'.URL_PATH.self::getBlogPage().'/'.$catlink.'" title="'.$value.'">'.$value.'</a></li>';
+ 			}
+ 			
+ 			$html .= '</ul>';
+ 				
+ 		}
+ 		
+ 		echo $html;
  		
  	}
  
@@ -85,19 +118,19 @@
  		
  	}
  	
- 	public static function addPost($post_title, $post_body, $categories, $status){
+ 	public static function addPost($post_title, $post_body, $categories, $permalink, $status){
  		
  		$categories = json_encode($categories);
  		
  		$cats = addslashes($categories);
  		
- 		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, status) VALUES ('$post_title', '".addslashes($post_body)."', '$cats', '$status')");
- 		$sth->execute();	
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, permalink, status) VALUES ('".addslashes($post_title)."', '".addslashes($post_body)."', '$cats', '$permalink', '$status')");
+		$sth->execute();
  	
  	}
  
- 	public static function editPost($post_title, $post_body, $categories, $pid, $status=false){
+ 	public static function editPost($post_title, $post_body, $categories, $permalink, $pid, $status=false){
  		
  		$categories = json_encode($categories);
  		
@@ -105,9 +138,9 @@
  		
  		$dbh = new CandyDB();
  		if ($status == false) {
- 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats' WHERE post_id='$pid'");
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='".addslashes($post_title)."', post_body='".addslashes($post_body)."', cat_id='$cats', permalink='$permalink' WHERE post_id='$pid'");
  		} else {
- 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='$post_title', post_body='".addslashes($post_body)."', cat_id='$cats', status='$status' WHERE post_id='$pid'");
+ 			$sth = $dbh->prepare("UPDATE ".DB_PREFIX."posts SET post_title='".addslashes($post_title)."', post_body='".addslashes($post_body)."', cat_id='$cats', status='$status', permalink='$permalink' WHERE post_id='$pid'");
  		}
  		
  		$sth->execute();	
@@ -160,9 +193,9 @@
  		global $Candy;
  	
  		$dbh = new CandyDB();
- 		$sth = $dbh->prepare("SELECT post_title FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
+ 		$sth = $dbh->prepare("SELECT permalink FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
- 		$title = $sth->fetchColumn();
+ 		$permalink = $sth->fetchColumn();
  		
  		$sth = $dbh->prepare("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id='".$id."'");
  		$sth->execute();
@@ -179,7 +212,7 @@
  		
  		$uri = self::getBlogPage();
 
- 		return URL_PATH.$uri.'/'.$catname.'/'.str_replace(' ', '-', strtolower($title));
+ 		return URL_PATH.$uri.'/'.$catname.'/'.$permalink;
  		
  	}
  	
@@ -474,7 +507,7 @@
 			$html .= '<ul>';
 		
 			foreach ($cats as $cat) {
-				$html .= "<li><a href='".$path.$_GET['page']."/".str_replace(' ', '-', strtolower($cat->cat_name))."'>".$cat->cat_name."</a></li>";
+				$html .= "<li><a href='".$path.self::getBlogPage()."/".str_replace(' ', '-', strtolower($cat->cat_name))."'>".$cat->cat_name."</a></li>";
 			}	
 			
 			$html .= '</ul>';
@@ -494,6 +527,16 @@
 		
 		return $id;
 		
+	}
+
+	public static function getPostTitle($permalink){
+
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('SELECT post_title FROM '.DB_PREFIX.'posts WHERE permalink="'.$permalink.'"');
+		$sth->execute();
+
+		return $sth->fetchColumn();
+
 	}
 	
  }
@@ -575,10 +618,8 @@
 
  function getBlogPost($uri){
  
- 	$uri = str_replace('-', ' ', $uri);
- 
  	$dbh = new CandyDB();
- 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_title` = "'. $uri .'"');
+ 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'posts WHERE `permalink` = "'. $uri .'"');
  	$sth->execute();
  	
  	return $sth->fetchAll(PDO::FETCH_CLASS);
