@@ -91,7 +91,7 @@ class Plugins {
 		
 	}
 	
-	private function installPlugin($plugins){
+	private static function installPlugin($plugins){
 		
 		foreach ($plugins as $plugin) {
 			
@@ -111,7 +111,7 @@ class Plugins {
 		
 	}
 	
-	private function getWidgetTitle($plugin){
+	private static function getWidgetTitle($plugin){
 		
 		$file = PLUGIN_PATH."$plugin/widget.php";
 		
