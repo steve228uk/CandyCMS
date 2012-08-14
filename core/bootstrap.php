@@ -40,7 +40,9 @@ require_once 'config.php';
 # Fire up the autoloader I'm going back to 1977!
 
 function __autoload($class_name) {
-	include 'classes/'. $class_name . '.php';
+	if (file_exists('classes/'. $class_name . '.php')) {
+		include 'classes/'. $class_name . '.php';
+	}
 }
 
 # Load the core classes into an array
@@ -54,11 +56,13 @@ $Candy['pages'] = new Pages;
 require_once 'functions.php';
 
 # Load all of our enabled plugins and include the files
+$Plugins = array();
+$plugins = Plugins::enabledPlugins();
 
-$plugins = Plugins::enabledPlugins(); 
 if (is_array($plugins)) {
 	foreach ($plugins as $plugin) {
 		include PLUGIN_PATH.$plugin.'/'.$plugin.'.php';
+		$Plugins[$plugin] = new $plugin;
 	}	
 }
 
