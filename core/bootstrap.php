@@ -16,7 +16,7 @@ define('CANDYVERSION', '0.7.4');
  * @options development or production
  */
 
-define('ENVIRONMENT', 'production');
+define('ENVIRONMENT', 'dev');
 
 if (ENVIRONMENT == 'dev') {
 	ini_set('display_errors', 1);
@@ -40,9 +40,7 @@ require_once 'config.php';
 # Fire up the autoloader I'm going back to 1977!
 
 function __autoload($class_name) {
-	if (file_exists('classes/'. $class_name . '.php')) {
-		include 'classes/'. $class_name . '.php';
-	}
+	include 'classes/'. $class_name . '.php';
 }
 
 # Load the core classes into an array
