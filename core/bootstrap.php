@@ -55,12 +55,14 @@ CandyCMS::init();
 require_once 'functions.php';
 
 # Load all of our enabled plugins and include the files
+$Plugins = array();
+$plugins = Plugins::enabledPlugins();
 
-$plugins = Plugins::enabledPlugins(); 
 if (is_array($plugins)) {
 	foreach ($plugins as $plugin) {
 		include PLUGIN_PATH.$plugin.'/'.$plugin.'.php';
-	}
+		$Plugins[$plugin] = new $plugin;
+	}	
 }
 
 CandyCMS::run();

@@ -471,9 +471,9 @@
 			
 			if ($_GET['category'] == 2) {
 				if ($class !=false) {
-					echo "<a href='".$site_url."$uri' class='$class'>$text</a>";
+					echo "<a href='".$site_url.Blog::getBlogPage()."' class='$class'>$text</a>";
 				} else {
-					echo "<a href='".$site_url."$uri'>$text</a>";
+					echo "<a href='".$site_url."'>$text</a>";
 				}
 			} else {
 				

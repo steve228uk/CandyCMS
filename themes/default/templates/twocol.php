@@ -1,6 +1,7 @@
 <?php 
 /**
  * @template Two Column
+ * @fields sidebar-wysi-Sidebar-Right Column Content
  * @author Cocoon Design
  * @copyright 2012 (c) Cocoon Design
  */	
@@ -10,5 +11,5 @@
 	<?php theContent() ?>
 </div>
 <div id="sidebar">
-	This is the sidebar
+	<?php theField('sidebar') ?>
 </div>
