@@ -11,12 +11,19 @@
 
 define('CANDYVERSION', '0.7.4');
 
+
+# Load our user defined config file
+
+require_once 'config.php';
+
 /**
- * Set the development enviornment
+ * Set the development environment
  * @options development or production
  */
 
-define('ENVIRONMENT', 'production');
+if(!defined('ENVIRONMENT')) {
+	define('ENVIRONMENT', 'production');
+}
 
 if (ENVIRONMENT == 'dev') {
 	ini_set('display_errors', 1);
@@ -33,10 +40,6 @@ if (version_compare(phpversion(), '5.3', '<=')) {
 	exit(1);
 }
 
-# Load our user defined config file
-
-require_once 'config.php';
-
 # Fire up the autoloader I'm going back to 1977!
 
 function __autoload($class_name) {
@@ -45,21 +48,21 @@ function __autoload($class_name) {
 
 # Load the core classes into an array
 
-$Candy = array();
-$Candy['options'] = new Options;
-$Candy['pages'] = new Pages;
+CandyCMS::init();
 
 # Let's load in our functions file. It's gonna be big!
 
 require_once 'functions.php';
 
 # Load all of our enabled plugins and include the files
+$Plugins = array();
+$plugins = Plugins::enabledPlugins();
 
-$plugins = Plugins::enabledPlugins(); 
 if (is_array($plugins)) {
 	foreach ($plugins as $plugin) {
 		include PLUGIN_PATH.$plugin.'/'.$plugin.'.php';
+		$Plugins[$plugin] = new $plugin;
 	}	
 }
 
-$Candy['system'] = new CandyCMS();
+CandyCMS::run();

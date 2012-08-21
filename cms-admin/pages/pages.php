@@ -7,8 +7,8 @@
 * The view for the pages page in the admin dashboard
 */
 
-$site_url = $Candy['options']->getOption('site_url');
-$homepage = $Candy['options']->getOption('homepage');	
+$site_url = CandyCMS::Options('site_url');
+$homepage = CandyCMS::Options('homepage');
 	
 ?>
 

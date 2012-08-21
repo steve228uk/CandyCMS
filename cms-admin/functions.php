@@ -11,8 +11,6 @@
 
 function adminNav(){
 	
-	global $Candy;
-
 	$adminnav = array('pages' => 'Pages');
 	$plugins = Plugins::enabledPlugins();
 	
@@ -30,7 +28,7 @@ function adminNav(){
 		
 	}
 	
-	$theme = $Candy['options']->getOption('theme');
+	$theme = CandyCMS::Options('theme');
 	
 	if (file_exists(THEME_PATH.$theme.'/css/user.php') && $_SESSION['role'] == 'admin') {
 		$nav[] = array('theme' => 'Appearance');
