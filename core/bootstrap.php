@@ -11,12 +11,19 @@
 
 define('CANDYVERSION', '0.7.4');
 
+
+# Load our user defined config file
+
+require_once 'config.php';
+
 /**
- * Set the development enviornment
+ * Set the development environment
  * @options development or production
  */
 
-define('ENVIRONMENT', 'production');
+if(!defined('ENVIRONMENT')) {
+	define('ENVIRONMENT', 'production');
+}
 
 if (ENVIRONMENT == 'dev') {
 	ini_set('display_errors', 1);
@@ -32,10 +39,6 @@ if (version_compare(phpversion(), '5.3', '<=')) {
 	echo 'Sorry, CandyCMS requires PHP version 5.3, you\'re currently running: ' . phpversion();
 	exit(1);
 }
-
-# Load our user defined config file
-
-require_once 'config.php';
 
 # Fire up the autoloader I'm going back to 1977!
 
