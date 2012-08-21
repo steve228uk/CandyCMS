@@ -126,12 +126,12 @@ class Pages {
 	
 		$innav = ($innav == 'on') ? 1 : 0;
 	
-		CandyDB::query('UPDATE '. DB_PREFIX .'pages SET page_title = :title, page_body = :body, page_template = :template, rewrite = :rewrite WHERE page_id = :id', compact($id, $title, $body, $template));
+		CandyDB::q('UPDATE '. DB_PREFIX .'pages SET page_title = :title, page_body = :body, page_template = :template, rewrite = :rewrite WHERE page_id = :id', compact($id, $title, $body, $template));
 
 		if (isset($_POST['cf-update'])) {
 			foreach ($_POST['cf-update'] as $key => $value) {
 			
-				CandyDB::query('UPDATE ' . DB_PREFIX . 'fields SET field_value = :value WHERE field_name = :key AND post_id = :id', compact($value, $key, $id));
+				CandyDB::q('UPDATE ' . DB_PREFIX . 'fields SET field_value = :value WHERE field_name = :key AND post_id = :id', compact($value, $key, $id));
 				
 			}
 		}
@@ -147,7 +147,7 @@ class Pages {
 				
 				$desc = addslashes($_POST['cf-desc'][$key]);
 
-				CandyDB::query(
+				CandyDB::q(
 					'INSERT INTO ' . DB_PREFIX . 'fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES (:id, :key, :value, :data, :title, :desc)',
 					compact('id', 'key', 'value', 'data', 'title', 'desc')
 				);
@@ -163,7 +163,7 @@ class Pages {
 		
 		// Insert the post
 		$body = addslashes($body);
-		CandyDB::query('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES (:title, :body, :template, :rewrite)', compact('title', 'body', 'template', 'rewrite'));
+		CandyDB::q('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES (:title, :body, :template, :rewrite)', compact('title', 'body', 'template', 'rewrite'));
 		
 		// Get the last inserted ID
 
@@ -179,7 +179,7 @@ class Pages {
 				
 				$desc = addslashes($_POST['cf-desc'][$key]);
 				
-				CandyDB::query(
+				CandyDB::q(
 					'INSERT INTO ' . DB_PREFIX . 'fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES (:id, :key, :value, :data, :title, :desc)',
 					compact('id', 'key', 'value', 'data', 'title', 'desc')
 				);
@@ -191,7 +191,7 @@ class Pages {
 	
 	public static function deletePage($id){
 		
-		CandyDB::query('DELETE FROM ' . DB_PREFIX . 'pages WHERE page_id = :id', compact('id'));
+		CandyDB::q('DELETE FROM ' . DB_PREFIX . 'pages WHERE page_id = :id', compact('id'));
 		
 	}
 	

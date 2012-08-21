@@ -51,7 +51,7 @@ class CandyDB extends PDO {
 		return true;
 	}
 
-	public static function query($sql, $parameters = array()) {
+	public static function q($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		return $db->do_query($sql, $parameters);
 	}

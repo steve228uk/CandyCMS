@@ -28,6 +28,6 @@ class Options {
 	}
 
 	public function set($name, $value) {
-		CandyDB::query('INSERT INTO ' . DB_PREFIX . 'options (option_key, option_value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE option_value = :value', compact('name', 'value'));
+		CandyDB::q('INSERT INTO ' . DB_PREFIX . 'options (option_key, option_value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE option_value = :value', compact('name', 'value'));
 	}
 }
