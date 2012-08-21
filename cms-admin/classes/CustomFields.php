@@ -33,10 +33,7 @@ class CustomFields {
 	
 	public static function getAdminFields($page) {
 		
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare("SELECT * FROM ".DB_PREFIX."fields WHERE post_id=$page");
-		$sth->execute();
-		$fields = $sth->fetchAll(PDO::FETCH_CLASS);
+		$fields = CandyDB::results('SELECT * FROM '.DB_PREFIX.'fields WHERE post_id = :page', array('page' => $page) );
 		
 		$return = '';
 		

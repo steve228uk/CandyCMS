@@ -37,7 +37,7 @@ class CandyDB extends PDO {
 		return self::$dbh;
 	}
 
-	public function query($sql, $parameters = array()) {
+	public function do_query($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		if($this->pdo_statement != null) {
 			$this->pdo_statement->closeCursor();
@@ -51,30 +51,35 @@ class CandyDB extends PDO {
 		return true;
 	}
 
+	public static function query($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		return $db->do_query($sql, $parameters);
+	}
+
 	public static function results($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		$db->fetch_mode = PDO::FETCH_OBJ;
-		$db->query($sql, $parameters);
+		$db->do_query($sql, $parameters);
 		return $db->pdo_statement->fetchAll();
 	}
 
 	public static function row($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		$db->fetch_mode = PDO::FETCH_OBJ;
-		$db->query($sql, $parameters);
+		$db->do_query($sql, $parameters);
 		return $db->pdo_statement->fetch();
 	}
 
 	public static function col($sql, $parameters = array()) {
 		$db = CandyDB::get();
-		$db->query($sql, $parameters);
+		$db->do_query($sql, $parameters);
 		return $db->pdo_statement->fetch(PDO::FETCH_COLUMN);
 	}
 
 	public static function val($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		$db->fetch_mode = PDO::FETCH_NUM;
-		$db->query($sql, $parameters);
+		$db->do_query($sql, $parameters);
 		$row = $db->pdo_statement->fetch();
 		return reset($row);
 	}
@@ -82,13 +87,18 @@ class CandyDB extends PDO {
 	public static function keyvalue($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		$db->fetch_mode = PDO::FETCH_NUM;
-		$db->query($sql, $parameters);
+		$db->do_query($sql, $parameters);
 		$result = $db->pdo_statement->fetchAll();
 		$output = array();
 		foreach ( $result as $item ) {
 			$output[$item[0]] = $item[1];
 		}
 		return $output;
+	}
+
+	public static function last_insert_id() {
+		$db = CandyDB::get();
+		return $db->lastInsertId();
 	}
 
 }

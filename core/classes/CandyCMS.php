@@ -25,7 +25,7 @@ class CandyCMS {
 
 	public static function __callStatic($name, $parameters) {
 		$return = self::$properties[strtolower($name)];
-		if(is_callable($return)) {
+		if(is_callable($return) && count($parameters) > 0) {
 			$return = call_user_func_array($return, $parameters);
 		}
 		return $return;
