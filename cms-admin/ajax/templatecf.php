@@ -14,8 +14,7 @@ function __autoload($class_name) {
 require_once '../../core/config.php';
 
 
-$Candy = array();
-$Candy['options'] = new Options;
+CandyCMS::init();
 
 if (isset($_POST['template'])) {
 	CustomFields::templateFields($_POST['template']);	

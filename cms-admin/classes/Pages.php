@@ -31,9 +31,7 @@ class Pages {
 	
 	public static function sortPages(){
 		
-		global $Candy;
-		
-		$pages = $Candy['options']->getOption('nav');
+		$pages = CandyCMS::Options('nav');
 		$order = json_decode($pages);
 
 		$html = '<ol>';

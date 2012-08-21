@@ -48,9 +48,7 @@ function __autoload($class_name) {
 
 # Load the core classes into an array
 
-$Candy = array();
-$Candy['options'] = new Options;
-$Candy['pages'] = new Pages;
+CandyCMS::init();
 
 # Let's load in our functions file. It's gonna be big!
 
@@ -62,7 +60,7 @@ $plugins = Plugins::enabledPlugins();
 if (is_array($plugins)) {
 	foreach ($plugins as $plugin) {
 		include PLUGIN_PATH.$plugin.'/'.$plugin.'.php';
-	}	
+	}
 }
 
-$Candy['system'] = new CandyCMS();
+CandyCMS::run();

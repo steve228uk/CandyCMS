@@ -11,14 +11,19 @@
 
 
 class Options {
-	
-	public function getOption($option){
-	
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare('SELECT option_value FROM '. DB_PREFIX .'options WHERE option_key = "'.$option.'"');
-		$sth->execute();
-		
-		return stripslashes($sth->fetchColumn());
-	
-	}	
+
+	public function __invoke($name, $default = null) {
+		static $options;
+
+		if(!isset($options)) {
+			$options = CandyDB::keyvalue('SELECT option_key, option_value FROM '. DB_PREFIX .'options');
+		}
+
+		if(isset($options[$name])) {
+			return $options[$name];
+		}
+		else {
+			return $default;
+		}
+	}
 }

@@ -23,7 +23,7 @@
 <?php
 
 $themes = Theme::listThemes();
-$current = $Candy['options']->getOption('theme');
+$current = CandyCMS::Options('theme');
 
 foreach($themes as $theme){
 

@@ -9,7 +9,15 @@
 */
 
 class CandyDB extends PDO {
-	
+
+	private static $dbh;
+
+	/**
+	 * @var PDOStatement $pdo_statement
+	 */
+	protected $pdo_statement;
+	protected $fetch_mode;
+
 	/**
 	 * @method __construct()
 	 * @returns nothing
@@ -19,6 +27,68 @@ class CandyDB extends PDO {
 	
 	function __construct(){
 		parent::__construct(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
+		$this->fetch_mode = PDO::FETCH_OBJ;
 	}
-	
+
+	public static function get() {
+		if(!isset(self::$dbh)) {
+			self::$dbh = new CandyDB();
+		}
+		return self::$dbh;
+	}
+
+	public function query($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		if($this->pdo_statement != null) {
+			$this->pdo_statement->closeCursor();
+		}
+		$this->pdo_statement = $db->prepare($sql);
+		$this->pdo_statement->setFetchMode( $this->fetch_mode );
+		if ( ! $this->pdo_statement->execute( $parameters ) ) {
+			// There was an error.  Throw an exception?
+			return false;
+		}
+		return true;
+	}
+
+	public static function results($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		$db->fetch_mode = PDO::FETCH_OBJ;
+		$db->query($sql, $parameters);
+		return $db->pdo_statement->fetchAll();
+	}
+
+	public static function row($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		$db->fetch_mode = PDO::FETCH_OBJ;
+		$db->query($sql, $parameters);
+		return $db->pdo_statement->fetch();
+	}
+
+	public static function col($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		$db->query($sql, $parameters);
+		return $db->pdo_statement->fetch(PDO::FETCH_COLUMN);
+	}
+
+	public static function val($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		$db->fetch_mode = PDO::FETCH_NUM;
+		$db->query($sql, $parameters);
+		$row = $db->pdo_statement->fetch();
+		return reset($row);
+	}
+
+	public static function keyvalue($sql, $parameters = array()) {
+		$db = CandyDB::get();
+		$db->fetch_mode = PDO::FETCH_NUM;
+		$db->query($sql, $parameters);
+		$result = $db->pdo_statement->fetchAll();
+		$output = array();
+		foreach ( $result as $item ) {
+			$output[$item[0]] = $item[1];
+		}
+		return $output;
+	}
+
 }

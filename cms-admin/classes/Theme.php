@@ -75,9 +75,7 @@ class Theme {
 	
 	public static function listTemplates(){
 		
-		global $Candy;
-		
-		$theme = $Candy['options']->getOption('theme');
+		$theme = CandyCMS::Options('theme');
 		
 		$templates = THEME_PATH.$theme.'/templates';
 		$templates = scandir($templates);

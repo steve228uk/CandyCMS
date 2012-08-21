@@ -27,8 +27,7 @@ function __autoload($class_name) {
 	}
 }
 
-$Candy = array();
-$Candy['options'] = new Options;
+CandyCMS::init();
 
 # Include our admin functions file
 

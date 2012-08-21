@@ -53,7 +53,7 @@ if (isset($_POST['username'])) {
 				<a href="iforgot.php" class="right">Forgot Your Password?</a>
 			</form>
 		</div>
-		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo $Candy['options']->getOption('site_title') ?></a>
+		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo CandyCMS::Options('site_title') ?></a>
 	</div>
 </body>
 </html>

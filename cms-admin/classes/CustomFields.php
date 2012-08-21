@@ -55,9 +55,7 @@ class CustomFields {
 	
 	public static function templateFields($template) {
 		
-		global $Candy;
-		
-		$theme = $Candy['options']->getOption('theme');		
+		$theme = CandyCMS::Options('theme');
 		$file = THEME_PATH.$theme.'/templates/'.$template.'.php';
 		
 		$contents = file_get_contents($file);
