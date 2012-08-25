@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 1.0
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -24,7 +24,7 @@ require('bootstrap.php');
 <head>
 	<meta charset="utf-8">
 	<?php $array = adminNav();?>
-	<title><?php echo (isset($_GET['page'])) ? ucfirst($_GET['page']) : 'Dashboard' ?> &raquo; Admin &raquo; <?php echo $Candy['options']->getOption('site_title'); ?></title>
+	<title><?php echo (isset($_GET['page'])) ? ucfirst($_GET['page']) : 'Dashboard' ?> &raquo; Admin &raquo; <?php echo Candy::Options('site_title'); ?></title>
 	<link rel="stylesheet" href="css/admin.css" type="text/css" />
 		<link rel="stylesheet" href="../core/plugins/redactor/css/redactor.css" type="text/css" />
 	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />

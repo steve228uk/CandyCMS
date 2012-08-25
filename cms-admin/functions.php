@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 1.0
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd.
 * 
@@ -11,8 +11,6 @@
 
 function adminNav(){
 	
-	global $Candy;
-
 	$adminnav = array('pages' => 'Pages');
 	$plugins = Plugins::enabledPlugins();
 	
@@ -30,7 +28,7 @@ function adminNav(){
 		
 	}
 	
-	$theme = $Candy['options']->getOption('theme');
+	$theme = Candy::Options('theme');
 	
 	if (file_exists(THEME_PATH.$theme.'/css/user.php') && $_SESSION['role'] == 'admin') {
 		$nav[] = array('theme' => 'Appearance');

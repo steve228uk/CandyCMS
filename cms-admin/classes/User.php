@@ -85,13 +85,7 @@ class User {
 	}
 	
 	public static function getRole($username){
-		
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare("SELECT role FROM ".DB_PREFIX."users WHERE username='$username'");
-		$sth->execute();
-		
-		return $sth->fetchColumn();
-		
+		return CandyDB::val('SELECT role FROM '. DB_PREFIX .'users WHERE username = :username', array('username' => $username));
 	}
 	
 	public static function changePassword($user, $old, $new){

@@ -29,7 +29,7 @@ error_reporting(E_ALL);
 # Check which version of PHP is running
 
 if (version_compare(phpversion(), '5.3', '<=')) {
-	echo 'Sorry, CandyCMS requires PHP version 5.3, you\'re currently running: ' . phpversion();
+	echo 'Sorry, Candy requires PHP version 5.3, you\'re currently running: ' . phpversion();
 	exit(1);
 }
 
@@ -43,11 +43,13 @@ function __autoload($class_name) {
 	include 'classes/'. $class_name . '.php';
 }
 
-# Load the core classes into an array
+# Define the $Candy global for back-compatibality
 
 $Candy = array();
-$Candy['options'] = new Options;
-$Candy['pages'] = new Pages;
+
+# Load the core classes into an array
+
+Candy::init();
 
 # Let's load in our functions file. It's gonna be big!
 
@@ -64,4 +66,6 @@ if (is_array($plugins)) {
 	}	
 }
 
-$Candy['system'] = new CandyCMS();
+# Run the system to create the frontend
+
+Candy::run();

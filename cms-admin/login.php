@@ -2,11 +2,14 @@
 
 /**
 * @package CandyCMS
-* @version 0.1
+* @version 1.0
+* @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * Login page for CandyCMS admin
 */
+
+ini_set('display_errors', 1);
 
 session_start();
 
@@ -25,6 +28,7 @@ if (isset($_POST['username'])) {
 		$_SESSION['loggedin'] = 'true';
 		$_SESSION['username'] = $_POST['username'];
 		$_SESSION['role'] = $role;
+
 		header('Location: dashboard.php');
 	}
 		
@@ -46,14 +50,14 @@ if (isset($_POST['username'])) {
 	<div id="container">
 		<div id="box">
 			<h1>Login</h1>
-			<form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 				<input type="text" name="username" placeholder="Username" /><br />
 				<input type="password" name="password" placeholder="Password" /><br />
 				<input type="submit" value="Login" class="button" />
 				<a href="iforgot.php" class="right">Forgot Your Password?</a>
 			</form>
 		</div>
-		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo $Candy['options']->getOption('site_title') ?></a>
+		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo Candy::Options('site_title') ?></a>
 	</div>
 </body>
 </html>

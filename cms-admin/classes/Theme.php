@@ -75,9 +75,7 @@ class Theme {
 	
 	public static function listTemplates(){
 		
-		global $Candy;
-		
-		$theme = $Candy['options']->getOption('theme');
+		$theme = Candy::Options('theme');
 		
 		$templates = THEME_PATH.$theme.'/templates';
 		$templates = scandir($templates);
@@ -138,7 +136,7 @@ class Theme {
 			if ($page != false) {
 				$pageinfo = Pages::pageInfo($page);
 				
-				if ($pageinfo[0]['page_template'] == $template['file']) {
+				if ($pageinfo[0]->page_template == $template['file']) {
 					$html .= "<option value='{$template['file']}' selected='selected'>";	
 				} else {
 					$html .= "<option value='{$template['file']}'>";

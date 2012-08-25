@@ -1,10 +1,6 @@
 <?php
-
-	global $Candy;
-	$theme = $Candy['options']->getOption('theme');
-
-	$siteurl = $Candy['options']->getOption('site_url');
-
+	$theme = Candy::Options('theme');
+	$siteurl = Candy::Options('site_url');
 ?>
 
 <?php if (isset($_GET['post']) && $_GET['post'] != '') { ?>
@@ -74,7 +70,6 @@
 <?php } else { ?>
 
 	<?php $posts = listBlogPosts(); 
-	
 		// Include the main.php template from theme if it's there!
 			
 		$themeMain = THEME_PATH.$theme.'/blog/main.php';

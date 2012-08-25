@@ -1,14 +1,14 @@
 <?php 
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 1.0
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * The view for the pages page in the admin dashboard
 */
 
-$site_url = $Candy['options']->getOption('site_url');
-$homepage = $Candy['options']->getOption('homepage');	
+$site_url = Candy::Options('site_url');
+$homepage = Candy::Options('homepage');	
 	
 ?>
 
@@ -33,21 +33,21 @@ $homepage = $Candy['options']->getOption('homepage');
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
-				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $page[0]['page_title'] ?>" />
+				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $page[0]->page_title ?>" />
 			</li>
 			
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
 				<?php echo $site_url?>
-				<?php if ($page[0]['rewrite'] != $homepage) : ?>
-					<input type="text" name="rewrite" class="url-box" value="<?php echo $page[0]['rewrite'] ?>" /> 
+				<?php if ($page[0]->rewrite != $homepage) : ?>
+					<input type="text" name="rewrite" class="url-box" value="<?php echo $page[0]->rewrite ?>" /> 
 				<?php else : ?>
-					<input type="hidden" name="rewrite" value="<?php echo $page[0]['rewrite'] ?>" />
+					<input type="hidden" name="rewrite" value="<?php echo $page[0]->rewrite ?>" />
 				<?php endif; ?>
-				<a href="<?php echo $site_url.$page[0]['rewrite'] ?>" title="View Page" target="_blank">View</a>
+				<a href="<?php echo $site_url.$page[0]->rewrite ?>" title="View Page" target="_blank">View</a>
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
-			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]['page_body'] ?></textarea></li>
+			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]->page_body ?></textarea></li>
 			<li><ul id="cf-area"><?php CustomFields::getAdminFields($_GET['edit']) ?></ul></li>
 			<li><input name="update" type="submit" value="Save Page" class="button" /></li>
 		</ul>

@@ -12,7 +12,7 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '0.7.4');
+define('CANDYVERSION', '1.0');
 
 require_once '../core/config.php';
 
@@ -27,8 +27,8 @@ function __autoload($class_name) {
 	}
 }
 
-$Candy = array();
-$Candy['options'] = new Options;
+# Load up our core classes 
+Candy::init();
 
 # Include our admin functions file
 

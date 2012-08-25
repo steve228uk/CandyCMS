@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 1.0
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -12,29 +12,18 @@
 class Pages {
 	
 	public function loadPage($page){
-		
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'pages WHERE rewrite = "' . $page . '"');
-		$sth->execute();
-		
-		return $sth->fetchAll(PDO::FETCH_CLASS);
+		return CandyDB::results('SELECT * FROM '. DB_PREFIX .'pages WHERE rewrite = :page', array('page' => $page));
 	}
 	
 	public function getInfo($col, $page){
-		$dbh = new CandyDB();
-		$sth = $dbh->prepare('SELECT '.$col.' FROM '. DB_PREFIX .'pages WHERE rewrite = "' . $page . '"');
-		$sth->execute();
-		
-		return $sth->fetchColumn();
+		return CandyDB::col('SELECT '.$col.' FROM '. DB_PREFIX .'pages WHERE rewrite = :page', array('page' => $page));
 	}
 	 
-	 public function listPages(){
-	 
-	 	$dbh = new CandyDB();
-	 	$sth = $dbh->prepare('SELECT * FROM '. DB_PREFIX .'pages');
-	 	$sth->execute();
-	 	
-	 	return $sth->fetchAll(PDO::FETCH_CLASS);
-	 	
-	 }
+	public function listPages(){
+		return CandyDB::results('SELECT * FROM '. DB_PREFIX .'pages');
+	}
+
+	public function test(){
+		echo 'test';
+	}
 }

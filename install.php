@@ -23,7 +23,7 @@ function diehard($msg) {
 	die();
 }
 
-$path = $_SERVER['DOCUMENT_ROOT'].trim($_SERVER['PHP_SELF'], 'install.php');
+$path = dirname(__FILE__);
 
 ?>
 
