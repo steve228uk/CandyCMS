@@ -475,7 +475,7 @@
 	 	);
  	}
 
- 	return stripslashes($results);
+ 	return $results;
 
  }
  
@@ -498,7 +498,7 @@
   	
   	$ids = join(',', $return);
 
-  	return stripslashes(CandyDB::results("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN (:ids) ORDER BY post_title ASC", compact('ids')));
+  	return CandyDB::results("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN (:ids) ORDER BY post_title ASC", compact('ids'));
  
   }
   
