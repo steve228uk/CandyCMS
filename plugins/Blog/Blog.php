@@ -25,10 +25,10 @@
  	public static function listCategories($cat_id){
  		
  		$cats = array();		
- 		$cat_id = json_decode($cat_id);
+ 		$cat_id = json_decode(stripslashes($cat_id));
  		
  		foreach ($cat_id as $value) {
- 			$cats[] = CandyDB::col("SELECT cat_name FROM ".DB_PREFIX."categories WHERE `cat_id` = :value", array('value' => $value));
+ 			$cats[] = CandyDB::col("SELECT cat_name FROM ".DB_PREFIX."categories WHERE cat_id = :id", array('id' => $value));
  		}
  		
  		$html = '';
