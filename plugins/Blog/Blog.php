@@ -484,7 +484,7 @@
   	$category = str_replace('-', ' ', $_GET['category']);
 
 	$catid = CandyDB::col('SELECT cat_id FROM '.DB_PREFIX.'categories WHERE cat_name = :cat', array('cat' => $category));
-  	$posts = CandyDB::results('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts WHERE status = :published', array('status' => 'published'));
+  	$posts = CandyDB::results('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts WHERE status = :status', array('status' => 'published'));
   	
   	$return = array();
   	
@@ -498,7 +498,7 @@
   	
   	$ids = join(',', $return);
 
-  	return CandyDB::results("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN (:ids) ORDER BY post_title ASC", compact('ids'));
+  	return CandyDB::results("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN (:ids) ORDER BY post_title ASC", array('ids' => $ids));
  
   }
   
