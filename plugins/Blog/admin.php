@@ -69,7 +69,7 @@
 			<input type="text" name="rewrite" class="url-box" id="rewrite" value="<?php echo $post[0]->permalink ?>" />
 		</li>
 
-		<li class="clear"><textarea class="ckeditor" name="body"><?php echo $post[0]->post_body ?></textarea></li>
+		<li class="clear"><textarea class="ckeditor" name="body"><?php echo stripslashes($post[0]->post_body) ?></textarea></li>
 		<li id="post-btn">
 			<input type="submit" name="editpost" value="Save Changes" class="button" />
 			<?php if ($post[0]->status == 'draft') : ?>
