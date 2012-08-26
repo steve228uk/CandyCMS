@@ -180,7 +180,7 @@
  		$permalink = CandyDB::col("SELECT permalink FROM ". DB_PREFIX ."posts WHERE post_id = :id", compact('id'));
  		
  		$cats = CandyDB::col("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id = :id", compact('id'));
- 		$cats = json_decode($cats);
+ 		$cats = json_decode(stripslashes($cats));
  		
  		$cat = CandyDB::col("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id = :cat", array('cat' => $cats[0]));
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
@@ -489,7 +489,7 @@
   	$return = array();
   	
   	foreach ($posts as $post) {
-  		$ids = json_decode($post->cat_id);
+  		$ids = json_decode(stripslashes($post->cat_id));
   		
   		if (is_array($ids) && in_array($catid, $ids)) {
   			$return[] = $post->post_id;
