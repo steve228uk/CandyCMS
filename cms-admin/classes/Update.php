@@ -11,7 +11,15 @@
 class Update {
 
 	private static function xml(){
-		$xml = simplexml_load_file('http://www.jquerycandy.com/cmsupdate.xml'); 
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'http://www.jquerycandy.com/cmsupdate.xml');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$output = curl_exec($ch);
+		curl_close($ch);
+
+		$xml = simplexml_load_string($output);
+		
 		return $xml;
 	}
 
