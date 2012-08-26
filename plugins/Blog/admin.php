@@ -124,7 +124,7 @@
 		} else {
 			$categories = '';
 		}
-	 	Blog::addPost($_POST['title'], $_POST['body'], $categories, 'draft');
+	 	Blog::addPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], 'draft');
 		echo '<p class="message success">Post Saved As Draft</p>';
 	} 
 	
