@@ -493,7 +493,7 @@
   	foreach ($posts as $post) {
   		$ids = json_decode($post->cat_id);
   		
-  		if (in_array($catid, $ids)) {
+  		if (is_array($ids) && in_array($catid, $ids)) {
   			$return[] = $post->post_id;
   		}
   	}
