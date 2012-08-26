@@ -123,40 +123,38 @@ class Pages {
 	}
 	
 	public static function updatePage($title, $body, $rewrite, $template, $innav, $id, $cfields = false){
-	
+
 		$innav = ($innav == 'on') ? 1 : 0;
-	
-		CandyDB::q('UPDATE '. DB_PREFIX .'pages SET page_title = :title, page_body = :body, page_template = :template, rewrite = :rewrite WHERE page_id = :id',
-			array(
-					'title'    => $title,
-					'body'     => $body,
-					'template' => $template,
-					'rewrite'  => $rewrite,
-					'id'       => $id
-				)
-		);
+
+		$dbh = new CandyDB();
+
+		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'pages SET page_title="'. $title .'", page_body="'. addslashes($body) .'", page_template="'. $template .'", rewrite="'. $rewrite .'" WHERE page_id="' . $id . '"');
+		$sth->execute();
 
 		if (isset($_POST['cf-update'])) {
 			foreach ($_POST['cf-update'] as $key => $value) {
-				CandyDB::q('UPDATE ' . DB_PREFIX . 'fields SET field_value = :value WHERE field_name = :key AND post_id = :id', compact($value, $key, $id));
+
+				$value = addslashes($value);
+
+				$sth = $dbh->prepare("UPDATE ".DB_PREFIX."fields SET field_value='$value' WHERE field_name='$key' AND post_id='$id'");
+				$sth->execute();
+
 			}
 		}
-		
-		
+
+
 		// Insert the custom fields
 		if ($cfields != false) {
 			foreach ($cfields as $key => $value) {
-			
+
 				$data = addslashes($_POST['cf-update'][$key]);
-				
+
 				$title = addslashes($_POST['cf-title'][$key]);
-				
+
 				$desc = addslashes($_POST['cf-desc'][$key]);
 
-				CandyDB::q(
-					'INSERT INTO ' . DB_PREFIX . 'fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES (:id, :key, :value, :data, :title, :desc)',
-					compact('id', 'key', 'value', 'data', 'title', 'desc')
-				);
+				$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES ($id, '$key', '$value', '$data', '$title', '$desc')");
+				$sth->execute();
 
 			}
 		}
@@ -164,37 +162,38 @@ class Pages {
 	}
 
 	public static function addPage($title, $body, $template, $rewrite, $innav, $cfields = false){
-		
+
 		$innav = ($innav == 'on') ? 1 : 0;
-		
+
 		// Insert the post
-		$body = addslashes($body);
-		CandyDB::q('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES (:title, :body, :template, :rewrite)', compact('title', 'body', 'template', 'rewrite'));
-		
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare('INSERT INTO '. DB_PREFIX .'pages (page_title, page_body, page_template, rewrite) VALUES ("'. $title .'", "'. addslashes($body) .'", "'. $template .'", "'. $rewrite .'")');
+		$sth->execute();	
+
 		// Get the last inserted ID
 
-		$id = CandyDB::last_insert_id();
+		$sth = $dbh->prepare("SELECT page_id FROM ".DB_PREFIX."pages WHERE page_title='$title' AND rewrite='$rewrite' AND page_template='$template'");
+		$sth->execute();
+		$id = $sth->fetchColumn();
 
 		// Insert the custom fields
 		if ($cfields != false) {
 			foreach ($cfields as $key => $value) {
-			
+
 				$data = addslashes($_POST['cf-update'][$key]);
-				
+
 				$title = addslashes($_POST['cf-title'][$key]);
-				
+
 				$desc = addslashes($_POST['cf-desc'][$key]);
-				
-				CandyDB::q(
-					'INSERT INTO ' . DB_PREFIX . 'fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES (:id, :key, :value, :data, :title, :desc)',
-					compact('id', 'key', 'value', 'data', 'title', 'desc')
-				);
-				
+
+				$sth = $dbh->prepare("INSERT INTO ".DB_PREFIX."fields (post_id, field_name, field_type, field_value, field_title, field_desc) VALUES ($id, '$key', '$value', '$data', '$title', '$desc')");
+				$sth->execute();
+
 			}
 		}
-		
+
 	}
-	
+		
 	public static function deletePage($id){
 		
 		CandyDB::q('DELETE FROM ' . DB_PREFIX . 'pages WHERE page_id = :id', compact('id'));

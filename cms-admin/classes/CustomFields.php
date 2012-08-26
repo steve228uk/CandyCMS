@@ -33,7 +33,10 @@ class CustomFields {
 	
 	public static function getAdminFields($page) {
 
-		$fields = CandyDB::results('SELECT * FROM'.DB_PREFIX.'fields WHERE post_id = :page', array('page' => $page));
+		$dbh = new CandyDB();
+		$sth = $dbh->prepare("SELECT * FROM ".DB_PREFIX."fields WHERE post_id=$page");
+		$sth->execute();
+		$fields = $sth->fetchAll(PDO::FETCH_CLASS);
 		
 		$return = '';
 		
@@ -52,7 +55,8 @@ class CustomFields {
 	
 	public static function templateFields($template) {
 
-		$theme = Candy::Options('theme');		
+		$theme = CandyDB::col('SELECT option_value FROM '.DB_PREFIX.'options WHERE option_key = :key', array('key' => 'theme'));
+		
 		$file = THEME_PATH.$theme.'/templates/'.$template.'.php';
 		
 		$contents = file_get_contents($file);
