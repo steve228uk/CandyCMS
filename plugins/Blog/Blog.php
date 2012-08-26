@@ -359,7 +359,7 @@
  			$offset = $offset*$limit;
  			$offset = $offset-$limit;
  		
- 			$posts = CandyDB::results('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT :limit  OFFSET :offset', compact($limit, $offset));
+ 			$posts = CandyDB::results('SELECT * FROM '. DB_PREFIX .'posts ORDER BY post_id DESC LIMIT '.$limit.' OFFSET '.$offset);
  			
  			$page = $_GET['category']+1;
  			

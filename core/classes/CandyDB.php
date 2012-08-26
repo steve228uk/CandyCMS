@@ -45,7 +45,11 @@ class CandyDB extends PDO {
 		$this->pdo_statement = $db->prepare($sql);
 		$this->pdo_statement->setFetchMode( $this->fetch_mode );
 		try{ 
-			$this->pdo_statement->execute( $parameters );
+			if (!empty($parameters)) {
+				$this->pdo_statement->execute( $parameters );
+			} else {
+				$this->pdo_statement->execute();
+			}
 			return true;
 		} catch(Exception $e) {
 			var_dump($e->getTrace());
