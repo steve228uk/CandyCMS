@@ -99,8 +99,8 @@
  		
  		$categories = json_encode($categories);
  		$cats = addslashes($categories);
- 		$title = addslashes($post_title);
- 		$body = addslashes($post_body);
+ 		$title = $post_title;
+ 		$body = $post_body;
 
 		CandyDB::q("INSERT INTO ". DB_PREFIX ."posts (post_title, post_body, cat_id, permalink, status) VALUES (:title, :body, :cats, :permalink, :status)",
 			array(
@@ -117,8 +117,8 @@
  	public static function editPost($post_title, $post_body, $categories, $permalink, $pid, $status=null){
  
  		$cats = addslashes(json_encode($categories));
- 		$title = addslashes($post_title);
- 		$body = addslashes($post_body);
+ 		$title = $post_title;
+ 		$body = $post_body;
  		
  		if (is_null($status)) {
  			CandyDB::q("UPDATE ".DB_PREFIX."posts SET post_title = :title, post_body = :body, cat_id = :cats, permalink = :permalink WHERE post_id = :id",
@@ -514,7 +514,7 @@
  function getBlogPostById($id){
  	return CandyDB::results('SELECT * FROM '. DB_PREFIX .'posts WHERE `post_id` = :id', compact('id'));
  }
-
+ 
 $uri = $_SERVER['REQUEST_URI'];
 
 if (!stristr($uri, 'cms-admin') && !stristr($uri, 'ajax.php')) {
