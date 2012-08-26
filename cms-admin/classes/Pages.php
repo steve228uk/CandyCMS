@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7.1
+* @version 1.0
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -71,7 +71,9 @@ class Pages {
 		
 		$decode = json_decode($nav);
 		
-		Candy::Options()->set('nav', $nav);
+		// Candy::Options()->set('nav', $nav);
+
+		CandyDB::q('UPDATE '.DB_PREFIX.'options SET option_value = :value WHERE option_key = :key', array('value' => $nav, 'key' => 'nav'));
 
 	}
 	
