@@ -1,6 +1,6 @@
 /**
 * @package CandyCMS
-* @version 0.7
+* @version 1.0
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -1148,4 +1148,20 @@ ol ol{
 
 .post-perma{
 	margin: 5px 0 0 !important;
+}
+
+.view-site{
+	color: #ada796 !important;
+	text-decoration: none;
+	float: left;
+	margin: 3px 0 0 25px;
+	display: none;
+}
+
+header:hover .view-site{
+	display: inline;
+}
+
+.view-site:hover{
+	color: #fff !important;
 }

@@ -46,6 +46,7 @@ require('bootstrap.php');
 	<header>	
 		<div id="head-cont">
 			<a href="dashboard.php" id="head-logo"> </a>
+			<a href="<?php echo URL_PATH ?>" class="view-site">View Site &rarr;</a>
 			<button class="user-btn"><?php echo $_SESSION['username'] ?></button>
 			<ul id="usernav">
 				<li><a href="dashboard.php?page=profile">Account Settings</a></li>
