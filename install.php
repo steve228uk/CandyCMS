@@ -300,8 +300,13 @@ $path = dirname(__FILE__);
 			
 			}
 			
-			$dbh = new PDO(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
-			
+			try{ 
+				$dbh = new PDO(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
+			} catch(Exception $e){
+				unlink('core/config.php');
+				die('Candy couldn\'t connect to the database, please try again.');
+			}
+
 			#Create the Options table if not exists
 			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."options` (`id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`), `option_key` varchar(256) NOT NULL, UNIQUE KEY (`option_key`), `option_value` varchar(256) NOT NULL)");
 			
@@ -360,7 +365,7 @@ $path = dirname(__FILE__);
 			<fieldset>
 				<h3>Site Information</h3>
 				<ul>
-					<li><label>Site URL</label><input type="text" name="url" value="http://www.<?php echo$_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
+					<li><label>Site URL</label><input type="text" name="url" value="http://<?php echo$_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
 					<li><label>Site Title</label><input type="text" name="title" placeholder="Site TItle" /></li>
 				</ul>
 			</fieldset>
