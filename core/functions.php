@@ -64,7 +64,7 @@ function theContent(){
 
 function theField($field){
 	$page = (isset($_GET['page'])) ? $_GET['page'] : Candy::Options('homepage');
-	$id = $Candy['pages']->getInfo('page_id', $page);
+	$id = Candy::Pages()->getInfo('page_id', $page);
 	
 	$dbh = new CandyDB();
 	$sth = $dbh->prepare("SELECT field_value FROM ".DB_PREFIX."fields WHERE field_name='$field' AND post_id=$id");
