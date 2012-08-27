@@ -2,14 +2,14 @@
 
 /**
 * @package CandyCMS
-* @version 0.7.4
+* @version 1.0.1
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
 * This file is the main bootstrap for CandyCMS
 */
 
-define('CANDYVERSION', '0.7.4');
+define('CANDYVERSION', '1.0.1');
 
 /**
  * Set the development enviornment
@@ -39,9 +39,9 @@ require_once 'config.php';
 
 # Fire up the autoloader I'm going back to 1977!
 
-function __autoload($class_name) {
+spl_autoload_register(function ($class_name) {
 	include 'classes/'. $class_name . '.php';
-}
+});
 
 # Define the $Candy global for back-compatibality
 

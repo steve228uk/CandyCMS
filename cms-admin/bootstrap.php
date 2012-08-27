@@ -2,7 +2,7 @@
 
 /**
 * @package CandyCMS
-* @version 0.7.4
+* @version 1.0.1
 * @since 0.1
 * @copyright Copyright 2012 (C) Cocoon Design Ltd. - All Rights Reserved
 * 
@@ -12,20 +12,20 @@
 #ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('CANDYVERSION', '1.0');
+define('CANDYVERSION', '1.0.1');
 
 require_once '../core/config.php';
 
 # Fire up the autoloader I'm going back to 1977!
 
-function __autoload($class_name) {
+spl_autoload_register(function ($class_name) {
 	
 	if (file_exists("classes/$class_name.php")) {
 		include 'classes/'. $class_name . '.php';
 	} else {
 		include CMS_PATH.'core/classes/'. $class_name . '.php';
 	}
-}
+});
 
 # Load up our core classes 
 Candy::init();
