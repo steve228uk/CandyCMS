@@ -181,8 +181,11 @@
  		
  		$cats = CandyDB::col("SELECT cat_id FROM ". DB_PREFIX ."posts WHERE post_id = :id", compact('id'));
  		$cats = json_decode(stripslashes($cats));
- 		
- 		$cat = CandyDB::col("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id = :cat", array('cat' => $cats[0]));
+ 		if (empty($cats)) {
+ 			$cat = false;
+ 		} else {
+ 			$cat = CandyDB::col("SELECT cat_name FROM ". DB_PREFIX ."categories WHERE cat_id = :cat", array('cat' => $cats[0]));
+ 		}
  		$catname = ($cat == false) ? 'uncategorised' : str_replace(' ', '-', strtolower($cat));
  		
  		$uri = self::getBlogPage();
