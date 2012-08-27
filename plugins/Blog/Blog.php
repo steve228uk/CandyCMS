@@ -231,7 +231,7 @@
  					
  					$cats = json_decode(stripslashes($selected));	
  					
- 					if (in_array($cat->cat_id, $cats)) {
+ 					if (is_array($cats) && in_array($cat->cat_id, $cats)) {
  						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' checked='checked' /></li>";	
  					} else {
  						$html .= "<li>{$cat->cat_name}<input type='checkbox' value='{$cat->cat_id}' name='categories[]' /></li>";
