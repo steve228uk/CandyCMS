@@ -1,7 +1,7 @@
 .DS_STORE
 .htaccess
 sftp-config.json
-
 CandyCMS.sublime-project
-
 CandyCMS.sublime-workspace
+
+/core/config.php
