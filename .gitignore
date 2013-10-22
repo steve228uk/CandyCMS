@@ -5,3 +5,7 @@ CandyCMS.sublime-project
 CandyCMS.sublime-workspace
 
 /core/config.php
+
+/_design/
+
+/.idea/
