@@ -87,7 +87,11 @@ class CandyDB extends PDO {
 		$db->fetch_mode = PDO::FETCH_NUM;
 		$db->do_query($sql, $parameters);
 		$row = $db->pdo_statement->fetch();
-		return reset($row);
+
+        if($row)
+		    return reset($row);
+        else
+            return $row;
 	}
 
 	public static function keyvalue($sql, $parameters = array()) {
