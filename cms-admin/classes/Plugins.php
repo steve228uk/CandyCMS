@@ -81,7 +81,7 @@ class Plugins {
 	
 	public static function savePlugins($enabled) {
 		
-		$json = mysql_escape_string(json_encode($enabled));
+		$json = json_encode($enabled);
 		
 		$dbh = new CandyDB();
 		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'options SET option_value="'. $json .'" WHERE option_key="enabled_plugins"');
