@@ -3,11 +3,9 @@
 sftp-config.json
 CandyCMS.sublime-project
 CandyCMS.sublime-workspace
-
 /core/config.php
-
 /_design/
-
 /.idea/
-
 /sitemap.xml
+uploads/*
+/rss.xml
