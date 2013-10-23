@@ -10,38 +10,37 @@
 
 class Update {
 
-	private static function xml(){
+    private static function xml(){
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'http://www.jquerycandy.com/cmsupdate.xml');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$output = curl_exec($ch);
-		curl_close($ch);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://www.candycms.org/cmsupdate.xml');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
 
-		$xml = simplexml_load_string($output);
-		
-		return $xml;
-	}
+        $xml = simplexml_load_string($output);
 
-	public static function checkUpdate(){
-		
-		$xml = self::xml();
-		$curver = CANDYVERSION;
-		
-		foreach ($xml->channel->item as $item) {
-			$newver = $item->version;
-			
-			if(version_compare($curver, $newver, '>=')){
-				$return = false;
-			} else {
-				$return = "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
-				break;
-			}
-		}
-		
-		return $return;	
-				
-	}
+        return $xml;
+    }
+
+    public static function checkUpdate(){
+
+        $xml = self::xml();
+        $curver = CANDYVERSION;
+
+        foreach ($xml->channel->item as $item) {
+            $newver = $item->version;
+
+            if(version_compare($curver, $newver, '>=')){
+                $return = false;
+            } else {
+                $return = "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
+                break;
+            }
+        }
+
+        return $return;
+    }
 	
 	public static function getChangelog(){
 		
