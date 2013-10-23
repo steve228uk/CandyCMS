@@ -249,9 +249,7 @@ $path = dirname(__FILE__);
 			$fp = @fopen('core/config.php', 'w');
 			
 			if (!$fp) {
-			
 				diehard("Sorry, we couldn't write to core/config.php.");
-			
 			} else {
 			
 				fwrite($fp, $config);
@@ -271,12 +269,9 @@ $path = dirname(__FILE__);
 			
 			$currentmodal = substr(sprintf('%o', fileperms($path)), -4);
 			
-			if ($currentmodal != "0755" && $currentmodal != "0777") {
-			
+			if ($currentmodal != "0755" && $currentmodal != "0777")
 				$result = @chmod($path, 0755);
-				
-			}
-		
+
 			$fp = @fopen('./.htaccess', 'a');
 			
 			if (!$fp) {
@@ -294,12 +289,9 @@ $path = dirname(__FILE__);
 			#Include the file once we've created it!
 			$configfinal = @include('core/config.php');
 			
-			if (!$configfinal) {
-			
+			if (!$configfinal)
 				diehard("Sorry, we couldn't create core/config.php properly.");
-			
-			}
-			
+
 			try{ 
 				$dbh = new PDO(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
 			} catch(Exception $e){
@@ -346,8 +338,6 @@ $path = dirname(__FILE__);
 			
 			#insert the user into the DB
 			$dbh->exec("INSERT INTO `".DB_PREFIX."users` (`username`, `password`, `name`, `email`, `role`) VALUES ('$username', '$password', '$name', '$email', 'admin')");
-		
-			
 		?>
 		
 		<p class="leadin">
