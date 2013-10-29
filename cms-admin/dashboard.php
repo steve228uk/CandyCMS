@@ -111,8 +111,8 @@ require('bootstrap.php');
 		<?php endif; ?>
 	
 	<footer>
-		<p>Copyright &copy;<?php echo date('Y') ?> Cocoon Design - Built with <a href="http://www.candycms.org" title="Candy CMS">Candy</a> v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
-		<a href="http://www.wearecocoon.co.uk" title="Made By Cocoon" target="_blank" class="footer-logo"> </a>
+        <p>Copyright &copy;<?php echo date('Y') ?> Adam Patterson - Built with <a href="http://www.candycms.org" title="Candy CMS">Candy</a> v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>
+        <a href="http://www.adampatterson.ca" title="Made By Adam Patterson" target="_blank" class="footer-logo"> </a>
 	</footer>
 </body>
 </html>

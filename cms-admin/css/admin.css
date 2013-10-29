@@ -390,12 +390,11 @@ footer{
 }
 
 .footer-logo{
-	background: url(../images/footer-logo.png) no-repeat;
-	width: 93px;
-	height: 17px;
-	float: right;
+    background: url(http://www.adampatterson.ca/adampatterosn.png) no-repeat;
+    width: 30px;
+    height: 20px;
+    float: right;
 }
-
 footer p {
 	float: left;
 }
