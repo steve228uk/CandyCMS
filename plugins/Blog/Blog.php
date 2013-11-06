@@ -202,7 +202,7 @@
  		
  		$body = CandyDB::col("SELECT post_body FROM ". DB_PREFIX ."posts WHERE post_id = :id", compact('id'));
  		
- 		if (strlen($body) >= 200) {
+ 		if (strlen($body) >= $length) {
  			echo substr($body, 0, $length).'&hellip;';
  		} else {
  			echo $body;
