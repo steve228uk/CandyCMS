@@ -13,10 +13,8 @@ class Plugins {
 
 	public static function listPlugins(){
 		
-		$plugins = PLUGIN_PATH;
-		$plugins = scandir($plugins);
-		array_shift($plugins);
-		array_shift($plugins);
+	    chdir(PLUGIN_PATH);
+        $plugins = array_filter(glob('*'), 'is_dir');
 		
 		$plugininfo = array();
 		
