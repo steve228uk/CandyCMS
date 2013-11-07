@@ -7,7 +7,9 @@
 	<div class="post-cont">
 		<?= $post[0]->post_body ?>
 	</div>
+
 </div>
 
 <?
-Blog::commentForm();
+if ( Blog::disqusAccount() )
+    Blog::commentForm();

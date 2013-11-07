@@ -23,15 +23,15 @@
 			</div>	
 			
 			<a href="<? Blog::postUri($post->post_id) ?>" title="View Post" class="button">View Post</a>
-			
-			<a href="<? Blog::postUri($post->post_id) ?>#disqus_thread" data-disqus-identifier="<? echo $post->post_id ?>" class="comment-link"></a>
-	
+			<? if ( Blog::disqusAccount() ): ?>
+			    <a href="<? Blog::postUri($post->post_id) ?>#disqus_thread" data-disqus-identifier="<? echo $post->post_id ?>" class="comment-link"></a>
+	        <? endif; ?>
 		</div>
-		
+        <? if ( Blog::disqusAccount() ): ?>
 		<script type="text/javascript">
 		    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 		    var disqus_shortname = '<?= Blog::disqusAccount() ?>'; // required: replace example with your forum shortname
-		
+
 		    /* * * DON'T EDIT BELOW THIS LINE * * */
 		    (function () {
 		        var s = document.createElement('script'); s.async = true;
@@ -40,7 +40,7 @@
 		        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		    }());
 		</script>
-		
+        <? endif; ?>
 	<? endforeach;
 		Blog::prevLink('&larr; Previous Posts', 'bloglink prev');
 		Blog::nextLink('Next Posts &rarr;', 'bloglink next');

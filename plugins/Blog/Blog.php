@@ -283,7 +283,12 @@
  	}
  	
  	public static function disqusAccount(){
- 		return CandyDB::col("SELECT option_value FROM ". DB_PREFIX ."options WHERE option_key = :key", array('key' => 'disqus'));
+ 		$disqus = CandyDB::col("SELECT option_value FROM ". DB_PREFIX ."options WHERE option_key = :key", array('key' => 'disqus'));
+
+        if ( $disqus != '' )
+            return $disqus;
+        else
+            return false;
  	}
  	
  	public static function commentForm(){
