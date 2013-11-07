@@ -1,8 +1,8 @@
-<?php if (isset($_POST['colors'])) :?>
-	<?php Theme::setColors($_POST['colors']) ?>
-<?php else : ?>
+<? if (isset($_POST['colors'])) :?>
+	<? Theme::setColors($_POST['colors']) ?>
+<? else : ?>
 
-<?php if ($_SESSION['role'] != 'admin'){
+<? if ($_SESSION['role'] != 'admin'){
  echo '<h1>Access Denied</h1>';
  exit(1);
 }?>
@@ -20,7 +20,7 @@
 <div id="container">
 
 <form id="colorform">
-<?php
+<?
 
 $themes = Theme::listThemes();
 $current = Candy::Options('theme');
@@ -64,4 +64,4 @@ foreach($themes as $theme){
 ?>
 </form>
 </div>
-<?php endif; ?>
+<? endif; ?>

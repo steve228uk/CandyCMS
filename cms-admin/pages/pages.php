@@ -1,4 +1,4 @@
-<?php 
+<?
 /**
 * @package CandyCMS
 * @version 1.0
@@ -12,9 +12,9 @@ $homepage = Candy::Options('homepage');
 	
 ?>
 
-<?php if ( isset($_GET['edit']) ) : ?>
+<? if ( isset($_GET['edit']) ) : ?>
 	
-	<?php $page = Pages::pageInfo($_GET['edit']) ?>
+	<? $page = Pages::pageInfo($_GET['edit']) ?>
 	
 	<div id="title-bar">
 		
@@ -30,33 +30,33 @@ $homepage = Candy::Options('homepage');
 	
 	<div id="container">
 	
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
+	<form action="<? echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
-				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php echo $page[0]->page_title ?>" />
+				<input type="text" class="inputstyle" name="title" placeholder="Title" value="<? echo $page[0]->page_title ?>" />
 			</li>
 			
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
-				<?php echo $site_url?>
-				<?php if ($page[0]->rewrite != $homepage) : ?>
-					<input type="text" name="rewrite" class="url-box" value="<?php echo $page[0]->rewrite ?>" /> 
-				<?php else : ?>
-					<input type="hidden" name="rewrite" value="<?php echo $page[0]->rewrite ?>" />
-				<?php endif; ?>
-				<a href="<?php echo $site_url.$page[0]->rewrite ?>" title="View Page" target="_blank">View</a>
+				<? echo $site_url?>
+				<? if ($page[0]->rewrite != $homepage) : ?>
+					<input type="text" name="rewrite" class="url-box" value="<? echo $page[0]->rewrite ?>" />
+				<? else : ?>
+					<input type="hidden" name="rewrite" value="<? echo $page[0]->rewrite ?>" />
+				<? endif; ?>
+				<a href="<? echo $site_url.$page[0]->rewrite ?>" title="View Page" target="_blank">View</a>
 			</li>
-			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
-			<li class="clear"><textarea class="ckeditor" name="body"><?php echo $page[0]->page_body ?></textarea></li>
-			<li><ul id="cf-area"><?php CustomFields::getAdminFields($_GET['edit']) ?></ul></li>
+			<li class="left clearl p-templates"><label>Page Template</label><? Theme::dropdownTemplates($_GET['edit']) ?></li>
+			<li class="clear"><textarea class="ckeditor" name="body"><? echo $page[0]->page_body ?></textarea></li>
+			<li><ul id="cf-area"><? CustomFields::getAdminFields($_GET['edit']) ?></ul></li>
 			<li><input name="update" type="submit" value="Save Page" class="button" /></li>
 		</ul>
-		<input type="hidden" name="id" value="<?php echo $_GET['edit'] ?>" />
+		<input type="hidden" name="id" value="<? echo $_GET['edit'] ?>" />
 	</form>
 	
 	</div>
 	
-<?php elseif ( isset($_GET['new']) ) :?>
+<? elseif ( isset($_GET['new']) ) :?>
 	
 	<div id="title-bar">
 		
@@ -72,7 +72,7 @@ $homepage = Candy::Options('homepage');
 	
 	<div id="container">
 	
-	<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
+	<form action="<? echo $_SERVER['PHP_SELF'] ?>?page=pages" method="POST" class="clear">
 		<ul>
 			<li class="left">
 				<input type="text" class="inputstyle" name="title" placeholder="Title" id="page-title" />
@@ -80,10 +80,10 @@ $homepage = Candy::Options('homepage');
 						
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
-				<?php echo $site_url?>
+				<? echo $site_url?>
 				<input type="text" name="rewrite" class="url-box" id="rewrite" />
 			</li>
-			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates() ?></li>
+			<li class="left clearl p-templates"><label>Page Template</label><? Theme::dropdownTemplates() ?></li>
 			<li class="clear"><textarea name="body" class="ckeditor"></textarea></li>
 			<li><ul id="cf-area"></ul></li>
 			<li><input type="submit" value="Add Page" name="addnew" class="button" /></li> 
@@ -92,7 +92,7 @@ $homepage = Candy::Options('homepage');
 	
 	</div>
 	
-<?php else : ?>
+<? else : ?>
 	
 	<div id="title-bar">
 		
@@ -108,7 +108,7 @@ $homepage = Candy::Options('homepage');
 	
 	<div id="container">
 	
-	<?php if (isset($_POST['addnew'])) {
+	<? if (isset($_POST['addnew'])) {
 		echo '<p class="message success">Page Added</p>';
 		if (isset($_POST['innav'])) {
 			$innav = 'on';
@@ -124,7 +124,7 @@ $homepage = Candy::Options('homepage');
 		
 	} ?>
 	
-	<?php if (isset($_POST['update'])) {
+	<? if (isset($_POST['update'])) {
 		if (isset($_POST['innav'])) {
 			$innav = 'on';
 		} else {
@@ -140,13 +140,13 @@ $homepage = Candy::Options('homepage');
 		echo '<p class="message success">Post Updated</p>';
 	} ?>
 	
-	<?php if (isset($_GET['delete'])) {
+	<? if (isset($_GET['delete'])) {
 		echo '<p class="message success">Page deleted!</p>';
 		Pages::deletePage($_GET['delete']);
 	} ?>
 
-	<?php Pages::pagesTable() ?>
+	<? Pages::pagesTable() ?>
 	
 	</div>
 	
-<?php endif; ?>
+<? endif; ?>

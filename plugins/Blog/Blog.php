@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * @plugin Blog
@@ -22,25 +22,26 @@
 
  	}
 
- 	public static function listCategories($cat_id){
+ 	public static function listCategories($cat_id) {
  		
  		$cats = array();		
  		$cat_id = json_decode(stripslashes($cat_id));
  		
- 		foreach ($cat_id as $value) {
+ 		foreach ($cat_id as $value)
  			$cats[] = CandyDB::col("SELECT cat_name FROM ".DB_PREFIX."categories WHERE cat_id = :id", array('id' => $value));
- 		}
- 		
+
  		$html = '';
  		
- 		if (!empty($cats)) {
+ 		if (!empty($cats)):
  			$html .= '<ul class="category-list">';
- 			foreach ($cats as $value) {
+
+ 			foreach ($cats as $value):
  				$catlink = str_replace(' ', '-', strtolower($value));
  				$html .= '<li class="cat-'.strtolower($value).'"><a href="'.URL_PATH.self::getBlogPage().'/'.$catlink.'" title="'.$value.'">'.$value.'</a></li>';
- 			}	
+ 		    endforeach;
+
  			$html .= '</ul>';	
- 		}
+ 		endif;
  		
  		echo $html;
  	
@@ -389,35 +390,33 @@
 		
 		$site_url = Candy::Options('site_url');
 		
-		if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+		if (isset($_GET['category']) && is_numeric($_GET['category'])):
 
 			$limit = CandyDB::col("SELECT option_value FROM ".DB_PREFIX."options WHERE option_key = :key", array('key' => 'perpage'));
 			
-			if (isset($_GET['page'])) {
+			if (isset($_GET['page'])):
 	 			$uri = explode('/', $_SERVER['REQUEST_URI']);
 	 			$uri = $uri[1];
-	 		} else {
+	 		else:
 	 			$uri = Candy::Options('homepage');
-	 		}
+	 		endif;
 			
-			if ($_GET['category'] == 2) {
-				if ($class !=false) {
+			if ($_GET['category'] == 2):
+				if ($class !=false)
 					echo "<a href='".$site_url.Blog::getBlogPage()."' class='$class'>$text</a>";
-				} else {
+				else
 					echo "<a href='".$site_url."'>$text</a>";
-				}
-			} else {
-				
+
+            else:
 				$page = $_GET['category']-1;
 				
-				if ($class !=false) {
+				if ($class !=false)
 					echo "<a href='".$site_url."$uri/$page' class='$class'>$text</a>";
-				} else {
+				else
 					echo "<a href='".$site_url."$uri/$page'>$text</a>";
-				}
-			}
-			
-		}
+			endif;
+
+        endif;
 	
 	}
 	

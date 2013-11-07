@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * This file is simply for use of plugins and themes when core classes are needed without the header etc. of the full bootstrap

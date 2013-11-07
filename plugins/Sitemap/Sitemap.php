@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * @plugin XML Sitemap

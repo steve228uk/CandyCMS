@@ -1,4 +1,4 @@
-<?php 
+<?
 /**
  * @template One Column
  * @author Cocoon Design
@@ -6,5 +6,5 @@
  */	
 ?>
 
-<h1><?php theTitle() ?></h1>
-<?php theContent() ?>
+<h1><? theTitle() ?></h1>
+<? theContent() ?>

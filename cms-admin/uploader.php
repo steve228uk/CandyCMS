@@ -1,4 +1,4 @@
-<?php
+<?
 
 // todo: Make this a little more secure! 
 

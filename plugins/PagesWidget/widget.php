@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @title Pages 
  * @plugin Pages Widget

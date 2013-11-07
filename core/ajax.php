@@ -1,4 +1,4 @@
-<?php
+<?
 /**
 * @package CandyCMS
 * @version 0.5

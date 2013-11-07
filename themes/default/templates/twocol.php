@@ -1,4 +1,4 @@
-<?php 
+<?
 /**
  * @template Two Column
  * @fields sidebar-wysi-Sidebar-Right Column Content
@@ -7,9 +7,9 @@
  */	
 ?>
 <div id="content">
-	<h1><?php theTitle() ?></h1>
-	<?php theContent() ?>
+	<h1><? theTitle() ?></h1>
+	<? theContent() ?>
 </div>
 <div id="sidebar">
-	<?php theField('sidebar') ?>
+	<? theField('sidebar') ?>
 </div>

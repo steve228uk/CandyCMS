@@ -1,1 +1,1 @@
-<?php //No peeking! ?>
+<? //No peeking! ?>

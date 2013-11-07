@@ -1,4 +1,4 @@
-<?php $info = User::getUserInfo($_SESSION['username']) ?>
+<? $info = User::getUserInfo($_SESSION['username']) ?>
 
 <div id="title-bar">
 	
@@ -12,11 +12,11 @@
 
 <div id="container">
 
-<?php if (isset($_POST['save'])) : ?>
-	<?php User::saveUserInfo($_SESSION['username'], $_POST['name'], $_POST['email']) ?>
+<? if (isset($_POST['save'])) : ?>
+	<? User::saveUserInfo($_SESSION['username'], $_POST['name'], $_POST['email']) ?>
 	<p class="message success">Account Settings Saved</p>
 	
-	<?php if ($_POST['current'] != '' && $_POST['new'] != '' && $_POST['confirm'] != '') {
+	<? if ($_POST['current'] != '' && $_POST['new'] != '' && $_POST['confirm'] != '') {
 	
 		if ($_POST['new'] != $_POST['confirm']) {
 			echo '<p class="message notice">Sorry, your new passwords don\'t match!</p>';
@@ -26,17 +26,17 @@
 		
 	} ?>
 	
-<?php endif; ?>
+<? endif; ?>
 <form action="dashboard.php?page=profile" method="post">
 	<fieldset>
 		<ul>
 			<li>
 				<label>Full Name</label>
-				<input type="text" name="name" value="<?php echo $info[0]->name ?>" placeholder="Full Name" />
+				<input type="text" name="name" value="<? echo $info[0]->name ?>" placeholder="Full Name" />
 			</li>
 			<li>
 				<label>Email Address</label>
-				<input type="email" name="email" value="<?php echo $info[0]->email ?>" placeholder="Email Address" />
+				<input type="email" name="email" value="<? echo $info[0]->email ?>" placeholder="Email Address" />
 			</li>
 		</ul>
 	</fieldset>

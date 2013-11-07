@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @plugin Pages Widget
  * @author Cocoon Design

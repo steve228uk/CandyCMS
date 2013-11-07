@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
 * @package CandyCMS
@@ -50,14 +50,14 @@ if (isset($_POST['username'])) {
 	<div id="container">
 		<div id="box">
 			<h1>Login</h1>
-			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+			<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post">
 				<input type="text" name="username" placeholder="Username" /><br />
 				<input type="password" name="password" placeholder="Password" /><br />
 				<input type="submit" value="Login" class="button" />
 				<a href="iforgot.php" class="right">Forgot Your Password?</a>
 			</form>
 		</div>
-		<a href="<?php echo URL_PATH ?>" title="View Site">&larr;Back to <?php echo Candy::Options('site_title') ?></a>
+		<a href="<? echo URL_PATH ?>" title="View Site">&larr;Back to <? echo Candy::Options('site_title') ?></a>
 	</div>
 </body>
 </html>

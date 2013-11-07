@@ -1,1 +1,2 @@
-<?php Blog::theCategories() ?>
+<?
+Blog::theCategories();
