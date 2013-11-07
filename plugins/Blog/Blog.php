@@ -348,7 +348,7 @@
  	
  		$site_url = Candy::Options('site_url');
 
- 		$count = CandyDB::col("SELECT COUNT(*) FROM `".DB_PREFIX."posts`");
+ 		$count = CandyDB::col("SELECT COUNT(*) FROM `".DB_PREFIX."posts` WHERE status = 'published' AND ");
 
  		$limit = CandyDB::col("SELECT option_value FROM ".DB_PREFIX."options WHERE option_key = :key", array('key' => 'perpage'));
 
