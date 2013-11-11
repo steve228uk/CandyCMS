@@ -8,16 +8,14 @@
 	<div id="title-bar">
 		
 		<div id="title-bar-cont">
-		
 			<h1 class="left">Add New User</h1>
-			
 		</div>
 	
 	</div>
 	
 	<div id="container">
-	
-	<form action="dashboard.php?page=users" method="post">
+
+        <form action="dashboard.php?page=users" method="post">
 		<fieldset>
 			<ul>
 				<li>
@@ -120,8 +118,7 @@
 	</div>
 	
 	<div id="container">
-	
-	
+
 	<? if (isset($_POST['adduser'])) : ?>
 		<? User::addUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']) ?>
 		<p class="message success">User Added</p>

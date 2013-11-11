@@ -1,6 +1,12 @@
 $(function() {
 	
-	$('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false, imageUpload: 'uploader.php', autoresize: false });
+	$('.ckeditor').redactor({
+        focus: true,
+        convertDivs: false,
+        removeClasses: false,
+        imageUpload: 'uploader.php',
+        autoresize: true
+    });
 	
 	$(".colorpicker").miniColors({
 		letterCase: 'uppercase',
@@ -97,7 +103,7 @@ $(function() {
 		  $('#cf-area').append("<li><h3>" + title + "</h3><p>" + desc + "</p>" + data + "<input type='hidden' name='cfield[" + name + "]' value='" + key + "' /><input type='hidden' name='cf-title["+name+"]' value='" + title + "' /><input type='hidden' name='cf-desc["+name+"]' value='" + desc + "' /></li>");
 		  closeModal();
 		  
-		  $('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false, imageUpload: 'uploader.php', autoresize: false  });
+		  $('.ckeditor').redactor({ focus: true, convertDivs: false, removeClasses: false, imageUpload: 'uploader.php', autoresize: false  });
 		  
 		});
 	
@@ -126,15 +132,13 @@ $(function() {
 						
 						$('#cf-area').append(field);
 						
-						$('.ckeditor').redactor({ focus: false, convertDivs: false, removeClasses: false, imageUpload: 'uploader.php', autoresize: false  });		
+						$('.ckeditor').redactor({ focus: true, convertDivs: false, removeClasses: false, imageUpload: 'uploader.php', autoresize: false  });
 						
 					
 					});
-					
+
 				}
-				
-				
-					
+
 			}
 			
 		}, 'json');
