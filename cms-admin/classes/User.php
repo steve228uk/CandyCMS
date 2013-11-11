@@ -60,7 +60,38 @@ class User {
 		
 	
 	}
-	
+
+    public static function uniqueUser ($i) {
+        // Find by ID
+        if(preg_match('/^([0-9]+)$/',$i))
+        {
+            $dbh = new CandyDB();
+            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE userid = "'.$i.'"');
+            $sth->execute();
+            return $sth->fetchAll(PDO::FETCH_CLASS);
+        }
+
+        // Find by Username
+        elseif(preg_match('/^([\-_ a-z0-9]+)$/i',$i))
+        {
+            $dbh = new CandyDB();
+            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE username = "'.$i.'"');
+            $sth->execute();
+            return $sth->fetchAll(PDO::FETCH_CLASS);
+        }
+
+        // Find by E-mail
+        else
+        {
+            $dbh = new CandyDB();
+            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE email = "'.$i.'"');
+            $sth->execute();
+            return $sth->fetchAll(PDO::FETCH_CLASS);
+        }
+
+        return (!isset($user[0]));
+    }
+
 	public static function addUser($username, $name, $email, $pass, $role){
 	
 		$pass = sha1(trim($pass).SALT);
