@@ -41,8 +41,8 @@ require('bootstrap.php');
 	<![endif]-->
 	<? adminHead() ?>
 </head>
-<body>
-	<header id="wrapper">
+<body id="wrapper">
+	<header>
 		<div id="head-cont">
 			<a href="dashboard.php" id="head-logo"> </a>
 			<a href="<? echo URL_PATH ?>" class="view-site">View Site &rarr;</a>
