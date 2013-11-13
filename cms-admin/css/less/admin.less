@@ -6,19 +6,19 @@
 *
 * CSS for admin panel
 */
-
-@import "font-awesome.css";
+@import "variables";
+@import "font-awesome/font-awesome";
 @import "reset.less";
 
 header.app {
-  background: #2E1A3C;
+  background: @purpleDark;
   width: 100%;
   height: 55px;
   padding: 10px 0;
 
 
   #head-cont{
-    width: 960px;
+    width: @width;
     margin: auto;
     padding: 15px 10px;
     position: relative;
@@ -46,7 +46,7 @@ header.app {
 }
 
 #title-bar-cont {
-  width: 960px;
+  width: @width;
   margin: auto;
   padding: 30px 0 10px;
 
@@ -70,23 +70,23 @@ header.app {
     > a{
       font-weight: 300;
       padding: 5px 8px;
-      color: #ADA7B1;
+      color: @grayLight;
       text-decoration: none;
       font-size: 1.2em;
     }
 
     > a:hover{
-      color: #fff;
+      color: @white;
     }
   }
   .active a{
-    color: #fff;
+    color: @white;
   }
 }
 
 .user-btn{
-  background: #662479;
-  color: #fff !important;
+  background: @purple;
+  color: @white !important;
   padding: 8px;
   border-radius: 3px;
   text-decoration: none;
@@ -97,7 +97,7 @@ header.app {
   margin-top: -6px;
 
   &:hover{
-    background: #572665;
+    background: @purple;
   }
 
   &:active{ }
@@ -105,7 +105,7 @@ header.app {
 
 #usernav{
   width: 200px;
-  background: #fff;
+  background: @white;
   padding: 5px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -119,7 +119,7 @@ header.app {
   display: none;
 
   li {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid @grayLighter;
 
     &:last-child{
       border: none;
@@ -135,7 +135,7 @@ header.app {
     }
 
     a:hover{
-      background-color: #f3f3f3;
+      background-color: @grayLighter;
     }
   }
   &:after{
@@ -143,7 +143,7 @@ header.app {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid #fff;
+    border-bottom: 5px solid @white;
     position: absolute;
     top: -5px;
     right: 25px;
@@ -153,16 +153,16 @@ header.app {
 
 #container{
   padding: 30px 10px 20px;
-  width: 960px;
+  width: @width;
   margin: auto;
 }
 
 footer.app {
-  width: 960px;
+  width: @width;
   margin: auto;
   padding: 10px;
   border-top: 1px solid #ccc;
-  color: #999;
+  color: @grayLight;
   clear: both;
 
   .footer-logo {
@@ -187,13 +187,13 @@ footer.app {
 
 
 table{
-  background: #fff;
+  background: @white;
   width: 100%;
   border: 1px solid #ccc;
 
   thead th{
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#e1e1e1), to(#ffffff));
-    background-image: -moz-linear-gradient(90deg, #e1e1e1 0%, #ffffff 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#e1e1e1), to(@white));
+    background-image: -moz-linear-gradient(90deg, #e1e1e1 0%, @white 100%);
     text-align: left;
     padding: 5px;
     border-bottom: 1px solid #ccc;
@@ -281,7 +281,7 @@ table{
 }
 
 .widget {
-  background: #fff;
+  background: @white;
   border: 1px solid #ccc;
   width: 49%;
   margin: 0 0 15px;
@@ -299,14 +299,14 @@ table{
 }
 
 .widget-ttl {
-  background-color: #ffffff;
+  background-color: @white;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(225, 225, 225)));
   background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#e1e1e1');
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='@white', EndColorStr='#e1e1e1');
 
   font-size: 1.3em;
   font-weight: 300;
@@ -340,14 +340,14 @@ table{
 /* @group Sortable List */
 
 #sortable li{
-  background-color: #ffffff;
+  background-color: @white;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(239, 239, 239)));
   background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
   background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
   background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
   background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
   background-image: linear-gradient(top, rgb(255, 255, 255), rgb(239, 239, 239));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#efefef');
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='@white', EndColorStr='#efefef');
   font-size: 1.4em;
   font-weight: 300;
   padding: 10px;
@@ -359,7 +359,7 @@ table{
   -webkit-box-shadow: inset 0 -17px 0 rgba(0, 0, 0, 0.03);
   box-shadow: inset 0 -17px 0 rgba(0, 0, 0, 0.03);
   color: #666;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 1px 0 @white;
 }
 
 #sortable li:hover{
@@ -408,11 +408,11 @@ table{
 }
 
 .tabs li:hover{
-  background: #fff;
+  background: @white;
 }
 
 .tabs li.active{
-  background: #fff;
+  background: @white;
 }
 
 .tabs li a{
@@ -466,7 +466,7 @@ table{
 }
 
 #blog-cats ul{
-  background: #fff;
+  background: @white;
   border: 1px solid #ccc;
   padding: 5px;
   -webkit-border-radius: 5px;
@@ -517,9 +517,9 @@ table{
   border-radius: 5px;
   width: 150px;
 
-  -webkit-box-shadow: inset 0 1px 0 #ffffff;
-  -moz-box-shadow: inset 0 1px 0 #ffffff;
-  box-shadow: inset 0 1px 0 #ffffff;
+  -webkit-box-shadow: inset 0 1px 0 @white;
+  -moz-box-shadow: inset 0 1px 0 @white;
+  box-shadow: inset 0 1px 0 @white;
 
   margin: 0 5px 0 0;
   outline: none;
@@ -561,14 +561,14 @@ a.box-link{
   background-color: #f2f2f2;
   text-decoration: none;
   height: 21px;
-  color: #999;
-  -moz-box-shadow: 0 1px 0 #ffffff, inset 0 1px 0 #ffffff;
-  -webkit-box-shadow: 0 1px 0 #ffffff, inset 0 1px 0 #ffffff;
-  box-shadow: 0 1px 0 #ffffff, inset 0 1px 0 #ffffff;
+  color: @grayLight;
+  -moz-box-shadow: 0 1px 0 @white, inset 0 1px 0 @white;
+  -webkit-box-shadow: 0 1px 0 @white, inset 0 1px 0 @white;
+  box-shadow: 0 1px 0 @white, inset 0 1px 0 @white;
 }
 
 a.active-tab{
-  background: #fff;
+  background: @white;
 }
 
 div.filter{
@@ -580,9 +580,9 @@ div.filter{
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  -moz-box-shadow: 0 1px 0 #ffffff, inset 0 0 5px black;
-  -webkit-box-shadow: 0 1px 0 #ffffff, inset 0 0 5px black;
-  box-shadow: 0 1px 0 #ffffff, inset 0 0 5px black;
+  -moz-box-shadow: 0 1px 0 @white, inset 0 0 5px black;
+  -webkit-box-shadow: 0 1px 0 @white, inset 0 0 5px black;
+  box-shadow: 0 1px 0 @white, inset 0 0 5px black;
   position: relative;
   margin-top: -3px;
 }
@@ -625,7 +625,7 @@ a.dev{
 }
 
 #modal{
-  background: #fff;
+  background: @white;
   width: 600px;
   height: 300px;
   position: absolute;
@@ -639,14 +639,14 @@ a.dev{
 }
 
 #modal-title{
-  background-color: #ffffff;
+  background-color: @white;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(225, 225, 225)));
   background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#e1e1e1');
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='@white', EndColorStr='#e1e1e1');
 
   font-size: 1.3em;
   font-weight: 300;
@@ -728,9 +728,9 @@ a.dev{
   border-radius: 5px;
   width: 440px;
 
-  -webkit-box-shadow: inset 0 1px 0 #ffffff;
-  -moz-box-shadow: inset 0 1px 0 #ffffff;
-  box-shadow: inset 0 1px 0 #ffffff;
+  -webkit-box-shadow: inset 0 1px 0 @white;
+  -moz-box-shadow: inset 0 1px 0 @white;
+  box-shadow: inset 0 1px 0 @white;
 
   outline: none;
 
@@ -814,7 +814,7 @@ ol ol{
   box-sizing: border-box; -moz-box-sizing: border-box;
   cursor: move;
 }
-.dd-item > .dd-handle:hover { color: #572665; background: #fff; }
+.dd-item > .dd-handle:hover { color: #572665; background: @white; }
 
 .dd-item > button { cursor: pointer; float: left; border: 0; background: transparent; width: 25px; height: 20px; margin: 5px 0; padding: 0; line-height: 20px; font-size: 12px; text-align: center; font-weight: bold; }
 
@@ -846,21 +846,21 @@ ol ol{
 /* @group Modules */
 
 .module{
-  background: #fff;
+  background: @white;
   border: 1px solid #ccc;
   border-radius: 3px;
   margin: 10px 0;
 }
 
 .module-head{
-  background-color: #ffffff;
+  background-color: @white;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(225, 225, 225)));
   background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
   background-image: linear-gradient(top, rgb(255, 255, 255), rgb(225, 225, 225));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#e1e1e1');
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='@white', EndColorStr='#e1e1e1');
 
   font-size: 1.3em;
   font-weight: 300;
@@ -911,5 +911,5 @@ header:hover .view-site{
 }
 
 .view-site:hover{
-  color: #fff !important;
+  color: @white !important;
 }

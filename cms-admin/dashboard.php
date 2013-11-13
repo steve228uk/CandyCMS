@@ -68,8 +68,7 @@ require('bootstrap.php');
 			</ul>
  		</div>
 	</header>
-	
-		
+
 		<?
 		
 			if (!isset($_GET['page']) || $_GET['page'] != 'update') {
@@ -95,6 +94,7 @@ require('bootstrap.php');
 			<div id="title-bar">
 				<div id="title-bar-cont">
 					<h1>Dashboard</h1>
+                    <i class="fa fa-rocket"></i> fa-rocket
 				</div>
 			</div>
 			
