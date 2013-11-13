@@ -37,8 +37,9 @@ header.app {
     opacity: 0.8;
   }
 }
+
 #title-bar {
-  background: #eee;
+  background: @grayLighter;
 
   h1.left{
     padding: 0 0 10px;
@@ -57,7 +58,6 @@ header.app {
     margin-left: 8px;
   }
 }
-
 
 .nav{
   float: right;
@@ -164,6 +164,7 @@ footer.app {
   border-top: 1px solid #ccc;
   color: @grayLight;
   clear: both;
+  font-size: 10px;
 
   .footer-logo {
     background: url(http://www.adampatterson.ca/adampatterosn.png) no-repeat;
@@ -187,7 +188,7 @@ footer.app {
 
 
 table{
-  background: @white;
+  background: @tableBackground;
   width: 100%;
   border: 1px solid #ccc;
 
@@ -195,25 +196,28 @@ table{
     background-image: -webkit-gradient(linear, left bottom, left top, from(#e1e1e1), to(@white));
     background-image: -moz-linear-gradient(90deg, #e1e1e1 0%, @white 100%);
     text-align: left;
-    padding: 5px;
-    border-bottom: 1px solid #ccc;
+    padding: @paddingLarge;
+    border-bottom: 1px solid @tableBorder;
     font-weight: bold;
-    color: #666;
+    color: @gray;
   }
 
   tr:nth-child(even){
-    background-color: #fafafa;
-    border: 1px solid #eee;
+    background-color: @tableBackgroundAccent;
+    border: 1px solid @grayLighter;
     border-left: none;
     border-right: none;
   }
+  tr:hover{
+    background-color: @tableBackgroundHover;
+  }
 
   tr:last-child{
-    border-bottom-color: #ccc !important;
+    border-bottom-color: @grayLight !important;
   }
 
   td{
-    padding: 5px;
+    padding: @paddingLarge;
   }
 }
 
@@ -311,7 +315,7 @@ table{
   font-size: 1.3em;
   font-weight: 300;
   border-bottom: 1px solid #ccc;
-  color: #666;
+  color: @gray;
   padding: 10px;
 }
 
@@ -326,7 +330,7 @@ table{
 .list li{
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
-  color: #666;
+  color: @gray;
 }
 
 .plugin-ttl{
@@ -358,7 +362,7 @@ table{
   -moz-box-shadow: inset 0 -17px 0 rgba(0, 0, 0, 0.03);
   -webkit-box-shadow: inset 0 -17px 0 rgba(0, 0, 0, 0.03);
   box-shadow: inset 0 -17px 0 rgba(0, 0, 0, 0.03);
-  color: #666;
+  color: @gray;
   text-shadow: 0 1px 0 @white;
 }
 
@@ -429,7 +433,7 @@ table{
 
 #post-info{
   float: left;
-  width: 700px;
+  width: @widthMain;
   margin: 0 0 20px;
 }
 
@@ -438,18 +442,18 @@ table{
 }
 
 #blog-cats{
-  background-color: #eeeeee;
+  background-color: @grayLighter;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(238, 238, 238)), to(rgb(211, 211, 211)));
   background-image: -webkit-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
   background-image: -moz-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
   background-image: -o-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
   background-image: -ms-linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
   background-image: linear-gradient(top, rgb(238, 238, 238), rgb(211, 211, 211));
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#eeeeee', EndColorStr='#d3d3d3');
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='@grayLighter', EndColorStr='#d3d3d3');
 
   float: right;
   width: 230px;
-  border: 5px solid #eee;
+  border: 5px solid @grayLighter;
 
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -499,14 +503,6 @@ table{
 }
 
 #newcat{
-
-  background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
-
-  background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
   border: 1px solid #ccc;
   padding: 7px;
   font-size: 1.2em;
@@ -515,7 +511,7 @@ table{
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  width: 150px;
+  width: 140px;
 
   -webkit-box-shadow: inset 0 1px 0 @white;
   -moz-box-shadow: inset 0 1px 0 @white;
@@ -651,7 +647,7 @@ a.dev{
   font-size: 1.3em;
   font-weight: 300;
   border-bottom: 1px solid #ccc;
-  color: #666;
+  color: @gray;
   padding: 10px;
 }
 
@@ -662,7 +658,7 @@ a.dev{
 .close-btn{
   background: none;
   border: none;
-  color: #666;
+  color: @gray;
   float: right;
   cursor: pointer;
   margin: -2px -2px 0 0;
@@ -680,12 +676,12 @@ a.dev{
 }
 
 #cf-types li:hover{
-  background: #eee;
+  background: @grayLighter;
 }
 
 #cf-types li div{
   float: left;
-  color: #666;
+  color: @gray;
 }
 
 #cf-types{
@@ -702,7 +698,7 @@ a.dev{
 #cf-types span{
   display: block;
   font-weight: 300;
-  color: #666;
+  color: @gray;
 }
 
 #cf-types div{
@@ -711,13 +707,13 @@ a.dev{
 }
 
 #cf-addinfo input[type=text]{
-  background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#eeeeee));
+  background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(@grayLighter));
 
-  background-image: -webkit-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -moz-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -o-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: -ms-linear-gradient(90deg, white 0%, #eeeeee 100%);
-  background-image: linear-gradient(90deg, white 0%, #eeeeee 100%);
+  background-image: -webkit-linear-gradient(90deg, white 0%, @grayLighter 100%);
+  background-image: -moz-linear-gradient(90deg, white 0%, @grayLighter 100%);
+  background-image: -o-linear-gradient(90deg, white 0%, @grayLighter 100%);
+  background-image: -ms-linear-gradient(90deg, white 0%, @grayLighter 100%);
+  background-image: linear-gradient(90deg, white 0%, @grayLighter 100%);
   border: 1px solid #ccc;
   padding: 6px;
   font-size: 1.2em;
@@ -756,7 +752,7 @@ a.dev{
 }
 
 #cf-area p{
-  color: #666;
+  color: @gray;
   padding: 0 0 15px;
 }
 
@@ -779,72 +775,11 @@ a.dev{
   width: 600px;
   float: right;
 }
-
 /* @end */
 
-/* @group Nestable */
-
-.cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
-* html .cf { zoom: 1; }
-*:first-child+html .cf { zoom: 1; }
-
-ol ol{
-  margin-left: 35px;
-}
-
-.small { color: #666; font-size: 0.875em; }
-.large { font-size: 1.25em; }
-
-.dd { position: relative; display: block; max-width: 600px; list-style: none; font-size: 13px; line-height: 20px; margin: 0; padding: 0; }
-
-.dd ul,
-.dd-item ul { display: block; position: relative; list-style: none; padding: 0 0 0 30px; margin: 0; /* border: 1px dotted #ccc; */ }
-
-.dd-item { display: block; position: relative; font-size: 13px; line-height: 20px; padding: 0; margin: 0; }
-.dd-item > .dd-handle { display: block; height: 30px; padding: 5px 10px; margin: 5px 0; color: #333; text-decoration: none; font-weight: bold; border: 1px solid #ccc;
-  background: #fafafa;
-  background: -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#eee));
-  background: -webkit-linear-gradient(top, #fafafa 0%,#eee 100%);
-  background: -o-linear-gradient(top, #fafafa 0%,#eee 100%);
-  background: -ms-linear-gradient(top, #fafafa 0%,#eee 100%);
-  background: linear-gradient(top, #fafafa 0%,#eee 100%);
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  box-sizing: border-box; -moz-box-sizing: border-box;
-  cursor: move;
-}
-.dd-item > .dd-handle:hover { color: #572665; background: @white; }
-
-.dd-item > button { cursor: pointer; float: left; border: 0; background: transparent; width: 25px; height: 20px; margin: 5px 0; padding: 0; line-height: 20px; font-size: 12px; text-align: center; font-weight: bold; }
-
-.dd-collapsed > ul { display: none; }
-
-.dd-placeholder { background: #f6f6f6; border: 1px dashed #b6bcbf; box-sizing: border-box; -moz-box-sizing: border-box; }
-.dd-dragel { position: absolute; margin-top: -5px; z-index: 9999; pointer-events: none; }
-
-.dd-dragel .dd-handle {
-  -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
-  box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
-}
-
-.dd-handle button{
-  font-size: 12px !important;
-  background: none;
-  color: #666;
-  border: none;
-  margin: -1px 1px 0 0;
-  cursor: pointer;
-}
-
-#nestable-menu { padding: 0; margin: 20px 0; }
-
-#nestable-output { width: 100%; max-width: 600px; font-size: 0.75em; line-height: 1.333333em; height: 10em; padding: 5px; box-sizing: border-box; -moz-box-sizing: border-box; }
-
-/* @end */
+@import "nestable";
 
 /* @group Modules */
-
 .module{
   background: @white;
   border: 1px solid #ccc;
@@ -865,7 +800,7 @@ ol ol{
   font-size: 1.3em;
   font-weight: 300;
   border-bottom: 1px solid #ccc;
-  color: #666;
+  color: @gray;
   padding: 8px;
   border-radius: 2px 2px 0 0;
 }
@@ -878,9 +813,9 @@ ol ol{
 
 .module-cont ul li{
   padding: 5px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid @grayLighter;
   font-size: 1.2em;
-  color: #666;
+  color: @gray;
 }
 
 .module-cont input{
@@ -899,7 +834,7 @@ ol ol{
 }
 
 .view-site{
-  color: #ada796 !important;
+  color: @grayLight !important;
   text-decoration: none;
   float: left;
   margin: 3px 0 0 25px;
@@ -912,4 +847,8 @@ header:hover .view-site{
 
 .view-site:hover{
   color: @white !important;
+}
+
+.redactor_box {
+  min-height: 350px;
 }

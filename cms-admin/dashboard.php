@@ -26,7 +26,7 @@ require('bootstrap.php');
 	<? $array = adminNav();?>
 	<title><? echo (isset($_GET['page'])) ? ucfirst($_GET['page']) : 'Dashboard' ?> &raquo; Admin &raquo; <? echo Candy::Options('site_title'); ?></title>
     <? candyCss('admin.css'); ?>
-    <? candyCss(ADMIN_PATH.'js/redactor/css/redactor.css', true); ?>
+    <? candyCss('redactor.css'); ?>
     <? candyCss('jquery.miniColors.css'); ?>
 
 	<script type="text/javascript">
@@ -94,7 +94,6 @@ require('bootstrap.php');
 			<div id="title-bar">
 				<div id="title-bar-cont">
 					<h1>Dashboard</h1>
-                    <i class="fa fa-rocket"></i> fa-rocket
 				</div>
 			</div>
 			

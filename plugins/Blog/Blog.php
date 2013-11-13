@@ -63,8 +63,8 @@
  			$html .= '<td>'.$post->post_title.'</td>';
  			$html .= '<td>'.date('d/m/Y H:i:s', strtotime($post->post_date)).'</td>';
  			$html .= '<td>'.ucwords($post->status).'</td>';
- 			$html .= '<td><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page">Edit</a></td>';
- 			$html .= '<td><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="'.$post->post_title.'" class="delete">[x]</a></td>';
+ 			$html .= '<td width="20"><a href="dashboard.php?page=blog&edit='.$post->post_id.'" title="Edit Page"><i class="fa fa-pencil-square-o"></i></a></td>';
+ 			$html .= '<td width="20"><a href="dashboard.php?page=blog&delete='.$post->post_id.'" title="'.$post->post_title.'" class="delete"><i class="fa fa-trash-o"></i></a></td>';
  			$html .= '</tr>';	
  		}
  		

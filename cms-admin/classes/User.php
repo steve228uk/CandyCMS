@@ -49,8 +49,8 @@ class User {
 			$html .= '<td>'.$user->name.'</td>';
 			$html .= '<td>'.$user->email.'</td>';
 			$html .= '<td>'.$user->role.'</td>';
-			$html .= '<td><a href="dashboard.php?page=users&edit='.$user->username.'" title="Edit Page">Edit</a></td>';
-			$html .= '<td><a class="delete" href="dashboard.php?page=users&delete='.$user->username.'" title="'.$user->username.'">[x]</a></td>';
+			$html .= '<td width="20"><a href="dashboard.php?page=users&edit='.$user->username.'" title="Edit Page"><i class="fa fa-pencil-square-o"></i></a></td>';
+			$html .= '<td width="20"><a class="delete" href="dashboard.php?page=users&delete='.$user->username.'" title="'.$user->username.'"><i class="fa fa-trash-o"></i></a></td>';
 			$html .= '</tr>';	
 		}
 		

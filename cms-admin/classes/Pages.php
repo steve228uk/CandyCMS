@@ -105,8 +105,8 @@ class Pages {
 		foreach ($pages as $page) {
 			$html .= '<tr>';
 			$html .= '<td>'.$page->page_title.'</td>';
-			$html .= '<td><a href="dashboard.php?page=pages&edit='.$page->page_id.'" title="Edit Page">Edit</a></td>';
-			$html .= '<td><a class="delete" href="dashboard.php?page=pages&delete='.$page->page_id.'" title="'.$page->page_title.'">[x]</a></td>';
+			$html .= '<td width="20"><a href="dashboard.php?page=pages&edit='.$page->page_id.'" title="Edit Page"><i class="fa fa-pencil-square-o"></i></a></td>';
+			$html .= '<td width="20"><a class="delete" href="dashboard.php?page=pages&delete='.$page->page_id.'" title="'.$page->page_title.'"><i class="fa fa-trash-o"></i></a></td>';
 			$html .= '</tr>';	
 		}
 		
