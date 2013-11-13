@@ -99,5 +99,20 @@ function adminHead(){
 	}
 	
 	echo $html;
-	
+}
+
+function candyCss($filename, $external = null){
+    if ( $external == null ):
+        echo '<link rel="stylesheet" href="'.ADMIN_PATH.'css/'.$filename.'" type="text/css" />';
+    else:
+        echo '<link rel="stylesheet" href="'.$filename.'" type="text/css" />';
+    endif;
+}
+
+function candyScript($filename, $external = null){
+    if ( $external == null ):
+        echo '<script type="text/javascript" src="'.ADMIN_PATH.'js/'.$filename.'"></script>';
+    else:
+        echo '<script type="text/javascript" src="'.$filename.'"></script>';
+    endif;
 }

@@ -25,24 +25,27 @@ require('bootstrap.php');
 	<meta charset="utf-8">
 	<? $array = adminNav();?>
 	<title><? echo (isset($_GET['page'])) ? ucfirst($_GET['page']) : 'Dashboard' ?> &raquo; Admin &raquo; <? echo Candy::Options('site_title'); ?></title>
-	<link rel="stylesheet" href="css/admin.css" type="text/css" />
-		<link rel="stylesheet" href="js/redactor/css/redactor.css" type="text/css" />
-	<link type="text/css" rel="stylesheet" href="css/jquery.miniColors.css" />
+    <? candyCss('admin.css'); ?>
+    <? candyCss(ADMIN_PATH.'js/redactor/css/redactor.css', true); ?>
+    <? candyCss('jquery.miniColors.css'); ?>
+
 	<script type="text/javascript">
-		var adminpath = '<? echo URL_PATH.'cms-admin/' ?>';
+		var adminpath = '<?= URL_PATH.'cms-admin/' ?>';
 	</script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.miniColors.min.js"></script>
-	<script type="text/javascript" src="js/jquery.nestable.js"></script>
-	<script type="text/javascript" src="js/redactor/redactor.min.js"></script>
-	<script type="text/javascript" src="js/jquery.scripts.min.js"></script>
+
+    <? candyScript('//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js', true) ?>
+	<? candyScript('jquery.miniColors.min.js') ?>
+    <? candyScript('jquery.nestable.js') ?>
+    <? candyScript('redactor/redactor.min.js') ?>
+    <? candyScript('redactor/fullscreen.js') ?>
+    <? candyScript('jquery.scripts.min.js') ?>
 	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <? candyScript('http://html5shim.googlecode.com/svn/trunk/html5.js', true) ?>
 	<![endif]-->
 	<? adminHead() ?>
 </head>
-<body id="wrapper">
-	<header>
+<body>
+	<header class="app">
 		<div id="head-cont">
 			<a href="dashboard.php" id="head-logo"> </a>
 			<a href="<? echo URL_PATH ?>" class="view-site">View Site &rarr;</a>
@@ -90,26 +93,18 @@ require('bootstrap.php');
 		<? else :?>
 			
 			<div id="title-bar">
-				
 				<div id="title-bar-cont">
-				
 					<h1>Dashboard</h1>
-				
 				</div>
-			
 			</div>
 			
 			<div id="container">
-			
-			
-			<? Plugins::getWidgets() ?>
-			
-			
+    			<? Plugins::getWidgets() ?>
 			</div>
 			
 		<? endif; ?>
 	
-	<footer>
+	<footer class="app">
         <p>Copyright &copy;<? echo date('Y') ?> Adam Patterson - Built with <a href="http://www.candycms.org" title="Candy CMS">Candy</a> v<? echo CANDYVERSION ?> - <a href="<? echo URL_PATH ?>" title="View Site">View Site</a></p>
         <a href="http://www.adampatterson.ca" title="Made By Adam Patterson" target="_blank" class="footer-logo"> </a>
 	</footer>

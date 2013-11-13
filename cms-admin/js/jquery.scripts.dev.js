@@ -1,11 +1,21 @@
 $(function() {
 	
 	$('.ckeditor').redactor({
+        tabSpaces: 4,
         focus: true,
         convertDivs: false,
         removeClasses: false,
         imageUpload: 'uploader.php',
-        autoresize: true
+//        imageUploadErrorCallback: function(json)
+//        {
+//            alert(json.error);
+//            alert(json.anothermessage);
+//        },
+        //clipboardUploadUrl: '/your_clipboard_upload_script/',
+        autoresize: true,
+        toolbarFixed: true,
+        convertVideoLinks: true,
+        plugins: ['fullscreen']
     });
 	
 	$(".colorpicker").miniColors({
