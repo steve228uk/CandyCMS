@@ -41,12 +41,11 @@
         handleClass     : 'dd-handle',
         collapsedClass  : 'dd-collapsed',
         placeClass      : 'dd-placeholder',
-        noDragClass     : 'dd-nodrag',
         emptyClass      : 'dd-empty',
-        expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
-        collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
+        expandBtnHTML   : '<button data-action="expand">+</button>',
+        collapseBtnHTML : '<button data-action="collapse">-</button>',
         group           : 0,
-        maxDepth        : 5,
+        maxDepth        : 2,
         threshold       : 20
     };
 
@@ -91,14 +90,10 @@
 
             var onStartEvent = function(e)
             {
-                var handle = $(e.target);
-                if (!handle.hasClass(list.options.handleClass)) {
-                    if (handle.closest('.' + list.options.noDragClass).length) {
-                        return;
-                    }
-                    handle = handle.closest('.' + list.options.handleClass);
+                if (!$(e.target).hasClass(list.options.handleClass)) {
+                    return;
                 }
-                if (!handle.length || list.dragEl || (!hasTouch && e.button !== 0) || (hasTouch && e.touches.length !== 1)) {
+                if (list.dragEl || (!hasTouch && e.button !== 0) || (hasTouch && e.touches.length !== 1)) {
                     return;
                 }
                 e.preventDefault();
@@ -155,7 +150,7 @@
                 });
                 return array;
             };
-            data = step(list.el.find(list.options.listNodeName).first(), depth);
+            data = step(list.el.find(list.options.listNodeName + ':first'), depth);
             return data;
         },
 
@@ -248,9 +243,12 @@
         {
             var mouse    = this.mouse,
                 target   = $(e.target),
-                dragItem = target.closest(this.options.itemNodeName);
+                dragItem = target.parents(this.options.itemNodeName + ':first');
 
-            this.placeEl.css('height', dragItem.height());
+            this.placeEl.css({
+                //  'width'         : dragItem.width(),
+                'height'        : dragItem.height()
+            });
 
             mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
             mouse.offsetY = e.offsetY !== undefined ? e.offsetY : e.pageY - target.offset().top;
@@ -261,13 +259,7 @@
 
             this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
             this.dragEl.css('width', dragItem.width());
-
-            // fix for zepto.js
-            //dragItem.after(this.placeEl).detach().appendTo(this.dragEl);
-            dragItem.after(this.placeEl);
-            dragItem[0].parentNode.removeChild(dragItem[0]);
-            dragItem.appendTo(this.dragEl);
-
+            dragItem.replaceWith(this.placeEl).appendTo(this.dragEl);
             $(document.body).append(this.dragEl);
             this.dragEl.css({
                 'left' : e.pageX - mouse.offsetX,
@@ -286,12 +278,7 @@
 
         dragStop: function(e)
         {
-            // fix for zepto.js
-            //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
-            var el = this.dragEl.children(this.options.itemNodeName).first();
-            el[0].parentNode.removeChild(el[0]);
-            this.placeEl.replaceWith(el);
-
+            this.placeEl.replaceWith(this.dragEl.html());
             this.dragEl.remove();
             this.el.trigger('change');
             if (this.hasNewRoot) {
@@ -362,10 +349,10 @@
                 // increase horizontal level if previous sibling exists and is not collapsed
                 if (mouse.distX > 0 && prev.length && !prev.hasClass(opt.collapsedClass)) {
                     // cannot increase level when item above is collapsed
-                    list = prev.find(opt.listNodeName).last();
+                    list = prev.find(opt.listNodeName + ':last');
                     // check if depth limit has reached
                     depth = this.placeEl.parents(opt.listNodeName).length;
-                    if (depth + this.dragDepth <= opt.maxDepth) {
+                    if (depth + this.dragDepth <= this.options.maxDepth) {
                         // create new sub-level if one doesn't exist
                         if (!list.length) {
                             list = $('<' + opt.listNodeName + '/>').addClass(opt.listClass);
@@ -374,7 +361,7 @@
                             this.setParent(prev);
                         } else {
                             // else append to next level up
-                            list = prev.children(opt.listNodeName).last();
+                            list = prev.children(opt.listNodeName + ':last');
                             list.append(this.placeEl);
                         }
                     }
@@ -385,7 +372,7 @@
                     next = this.placeEl.next(opt.itemNodeName);
                     if (!next.length) {
                         parent = this.placeEl.parent();
-                        this.placeEl.closest(opt.itemNodeName).after(this.placeEl);
+                        this.placeEl.parents(opt.itemNodeName + ':first').after(this.placeEl);
                         if (!parent.children().length) {
                             this.unsetParent(parent.parent());
                         }
@@ -399,12 +386,12 @@
             if (!hasPointerEvents) {
                 this.dragEl[0].style.visibility = 'hidden';
             }
-            this.pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
+            this.pointEl = $(document.elementFromPoint(e.pageX - this.w.scrollLeft(), e.pageY - this.w.scrollTop()));
             if (!hasPointerEvents) {
                 this.dragEl[0].style.visibility = 'visible';
             }
             if (this.pointEl.hasClass(opt.handleClass)) {
-                this.pointEl = this.pointEl.parent(opt.itemNodeName);
+                this.pointEl = this.pointEl.parent('.' + opt.itemClass);
             }
             if (this.pointEl.hasClass(opt.emptyClass)) {
                 isEmpty = true;
@@ -414,7 +401,7 @@
             }
 
             // find parent list of item under cursor
-            var pointElRoot = this.pointEl.closest('.' + opt.rootClass),
+            var pointElRoot = this.pointEl.parents('.' + this.options.rootClass + ':first'),
                 isNewRoot   = this.dragRootEl.data('nestable-id') !== pointElRoot.data('nestable-id');
 
             /**
@@ -434,7 +421,7 @@
                 parent = this.placeEl.parent();
                 // if empty create new list to replace empty placeholder
                 if (isEmpty) {
-                    list = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);
+                    list = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass);
                     list.append(this.placeEl);
                     this.pointEl.replaceWith(list);
                 }
@@ -452,8 +439,8 @@
                 }
                 // parent root list has changed
                 if (isNewRoot) {
+                    this.hasNewRoot = true;
                     this.dragRootEl = pointElRoot;
-                    this.hasNewRoot = this.el[0] !== this.dragRootEl[0];
                 }
             }
         }
@@ -467,11 +454,10 @@
 
         lists.each(function()
         {
-            var plugin = $(this).data("nestable");
-
+            var plugin = $.data(this, 'nestable');
             if (!plugin) {
-                $(this).data("nestable", new Plugin(this, params));
-                $(this).data("nestable-id", new Date().getTime());
+                $.data(this, 'nestable', new Plugin(this, params));
+                $.data(this, 'nestable-id', new Date().getTime());
             } else {
                 if (typeof params === 'string' && typeof plugin[params] === 'function') {
                     retval = plugin[params]();
@@ -482,4 +468,4 @@
         return retval || lists;
     };
 
-})(window.jQuery || window.Zepto, window, document);
+})(jQuery, window, document);
