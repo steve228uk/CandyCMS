@@ -9,3 +9,11 @@ CandyCMS.sublime-workspace
 /sitemap.xml
 uploads/*
 /rss.xml
+
+/plugins/Dribbble/
+
+/plugins/Instagram/
+
+/plugins/Twitter/
+
+/plugins/ContactForm/
