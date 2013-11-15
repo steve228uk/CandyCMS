@@ -67,7 +67,7 @@ class Plugins {
 		$sth->execute();
 		
 		$plugins = $sth->fetchColumn();
-		
+
 		if ($plugins != false) {
 			$plugins = json_decode($plugins);	
 			return $plugins;
@@ -80,13 +80,12 @@ class Plugins {
 	public static function savePlugins($enabled) {
 		
 		$json = json_encode($enabled);
-		
+
 		$dbh = new CandyDB();
-		$sth = $dbh->prepare('UPDATE '. DB_PREFIX .'options SET option_value="'. $json .'" WHERE option_key="enabled_plugins"');
+		$sth = $dbh->prepare("UPDATE ". DB_PREFIX ."options SET option_value='". $json ."' WHERE option_key='enabled_plugins'");
 		$sth->execute();
-		
+
 		self::installPlugin($enabled);
-		
 	}
 	
 	private static function installPlugin($plugins){
@@ -146,7 +145,6 @@ class Plugins {
 				
 				$title = self::getWidgetTitle($plugin);
 				
-				
 				echo ($i%2 == 0) ? "<div class='widget right clearr'>" : "<div class='widget left clearl'>";
 				
 				$i++;
@@ -159,7 +157,4 @@ class Plugins {
 		}
 		
 	}
-
 }
-
-?>
