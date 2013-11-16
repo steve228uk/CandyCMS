@@ -14,7 +14,7 @@ class User {
 	public static function getUserInfo($user){
 	
 		$dbh = new CandyDB();
-		$sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE username = "'.$user.'"');
+		$sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE userid = "'.$user.'"');
 		$sth->execute();
 		return $sth->fetchAll(PDO::FETCH_CLASS);
 		
@@ -23,7 +23,7 @@ class User {
 	public static function saveUserInfo($user, $name, $email){
 	
 		$dbh = new CandyDB();
-		$dbh->exec("UPDATE ". DB_PREFIX ."users SET name='$name', email='$email' WHERE username='$user'");
+		$dbh->exec("UPDATE ". DB_PREFIX ."users SET name='$name', email='$email' WHERE userid='$user'");
 	
 	}
 	
@@ -39,7 +39,7 @@ class User {
 	public static function getUserTable(){
 	
 		$users = self::getUsers();
-		
+
 		$html = '<table class="usertbl">';
 		$html .= '<thead><tr><th>Username</th><th>Name</th><th>Email</th><th>Role</th><th></th><th></th></tr></thead>';
 		
@@ -49,8 +49,8 @@ class User {
 			$html .= '<td>'.$user->name.'</td>';
 			$html .= '<td>'.$user->email.'</td>';
 			$html .= '<td>'.$user->role.'</td>';
-			$html .= '<td width="20"><a href="dashboard.php?page=users&edit='.$user->username.'" title="Edit Page"><i class="fa fa-pencil-square-o"></i></a></td>';
-			$html .= '<td width="20"><a class="delete" href="dashboard.php?page=users&delete='.$user->username.'" title="'.$user->username.'"><i class="fa fa-trash-o"></i></a></td>';
+			$html .= '<td width="20"><a href="dashboard.php?page=users&edit='.$user->userid.'" title="Edit Page"><i class="fa fa-pencil-square-o"></i></a></td>';
+			$html .= '<td width="20"><a class="delete" href="dashboard.php?page=users&delete='.$user->userid.'" title="'.$user->username.'"><i class="fa fa-trash-o"></i></a></td>';
 			$html .= '</tr>';	
 		}
 		
@@ -116,7 +116,7 @@ class User {
 	public static function deleteUser($username){
 		
 		$dbh = new CandyDB();
-		$dbh->exec("DELETE FROM ".DB_PREFIX."users WHERE username='$username'");
+		$dbh->exec("DELETE FROM ".DB_PREFIX."users WHERE userid='$username'");
 		
 	}
 	

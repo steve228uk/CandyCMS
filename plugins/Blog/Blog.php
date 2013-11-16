@@ -86,7 +86,7 @@
  			$html .= '<td>'.$cat->cat_id.'</td>';
  			$html .= '<td>'.$cat->cat_name.'</td>';
  			$html .= '<td><!--Edit--></td>';
- 			$html .= '<td><a href="#'.$cat->cat_id.'" title="'.$cat->cat_name.'" class="delcat">[x]</a></td>';
+ 			$html .= '<td><a href="#'.$cat->cat_id.'" title="'.$cat->cat_name.'" class="delcat"><i class="fa fa-trash-o"></i></a></td>';
  			$html .= '</tr>';
  		}
  		

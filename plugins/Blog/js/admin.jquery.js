@@ -84,7 +84,7 @@ $(function(){
 				
 				function(data) {
 					
-					$('#catstable tbody').append('<tr><td>' + data + '</td><td>' + category + '</td><td></td><td><a href="#' + data + '" title="' + category + '" class="delcat">[x]</a></td></tr>');
+					$('#catstable tbody').append('<tr><td>' + data + '</td><td>' + category + '</td><td></td><td><a href="#' + data + '" title="' + category + '" class="delcat"><i class="fa fa-trash-o"></i></a></td></tr>');
 
 					jQuery('#newcat').val('');
 					
