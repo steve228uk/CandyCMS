@@ -17,3 +17,5 @@ uploads/*
 /plugins/Twitter/
 
 /plugins/ContactForm/
+
+/cms-admin/css/less/preboot-master/
