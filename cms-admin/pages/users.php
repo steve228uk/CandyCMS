@@ -10,49 +10,51 @@
 		<div id="title-bar-cont">
 			<h1 class="left">Add New User</h1>
 		</div>
-	
+
 	</div>
-	
+
 	<div id="container">
 
         <form action="dashboard.php?page=users" method="post">
-		<fieldset>
-			<ul>
-				<li>
-					<label>Username</label>
-					<input type="text" name="username" placeholder="Username" />
-				</li>
-				<li>
-					<label>Full Name</label>
-					<input type="text" name="name" placeholder="Full Name" />
-				</li>
-				<li>
-					<label>Email Address</label>
-					<input type="email" name="email" placeholder="Email Address" autocomplete="off" />
-				</li>
-			</ul>
-		</fieldset>
-		<fieldset>
-			<ul>
-				<li>
-					<label>User Role</label>
-					<select name="role">
-						<option value="user" selected="selected">User</option>
-						<option value="admin">Admin</option>
-					</select>
-				</li>
-			</ul>
-		</fieldset>
-		<fieldset>
-			<ul>
-				<li>
-					<label>Password</label>
-					<input type="password" name="password" placeholder="Password" autocomplete="off" />
-				</li>
-			</ul>
-		</fieldset>
-		<input type="submit" name="adduser" value="Add New User" class="button settings-btn" />
-	</form>
+
+			<fieldset>
+				<ul>
+					<li>
+						<label>Username</label>
+						<input type="text" name="username" placeholder="Username" id="username" />
+						<div id="message"></div>
+					</li>
+					<li>
+						<label>Full Name</label>
+						<input type="text" name="name" placeholder="Full Name" />
+					</li>
+					<li>
+						<label>Email Address</label>
+						<input type="email" name="email" placeholder="Email Address" id="useremail" autocomplete="off" />
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<ul>
+					<li>
+						<label>User Role</label>
+						<select name="role">
+							<option value="user" selected="selected">User</option>
+							<option value="admin">Admin</option>
+						</select>
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<ul>
+					<li>
+						<label>Password</label>
+						<input type="password" name="password" placeholder="Password" autocomplete="off" />
+					</li>
+				</ul>
+			</fieldset>
+			<input type="submit" name="adduser" id="save" value="Add New User" class="button settings-btn" />
+		</form>
 	</div>
 <? elseif(isset($_GET['edit'])) : ?>
 	
@@ -118,6 +120,10 @@
 	</div>
 	
 	<div id="container">
+
+    <? if (isset($_POST['userName'])) : ?>
+
+    <? endif; ?>
 
 	<? if (isset($_POST['adduser'])) : ?>
 		<? User::addUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']) ?>

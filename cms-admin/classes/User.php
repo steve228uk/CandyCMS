@@ -62,34 +62,39 @@ class User {
 	}
 
     public static function uniqueUser ($i) {
-        // Find by ID
-        if(preg_match('/^([0-9]+)$/',$i))
-        {
-            $dbh = new CandyDB();
-            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE userid = "'.$i.'"');
-            $sth->execute();
-            return $sth->fetchAll(PDO::FETCH_CLASS);
-        }
 
-        // Find by Username
-        elseif(preg_match('/^([\-_ a-z0-9]+)$/i',$i))
-        {
-            $dbh = new CandyDB();
-            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE username = "'.$i.'"');
-            $sth->execute();
-            return $sth->fetchAll(PDO::FETCH_CLASS);
-        }
+		// Find by ID
+		if(preg_match('/^([0-9]+)$/',$i))
+		{
+		    $dbh = new CandyDB();
+		    $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE userid = "'.$i.'"');
+		    $sth->execute();
+		    $r = $sth->fetchAll(PDO::FETCH_CLASS);
+		}
 
-        // Find by E-mail
-        else
-        {
-            $dbh = new CandyDB();
-            $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE email = "'.$i.'"');
-            $sth->execute();
-            return $sth->fetchAll(PDO::FETCH_CLASS);
-        }
+		// Find by Username
+		elseif(preg_match('/^([\-_ a-z0-9]+)$/i',$i))
+		{
+		    $dbh = new CandyDB();
+		    $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE username = "'.$i.'"');
+		    $sth->execute();
+		    $r = $sth->fetchAll(PDO::FETCH_CLASS);
+		}
 
-        return (!isset($user[0]));
+		// Find by E-mail
+		else
+		{
+		    $dbh = new CandyDB();
+		    $sth = $dbh->prepare('SELECT userid, name, email, username, role FROM '. DB_PREFIX .'users WHERE email = "'.$i.'"');
+		    $sth->execute();
+		    $r = $sth->fetchAll(PDO::FETCH_CLASS);
+		}
+		
+		if ( is_array($r) & !empty($r))
+			return true;
+		else
+			return false;
+		
     }
 
 	public static function addUser($username, $name, $email, $pass, $role){
