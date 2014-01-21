@@ -260,11 +260,11 @@ $path = dirname(__FILE__);
 			#Write the HTACCESS file
 //			$dir = (trim($_SERVER['PHP_SELF'], '/install.php') == '') ? '/' : trim($_SERVER['PHP_SELF'], 'install.php');
 				
-			$htaccess = "RewriteEngine On\n\n";	
-			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
-			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
-			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
-			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."index.php?page=$1&category=$2&post=$3 [QSA,L]";
+//			$htaccess = "RewriteEngine On\n\n";
+//			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
+//			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\n";
+//			$htaccess .= "RewriteCond %{REQUEST_FILENAME} !-l\n\n";
+//			$htaccess .= "RewriteRule ^([^/.]*)/?([^/.]*)/?([^/.]*)$ ".$dir."index.php?page=$1&category=$2&post=$3 [QSA,L]";
 			
 			
 			$currentmodal = substr(sprintf('%o', fileperms($path)), -4);
@@ -300,7 +300,7 @@ $path = dirname(__FILE__);
 			}
 
 			#Create the Options table if not exists
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."options` (`id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`), `option_key` varchar(256) NOT NULL, UNIQUE KEY (`option_key`), `option_value` varchar(256) NOT NULL)");
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."options` (`id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`id`), `option_key` varchar(256) NOT NULL, UNIQUE KEY (`option_key`), `option_value` varchar(256) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 			
 			#Set some defaults for the options table
 			$options = array('site_title' => $_POST['title'],
@@ -318,7 +318,7 @@ $path = dirname(__FILE__);
 			}
 			
 			#Create the Pages table if not exists
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL)");
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."pages` (`page_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`page_id`), `page_title` varchar(256) NOT NULL, `page_body` text NOT NULL, `page_template` varchar(256) NOT NULL, `rewrite` varchar(256) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 			
 			$sql = "INSERT INTO `".DB_PREFIX."pages` (`page_title`, `page_body`, `page_template`, `rewrite`) VALUES ('Home', 'Welcome to CandyCMS, this page can be changed in the admin dashboard.', 'onecol', 'home');";
 			
@@ -326,10 +326,10 @@ $path = dirname(__FILE__);
 			$dbh->exec($sql);
 			
 			# Create the Fields table if not exists
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."fields` (`field_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`field_id`), `post_id` int(11), `field_name` varchar(256) NOT NULL, `field_type` varchar(256) NOT NULL, `field_title` varchar(256) NOT NULL, `field_desc` varchar(256) NOT NULL, `field_value` text NOT NULL)");
+			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."fields` (`field_id` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`field_id`), `post_id` int(11), `field_name` varchar(256) NOT NULL, `field_type` varchar(256) NOT NULL, `field_title` varchar(256) NOT NULL, `field_desc` varchar(256) NOT NULL, `field_value` text NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 			
 			#Create user table
-			$dbh->exec("CREATE TABLE IF NOT EXISTS `".DB_PREFIX."users` (`userid` int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (`userid`), `username` varchar(256) NOT NULL, `password` varchar(256) NOT NULL, `email` varchar(256) NOT NULL, `name` varchar(256) NOT NULL, `role` varchar(256) NOT NULL, UNIQUE KEY(`username`, `email`))");
+			$dbh->exec("CREATE TABLE `".DB_PREFIX."users` (`userid` int(11) unsigned NOT NULL AUTO_INCREMENT, `username` varchar(256) NOT NULL DEFAULT '', `password` varchar(256) NOT NULL DEFAULT '', `email` varchar(256) NOT NULL DEFAULT '', `name` varchar(256) NOT NULL DEFAULT '', `role` varchar(256) NOT NULL DEFAULT '', PRIMARY KEY (`userid`), UNIQUE KEY `username` (`username`), UNIQUE KEY `email` (`email`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
 			
 			$username = $_POST['username'];
 			$password = sha1($_POST['password'].SALT);
