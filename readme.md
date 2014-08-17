@@ -21,7 +21,7 @@ Take a look at [this screencast](https://vimeo.com/45358208) to see Candy in act
 If you encounter an issues with the path and files not working remove the `$_SERVER['DOCUMENT_ROOT']` from the core/config.php CMS_PATH constant.
 
 ## Documentation
-See [http://www.candycms.org/docs](http://www.candycms.org/docs)
+See [http://candy.p53.ca/docs](http://candy.p53.ca/docs)
 
 ## Issues
 Please log any issues found in the Github repo or tweet them to me [@adampatterson](http://www.twitter.com/adampatterson)
