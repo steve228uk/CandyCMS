@@ -1,6 +1,6 @@
-<?php if (isset($_POST['colors'])) :?>
+<?php if (isset($_POST['colors'])) {?>
 	<?php Theme::setColors($_POST['colors']) ?>
-<?php else : ?>
+<?php } else { ?>
 
 <?php if ($_SESSION['role'] != 'admin'){
  echo '<h1>Access Denied</h1>';
@@ -64,4 +64,4 @@ foreach($themes as $theme){
 ?>
 </form>
 </div>
-<?php endif; ?>
+<?php } ?>

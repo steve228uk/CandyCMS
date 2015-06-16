@@ -3,7 +3,7 @@
  exit(1);
 }?>
 
-<?php if(isset($_GET['addnew'])) :?>
+<?php if(isset($_GET['addnew'])) {?>
 	
 	<div id="title-bar">
 		
@@ -56,7 +56,7 @@
 			<input type="submit" name="adduser" id="save" value="Add New User" class="button settings-btn" />
 		</form>
 	</div>
-<?php elseif(isset($_GET['edit'])) : ?>
+<?php } elseif(isset($_GET['edit'])) { ?>
 	
 	<?php $info = User::getUserInfo($_GET['edit']); ?>
 	
@@ -106,7 +106,7 @@
 	
 	</div>
 	
-<?php else : ?>
+<?php } else { ?>
 
 	<div id="title-bar">
 		
@@ -121,27 +121,27 @@
 	
 	<div id="container">
 
-    <?php if (isset($_POST['userName'])) : ?>
+    <?php if (isset($_POST['userName'])) { ?>
 
-    <?php endif; ?>
+    <?php } ?>
 
-	<?php if (isset($_POST['adduser'])) : ?>
+	<?php if (isset($_POST['adduser'])) { ?>
 		<?php User::addUser($_POST['username'], $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']) ?>
 		<p class="message success">User Added</p>
-	<?php endif; ?>
+	<?php } ?>
 	
-	<?php if (isset($_POST['edituser'])) : ?>
+	<?php if (isset($_POST['edituser'])) { ?>
 		<?php User::editUser($_POST['userid'], $_POST['username'], $_POST['name'], $_POST['email'], $_POST['role']) ?>
 		<p class="message success">User Edited Successfully</p>	
-	<?php endif;?>
+	<?php } ?>
 	
-	<?php if (isset($_GET['delete'])) : ?>
+	<?php if (isset($_GET['delete'])) { ?>
 		<?php User::deleteUser($_GET['delete']) ?>
 		<p class="message success">User Deleted</p>
-	<?php endif; ?>
+	<?php } ?>
 	
 	<?php User::getUserTable() ?>
 	
 	</div>
 	
-<?php endif; ?>
+<?php } ?>

@@ -184,14 +184,14 @@ $path = dirname(__FILE__);
 </head>
 <body>
 	<div id="container">
-		<?php if (isset($_GET['install'])) : ?>
+		<?php if (isset($_GET['install'])) { ?>
 		
 		<h1>Candy Installer</h1>
 		
 		<?php
 			
 			$currentmodal = substr(sprintf('%o', fileperms('./core')), -4);
-			
+
 			if ($currentmodal != "0755" && $currentmodal != "0777") {
 			
 				$result = @chmod($path."core", 0755);
@@ -345,7 +345,7 @@ $path = dirname(__FILE__);
 		</p>
 		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
 		
-		<?php else : ?>
+		<?php } else { ?>
 		
 		<h1>Candy Installer</h1>
 		<p class="leadin">
@@ -380,7 +380,7 @@ $path = dirname(__FILE__);
 			</fieldset>
 			<input type="submit" name="submit" value="Install Away!" class="button" />
 		</form>
-		<?php endif; ?>
+		<?php } ?>
 		
 	</div>
 </body>

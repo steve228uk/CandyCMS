@@ -12,7 +12,7 @@
 
 <div id="container">
 
-<?php if (isset($_POST['save'])) : ?>
+<?php if (isset($_POST['save'])) { ?>
 	<?php User::saveUserInfo($_SESSION['username'], $_POST['name'], $_POST['email']) ?>
 	<p class="message success">Account Settings Saved</p>
 	
@@ -26,7 +26,7 @@
 		
 	} ?>
 	
-<?php endif; ?>
+<?php } ?>
 <form action="dashboard.php?page=profile" method="post">
 	<fieldset>
 		<ul>

@@ -10,9 +10,9 @@
 
 ?>
 
-<?php if (isset($_GET['savenavigation'])) :?>
+<?php if (isset($_GET['savenavigation'])) { ?>
 	<?php Pages::saveNav($_POST['nav']) ?>
-<?php else : ?>
+<?php } else { ?>
 
 <div id="title-bar">
 	
@@ -61,7 +61,7 @@
 
 </div>
 
-<?php endif; ?>
+<?php } ?>
 
 <script type="text/javascript">
 	

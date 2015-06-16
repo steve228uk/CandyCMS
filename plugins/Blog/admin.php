@@ -10,7 +10,7 @@
 * This file generates the pages for the blog admin
 */
 
-if (isset($_GET['new'])) : ?>
+if (isset($_GET['new'])) { ?>
 
 <div id="title-bar">
 	
@@ -37,10 +37,10 @@ if (isset($_GET['new'])) : ?>
         <?php Blog::adminCats() ?>
     </form>
 </div>
-<?php elseif(isset($_GET['edit'])):
+<?php } elseif(isset($_GET['edit'])) {
 
     $post = getBlogPostById($_GET['edit']);
-?>
+    ?>
 
     <div id="title-bar">
         <div id="title-bar-cont">
@@ -53,29 +53,31 @@ if (isset($_GET['new'])) : ?>
 
             <ul id="post-info">
                 <li id="post-title" class="left">
-                    <input type="text" class="inputstyle" name="title" placeholder="Title" value="<?php= $post[0]->post_title ?>" />
+                    <input type="text" class="inputstyle" name="title" placeholder="Title"
+                           value="<?= $post[0]->post_title ?>"/>
                 </li>
 
                 <li class="viewed-at post-perma right">
                     Permalink
-                    <input type="text" name="rewrite" class="url-box" id="rewrite" value="<?php= $post[0]->permalink ?>" />
+                    <input type="text" name="rewrite" class="url-box" id="rewrite" value="<?= $post[0]->permalink ?>"/>
                 </li>
 
-                <li class="clear"><textarea class="ckeditor" name="body"><?php= stripslashes($post[0]->post_body) ?></textarea></li>
+                <li class="clear"><textarea class="ckeditor"
+                                            name="body"><?= stripslashes($post[0]->post_body) ?></textarea></li>
                 <li id="post-btn">
-                    <input type="submit" name="editpost" value="Save Changes" class="button" />
-                    <?php if ($post[0]->status == 'draft') : ?>
-                        <input type="submit" name="publish" value="Publish Post" class="button" />
-                    <?php endif ?>
+                    <input type="submit" name="editpost" value="Save Changes" class="button"/>
+                    <?php if ($post[0]->status == 'draft') { ?>
+                        <input type="submit" name="publish" value="Publish Post" class="button"/>
+                    <?php } ?>
                 </li>
             </ul>
             <?php Blog::adminCats($post[0]->cat_id) ?>
-            <input type="hidden" name="pid" value="<?php= $_GET['edit'] ?>" />
+            <input type="hidden" name="pid" value="<?= $_GET['edit'] ?>"/>
         </form>
     </div>
     <?php
     /*<a href="<?php echo URL_PATH.Blog::getBlogPage().'/uncategorised/preview-'.$_GET['edit'] ?>" class="button right" style="margin-top:20px;">Preview Post</a>*/
-    else: ?>
+    } else { ?>
 
     <div id="title-bar">
 
@@ -100,7 +102,7 @@ if (isset($_GET['new'])) : ?>
 
             <a href="dashboard.php?page=blog&new" class="button addnew right">Add New Post +</a>
 
-            <?php if (isset($_POST['addnew'])):
+            <?php if (isset($_POST['addnew'])) {
                 if (isset($_POST['categories']))
                     $categories = $_POST['categories'];
                 else
@@ -108,9 +110,9 @@ if (isset($_GET['new'])) : ?>
 
                 Blog::addPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], 'published');
                 echo '<p class="message success">Post Added Successfully</p>';
-            endif;
+            }
 
-            if (isset($_POST['draft'])):
+            if (isset($_POST['draft'])) {
                 if (isset($_POST['categories']))
                     $categories = $_POST['categories'];
                 else
@@ -118,9 +120,9 @@ if (isset($_GET['new'])) : ?>
 
                 Blog::addPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], 'draft');
                 echo '<p class="message success">Post Saved As Draft</p>';
-            endif;
+            }
 
-            if (isset($_POST['editpost'])):
+            if (isset($_POST['editpost'])) {
                 if (isset($_POST['categories']))
                     $categories = $_POST['categories'];
                 else
@@ -128,9 +130,9 @@ if (isset($_GET['new'])) : ?>
 
                 Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid']);
                 echo '<p class="message success">Post Edited Sucessfully</p>';
-            endif;
+            }
 
-            if (isset($_POST['publish'])):
+            if (isset($_POST['publish'])) {
                 if (isset($_POST['categories']))
                     $categories = $_POST['categories'];
                 else
@@ -138,12 +140,12 @@ if (isset($_GET['new'])) : ?>
 
                 Blog::editPost($_POST['title'], $_POST['body'], $categories, $_POST['rewrite'], $_POST['pid'], 'published');
                 echo '<p class="message success">Post Published Sucessfully</p>';
-            endif;
+            }
 
-            if (isset($_GET['delete'])):
+            if (isset($_GET['delete'])) {
                 Blog::deletePost($_GET['delete']);
                 echo '<p class="message success">Post Deleted</p>';
-            endif;
+            }
 
             Blog::postsTable() ?>
 
@@ -163,4 +165,4 @@ if (isset($_GET['new'])) : ?>
 
     </div>
 
-<?php endif; ?>
+<?php } ?>

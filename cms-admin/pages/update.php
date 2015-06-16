@@ -11,7 +11,7 @@
 
 ?>
 
-<?php if (isset($_GET['update'])) : ?>
+<?php if (isset($_GET['update'])) { ?>
 	
 	<div id="title-bar">
 		
@@ -56,7 +56,7 @@
 	
 	</div>
 	
-<?php else : ?>
+<?php } else { ?>
 
 	<div id="title-bar">
 		
@@ -72,4 +72,4 @@
 	<?php Update::getChangelog() ?>
 	</div>
 
-<?php endif; ?>
+<?php } ?>

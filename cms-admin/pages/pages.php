@@ -12,7 +12,7 @@ $homepage = Candy::Options('homepage');
 	
 ?>
 
-<?php if ( isset($_GET['edit']) ) : ?>
+<?php if ( isset($_GET['edit']) ) { ?>
 	
 	<?php $page = Pages::pageInfo($_GET['edit']) ?>
 	
@@ -39,11 +39,11 @@ $homepage = Candy::Options('homepage');
 			<li class="viewed-at right clearr">
 				This page can be viewed at 
 				<?php echo $site_url?>
-				<?php if ($page[0]->rewrite != $homepage) : ?>
+				<?php if ($page[0]->rewrite != $homepage) { ?>
 					<input type="text" name="rewrite" class="url-box" value="<?php echo $page[0]->rewrite ?>" />
-				<?php else : ?>
+				<?php } else { ?>
 					<input type="hidden" name="rewrite" value="<?php echo $page[0]->rewrite ?>" />
-				<?php endif; ?>
+				<?php } ?>
 				<a href="<?php echo $site_url.$page[0]->rewrite ?>" title="View Page" target="_blank">View</a>
 			</li>
 			<li class="left clearl p-templates"><label>Page Template</label><?php Theme::dropdownTemplates($_GET['edit']) ?></li>
@@ -56,7 +56,7 @@ $homepage = Candy::Options('homepage');
 	
 	</div>
 	
-<?php elseif ( isset($_GET['new']) ) :?>
+<?php } elseif ( isset($_GET['new']) ) { ?>
 	
 	<div id="title-bar">
 		
@@ -92,7 +92,7 @@ $homepage = Candy::Options('homepage');
 	
 	</div>
 	
-<?php else : ?>
+<?php } else { ?>
 	
 	<div id="title-bar">
 		
@@ -149,4 +149,4 @@ $homepage = Candy::Options('homepage');
 	
 	</div>
 	
-<?php endif; ?>
+<?php } ?>

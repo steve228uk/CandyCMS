@@ -77,7 +77,7 @@ require('bootstrap.php');
 			
 		?>
 		
-		<?php if( isset($_GET['page']) ) : ?>
+		<?php if( isset($_GET['page']) ) { ?>
 		
 			<?php
 				
@@ -89,7 +89,7 @@ require('bootstrap.php');
 				
 			?>
 		
-		<?php else :?>
+		<?php } else {?>
 			
 			<div id="title-bar">
 				<div id="title-bar-cont">
@@ -101,7 +101,7 @@ require('bootstrap.php');
     			<?php Plugins::getWidgets() ?>
 			</div>
 			
-		<?php endif; ?>
+		<?php } ?>
 	
 	<footer class="app">
         <p>Copyright &copy;<?php echo date('Y') ?> Adam Patterson - Built with <a href="http://www.candycms.org" title="Candy CMS">Candy</a> v<?php echo CANDYVERSION ?> - <a href="<?php echo URL_PATH ?>" title="View Site">View Site</a></p>

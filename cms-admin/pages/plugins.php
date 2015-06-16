@@ -17,10 +17,10 @@
 
 <div id="container">
 
-<?php if (isset($_POST['save'])) :?>
+<?php if (isset($_POST['save'])) { ?>
 <p class="message success">Plugins Saved</p>
 <?php Plugins::savePlugins($_POST['enabled']) ?>
-<?php endif; ?>
+<?php } ?>
 
 <form action="dashboard.php?page=plugins" method="post">
 <?php
