@@ -18,7 +18,7 @@ define('CANDYVERSION', '1.0.1');
 
 define('ENVIRONMENT', 'dev');
 
-if (ENVIRONMENT == 'dev') {
+if (ENVIRONMENT === 'dev') {
 	ini_set('display_errors', 1);
 } else {
 	ini_set('display_errors', 0);
