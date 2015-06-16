@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * @plugin Blog
@@ -528,7 +528,7 @@ if (!stristr($uri, 'cms-admin') && !stristr($uri, 'ajax.php')) {
 
 	//The following will generate and rss feed in the root of the CandyCMS install
 
-	$xml = '<?xml version="1.0" encoding="UTF-8"?>';
+	$xml = '<?phpxml version="1.0" encoding="UTF-8"?>';
 	$xml .= '<rss version="2.0">';
 	$xml .=	'<channel>';
 	$xml .= '<title>'.Candy::Options('site_title').'</title>';

@@ -1,4 +1,4 @@
-<?
+<?php
 if (!empty($posts)) :
 
 	foreach ($posts as $key => $post) : ?>
@@ -7,14 +7,14 @@ if (!empty($posts)) :
 			
 			<div class="post-heading">
 				<h2>
-					<a href="<? Blog::postUri($post->post_id) ?>">
-						<?= $post->post_title ?>
+					<a href="<?php Blog::postUri($post->post_id) ?>">
+						<?php= $post->post_title ?>
 					</a>
 				</h2>
 			</div>
 			
 		</div>
-	<?
+	<?php
     endforeach;
 else:
     echo 'Sorry, there are no posts available';

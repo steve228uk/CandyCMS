@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @package CandyCMS
@@ -10,9 +10,9 @@
 
 ?>
 
-<? if (isset($_GET['savenavigation'])) :?>
-	<? Pages::saveNav($_POST['nav']) ?>
-<? else : ?>
+<?php if (isset($_GET['savenavigation'])) :?>
+	<?php Pages::saveNav($_POST['nav']) ?>
+<?php else : ?>
 
 <div id="title-bar">
 	
@@ -37,7 +37,7 @@
 				Pages
 			</div>
 			<div class="module-cont">
-				<? Pages::listAddPages() ?>
+				<?php Pages::listAddPages() ?>
 			</div>
 		</div>
 		
@@ -49,7 +49,7 @@
 		
 		<div class="dd" id="nestable">
 		    
-		    <? Pages::sortPages() ?>
+		    <?php Pages::sortPages() ?>
 		    
 		</div>
 		
@@ -61,7 +61,7 @@
 
 </div>
 
-<? endif; ?>
+<?php endif; ?>
 
 <script type="text/javascript">
 	

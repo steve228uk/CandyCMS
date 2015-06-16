@@ -1,4 +1,4 @@
-<?
+<?php
 ini_set('display_errors', 1);
 
 function __autoload($class_name) {

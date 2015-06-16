@@ -1,23 +1,23 @@
-<? ini_set('display_errors', 1); ?>
+<?php ini_set('display_errors', 1); ?>
 
-<? include '../classes/CustomFields.php' ?>
+<?php include '../classes/CustomFields.php' ?>
 
 <ul id="cf-types" class="clearfix">
-<?
+<?php
 
 $fields = CustomFields::listFields();
 
 foreach($fields as $key => $field): ?>
 	
-	<li id="field-<? echo $key ?>" class="field-btn clearfix">
-		<div class="<? echo $field['icon']?>"></div>
+	<li id="field-<?php echo $key ?>" class="field-btn clearfix">
+		<div class="<?php echo $field['icon']?>"></div>
 		<p>
-			<? echo $field['title'] ?>
-			<span><? echo $field['desc'] ?></span>
+			<?php echo $field['title'] ?>
+			<span><?php echo $field['desc'] ?></span>
 		</p>
 	</li>
 	
-<? endforeach; ?>
+<?php endforeach; ?>
 </ul>
 
 <form id="cf-addinfo" class="hide">

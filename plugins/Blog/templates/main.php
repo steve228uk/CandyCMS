@@ -1,4 +1,4 @@
-<? if (!empty($posts)) :
+<?php if (!empty($posts)) :
 
 	$count = count($posts);
 
@@ -8,29 +8,29 @@
 			
 			<div class="post-heading">
 				<h2>
-					<a href="<? Blog::postUri($post->post_id) ?>">
-						<?=$post->post_title ?>
+					<a href="<?php Blog::postUri($post->post_id) ?>">
+						<?php=$post->post_title ?>
 					</a>
 				</h2>
 				
 				<div class="post-date">
-					<? Blog::postDate($post->post_id, "d/m/Y") ?>
+					<?php Blog::postDate($post->post_id, "d/m/Y") ?>
 				</div>
 			</div>
 			
 			<div class="post-cont">
-				<? Blog::postExcerpt($post->post_id, 400); ?>
+				<?php Blog::postExcerpt($post->post_id, 400); ?>
 			</div>	
 			
-			<a href="<? Blog::postUri($post->post_id) ?>" title="View Post" class="button">View Post</a>
-			<? if ( Blog::disqusAccount() ): ?>
-			    <a href="<? Blog::postUri($post->post_id) ?>#disqus_thread" data-disqus-identifier="<? echo $post->post_id ?>" class="comment-link"></a>
-	        <? endif; ?>
+			<a href="<?php Blog::postUri($post->post_id) ?>" title="View Post" class="button">View Post</a>
+			<?php if ( Blog::disqusAccount() ): ?>
+			    <a href="<?php Blog::postUri($post->post_id) ?>#disqus_thread" data-disqus-identifier="<?php echo $post->post_id ?>" class="comment-link"></a>
+	        <?php endif; ?>
 		</div>
-        <? if ( Blog::disqusAccount() ): ?>
+        <?php if ( Blog::disqusAccount() ): ?>
 		<script type="text/javascript">
 		    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-		    var disqus_shortname = '<?= Blog::disqusAccount() ?>'; // required: replace example with your forum shortname
+		    var disqus_shortname = '<?php= Blog::disqusAccount() ?>'; // required: replace example with your forum shortname
 
 		    /* * * DON'T EDIT BELOW THIS LINE * * */
 		    (function () {
@@ -40,8 +40,8 @@
 		        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		    }());
 		</script>
-        <? endif; ?>
-	<? endforeach;
+        <?php endif; ?>
+	<?php endforeach;
 		Blog::prevLink('&larr; Previous Posts', 'bloglink prev');
 		Blog::nextLink('Next Posts &rarr;', 'bloglink next');
 	else:
