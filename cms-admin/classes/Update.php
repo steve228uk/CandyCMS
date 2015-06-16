@@ -32,14 +32,14 @@ class Update {
             $newver = $item->version;
 
             if(version_compare($curver, $newver, '>=')){
-                $return = false;
+                $ret = false;
             } else {
-                $return = "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
+                $ret = "<p class='message notice update'>CandyCMS v$newver is available, you have v$curver. <a href='dashboard.php?page=update'>Learn More</a></p>";
                 break;
             }
         }
 
-        return $return;
+        return $ret;
     }
 	
 	public static function getChangelog(){
@@ -83,14 +83,14 @@ class Update {
 			$newver = $item->version;
 			
 			if(version_compare($curver, $newver, '>=')){
-				$return = false;
+				$ret = false;
 			} else {
-				$return = $item->updateurl;
+				$ret = $item->updateurl;
 				break;
 			}
 		}
 		
-		return $return;
+		return $ret;
 		
 	}
 

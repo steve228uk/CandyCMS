@@ -29,14 +29,14 @@ function candytitle($separator = '|'){
 
 function candyHead(){
 	$plugins = Plugins::enabledPlugins();
-	$return = '';
+	$ret = '';
 	foreach ($plugins as $plugin) {
 		if (method_exists($plugin, 'candyHead')) {
-			$return .= $plugin::candyHead()."\n";
+			$ret .= $plugin::candyHead()."\n";
 		}
 	}
-	$return .= '<meta name="generator" content="Candy '.CANDYVERSION.'" />'."\n";
-	echo $return;
+	$ret .= '<meta name="generator" content="Candy '.CANDYVERSION.'" />'."\n";
+	echo $ret;
 }
 
 function theContent(){

@@ -24,11 +24,11 @@ class Candy {
 	}
 
 	public static function __callStatic($name, $parameters) {
-		$return = self::$properties[strtolower($name)];
-		if(is_callable($return)) {
-			$return = call_user_func_array($return, $parameters);
+		$ret = self::$properties[strtolower($name)];
+		if(is_callable($ret)) {
+			$ret = call_user_func_array($ret, $parameters);
 		}
-		return $return;
+		return $ret;
 	}
 
 	public static function import($reference, $classname = null) {
