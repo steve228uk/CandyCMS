@@ -11,7 +11,7 @@
 
 class Options {
 	
-	public function __invoke($name = null, $default = null) {
+	public function __invoke($name = null, $def = null) {
 
 		if (!is_null($name)) {
 			
@@ -24,7 +24,7 @@ class Options {
 			if(isset($options[$name])) {
 				return $options[$name];
 			} else {
-				return $default;
+				return $def;
 			}
 
 		}
