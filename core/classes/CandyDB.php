@@ -33,11 +33,12 @@ class CandyDB extends PDO {
 	public static function get() {
 		if(!isset(self::$dbh)) {
 			self::$dbh = new CandyDB();
+            self::$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		}
 		return self::$dbh;
 	}
 
-	public function do_query($sql, $parameters = array()) {
+    public function do_query($sql, $parameters = array()) {
 		$db = CandyDB::get();
 		if($this->pdo_statement != null) {
 			$this->pdo_statement->closeCursor();
