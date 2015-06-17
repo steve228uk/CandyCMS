@@ -2,14 +2,14 @@
 
 ini_set('display_errors', 1);
 
-function __autoload($class_name) {
-	
-	if (file_exists("../classes/$class_name.php")) {
-		include '../classes/'. $class_name . '.php';
-	} else {
-		include CMS_PATH.'core/classes/'. $class_name . '.php';
-	}
-}
+# Fire up the autoloader, using an anonymous function as of PHP 5.3.0
+spl_autoload_register(function ($class) {
+    if (file_exists("../classes/$class.php")) {
+        include '../classes/'. $class . '.php';
+    } else {
+        include CMS_PATH.'core/classes/'. $class . '.php';
+    }
+});
 
 require_once '../../core/config.php';
 
