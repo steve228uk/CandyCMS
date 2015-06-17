@@ -205,3 +205,7 @@ function candyImg($filename, $alt){
 	$theme = Candy::Options('theme');
 	echo '<img src="'.THEME_URL.$theme.'/images/'.$filename.'" alt="'.$alt.'" />';
 }
+
+function htmlEncode($s) {
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}

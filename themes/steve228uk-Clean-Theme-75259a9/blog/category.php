@@ -1,4 +1,4 @@
-<h1><?php echo ucwords(str_replace('-', ' ', $_GET['category'])) ?></h1>
+<h1><?php echo ucwords(str_replace('-', ' ', htmlEncode($_GET['category']))) ?></h1>
 
 <?php if (!empty($posts)) : foreach ($posts as $key => $post) : ?>
 

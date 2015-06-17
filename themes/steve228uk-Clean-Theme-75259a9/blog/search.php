@@ -1,4 +1,4 @@
-<h1>Search: <?php echo str_replace('+', '-', $_GET['q']) ?></h1>
+<h1>Search: <?php echo str_replace('+', '-', htmlEncode($_GET['q'])) ?></h1>
 
 <?php if (!empty($posts)) : foreach ($posts as $key => $post) : ?>
 
