@@ -10,6 +10,13 @@
 
 session_start();
 
+if (!isset($_SESSION['initiated']))
+{
+    session_regenerate_id();
+    $_SESSION['initiated'] = true;
+}
+
+
 if(isset($_SESSION['loggedin'])) header('Location: dashboard.php');
 
 require('bootstrap.php');
