@@ -1,4 +1,7 @@
-# Candy
+# ABANDONED - Candy
+
+**This project hasn't been updated in over 3 years and should be considered abandoned.**
+
 Candy is an easy to use CMS written in PHP.
 
 Take a look at [this screencast](https://vimeo.com/45358208) to see Candy in action.
