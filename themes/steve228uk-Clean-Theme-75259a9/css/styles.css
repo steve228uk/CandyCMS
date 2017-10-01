@@ -1,0 +1,448 @@
+/*
+* @theme Clean
+* @author Cocoon Design
+* @copyright 2012 (C) Cocoon Design
+* @description Clean and Crisp
+* @version 1.0
+* @colors Global-bg,Global-accent,Links-link,Buttons-button_bg,Buttons-button_hover,Buttons-button_text
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,900);
+
+/* @group Reset */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* Automatically clear elements for standards-compliant browsers */
+.clearfix:after,
+.nav:after,
+article:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Trigger has-layout for IE compatibility */
+.clearfix,
+.nav,
+article {
+	zoom: 1;
+}
+/* @end */
+
+/* @group Global */
+
+body{
+	background-image: url(../images/bg.png);
+	font: 90%/1.5 "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+strong, b{
+	font-weight: bold;
+}
+
+i, em{
+	font-style: italic;
+}
+
+blockquote{
+	font: bold 1.2em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #666;
+	float: right;
+	padding:  5px;
+	margin: 0 0 0 15px;
+	width: 180px;
+}
+
+p{
+	margin: 0 0 15px;
+}
+
+pre{
+	background: #eee;
+	border: 1px dashed #ccc;
+	font-family: "Courier New", Courier, mono;
+	padding: 5px;
+	border-radius: 5px;
+	color: #333;
+	margin: 0 0 20px;
+	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.container{
+	background: #fff;
+	width: 960px;
+	margin: 30px auto;
+}
+
+#content{
+	padding: 30px;
+}
+
+.button{
+	border-radius: 5px;
+	padding: 5px;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+/* @end */
+
+/* @group H's & Headings */
+
+h1{
+	font: 900 1.8em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #666;
+	margin: 0 0 15px;
+}
+
+h2{
+	font: bold 1.3em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #666;
+	margin: 0 0 15px;
+}
+
+h2 a{
+	color: #666;
+	text-decoration: none;
+}
+
+h2 a:hover{
+	text-decoration: underline;
+}
+
+h3{
+	font: bold 1.2em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #666;
+	margin: 0 0 15px;
+}
+
+h4{
+	font: bold 1.2em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-transform: uppercase;
+	color: #666;
+	border-bottom: 1px solid #ccc;
+	-moz-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+	-webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+	margin: 0 0 15px;
+}
+
+/* @end */
+
+#content ul{
+	margin: 15px 0;
+}
+
+#content ul li{
+	list-style-type: disc;
+	list-style-position: inside;
+	padding: 0 0 5px;
+}
+
+#content ul li ul li{
+	padding: 0 0 5px 15px;
+	list-style: circle;
+	list-style-position: inside;
+}
+
+#content ol{
+	margin: 15px 0;
+}
+
+#content ol li{
+	list-style-type: decimal;
+	list-style-position: inside;
+	padding: 0 0 5px;
+}
+
+/* @group Header */
+
+#site-header{
+	padding: 30px;
+	border-bottom: 1px solid #ccc;
+	-moz-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+	-webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+#site-title{
+	font: 900 2.5em/1.5em "Lato", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-transform: uppercase;
+	float: left;
+}
+
+#site-title a{
+	text-decoration: none;
+}
+
+/* @group Nav */
+
+.nav{
+	float: right;
+	margin: 10px 0 0;
+}
+
+.nav > li{
+	float: left;
+	position: relative;
+}
+
+.nav > li > a{
+	padding: 5px 10px;
+	font: 1.2em/1.5em Georgia, "Times New Roman", Times, serif;
+	text-decoration: none;
+}
+
+.nav > li:hover > ul{
+	display: block;
+}
+
+/* @group Dropdown */
+
+.nav > li > ul{
+	display: none;
+	background: rgba(255,255,255,0.8);
+	width: 150px;
+	top: 30px;
+	right: 0;
+	position: absolute;
+}
+
+.nav li ul li a{
+	font: 1.2em/1.5em Georgia, "Times New Roman", Times, serif;
+	width: 130px;
+	padding: 5px 10px 8px;
+	display: block;
+	text-decoration: none;
+}
+
+.nav li ul li a:hover{
+	padding: 5px 10px 5px;
+}
+
+/* @end */
+
+/* @end */
+
+/* @end */
+
+/* @group Footer */
+
+#site-footer{
+	padding: 30px;
+	border-top: 1px solid #ccc;
+	-moz-box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.03);
+	-webkit-box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.03);
+	box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+#site-footer .left{
+	padding: 10px 0 0;
+	color: #666;
+}
+
+#candy-logo{
+	background: url(../images/candy-logo.png) right no-repeat;
+	padding: 10px 80px 8px 0;
+	color: #9A9A9A;
+	text-decoration: none;
+	float: right;
+}
+
+/* @end */
+
+/* @group Two Col */
+
+#leftcol{
+	width: 640px;
+	padding: 0 30px 0 0;
+	float: left;
+	border-right: 1px solid #ccc;
+	-moz-box-shadow: 3px 0 0 rgba(0, 0, 0, 0.03);
+	-webkit-box-shadow: 3px 0 0 rgba(0, 0, 0, 0.03);
+	box-shadow: 3px 0 0 rgba(0, 0, 0, 0.03);
+}
+
+#rightcol{
+	width: 200px;
+	float: right;
+}
+
+#rightcol ul{
+	margin: 0 0 15px;
+}
+
+#rightcol form{
+	margin: 0 0 15px;
+}
+
+#search-box{
+	width: 178px;
+	background: #eee;
+	border: none;
+	padding: 10px;
+	font-size: 1.1em;
+	outline: none;
+	border: 1px solid #eee;
+}
+
+#search-box:focus{
+	border-color: #999;
+}
+
+/* @end */
+
+/* @group Blog Styles */
+
+article{
+	margin: 0 0 30px;
+	clear: both;
+	border-bottom: 1px solid #ccc;
+	padding: 0 0 30px;
+}
+
+article .button{
+	display: block;
+	float: right;
+	margin: 20px 0 0;
+}
+
+.post-date{
+	color: #999;
+}
+
+.post-date.single{
+	padding: 10px 0 0;
+}
+
+/* @end */
+
+@media screen and (max-width: 960px) {
+
+	.container{
+		width: 95%;
+	}
+	
+	#leftcol{
+		width: 68%;
+	}
+	
+	#rightcol{
+		width: 25%;
+		float: right;
+	}
+	
+	#search-box{
+		width: 90%;
+		background: #eee;
+		border: none;
+		padding: 10px;
+		font-size: 1.1em;
+		outline: none;
+		border: 1px solid #eee;
+	}
+}
+
+@media screen and (max-width: 745px) {
+	
+	.container{
+		margin: 15px auto;
+	}
+	
+	#leftcol{
+		width: 100%;
+		padding: none;
+		border: none;
+		float: none;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	
+	#rightcol{
+		width: auto;
+		padding: 15px;
+		float: none;
+		margin: 30px 0;
+		background-color: #eee;
+	}
+	
+	#search-box{
+		background: #fff;
+		border-color: #fff;
+	}
+}
+
+@media screen and (max-width: 615px) {
+	.nav{
+		float: left;
+		clear: left;
+	}
+	
+	#candy-logo{
+		display: none;
+	}
+}

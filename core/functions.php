@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @package CandyCMS
@@ -29,14 +29,14 @@ function candytitle($separator = '|'){
 
 function candyHead(){
 	$plugins = Plugins::enabledPlugins();
-	$return = '';
+	$ret = '';
 	foreach ($plugins as $plugin) {
 		if (method_exists($plugin, 'candyHead')) {
-			$return .= $plugin::candyHead()."\n";
+			$ret .= $plugin::candyHead()."\n";
 		}
 	}
-	$return .= '<meta name="generator" content="Candy '.CANDYVERSION.'" />'."\n";
-	echo $return;
+	$ret .= '<meta name="generator" content="Candy '.CANDYVERSION.'" />'."\n";
+	echo $ret;
 }
 
 function theContent(){
@@ -204,4 +204,8 @@ function candyScript($filename){
 function candyImg($filename, $alt){
 	$theme = Candy::Options('theme');
 	echo '<img src="'.THEME_URL.$theme.'/images/'.$filename.'" alt="'.$alt.'" />';
+}
+
+function htmlEncode($s) {
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }

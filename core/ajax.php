@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * @package CandyCMS
 * @version 0.5
@@ -17,11 +17,10 @@ if ( !isset($_POST['action']) ) {
 
 require_once 'config.php';
 
-# Fire up the autoloader I'm going back to 1977!
-
-function __autoload($class_name) {
-	include 'classes/'. $class_name . '.php';
-}
+# Fire up the autoloader, using an anonymous function as of PHP 5.3.0
+spl_autoload_register(function ($class) {
+    include 'classes/' . $class . '.class.php';
+});
 
 $plugins = Plugins::enabledPlugins();
 

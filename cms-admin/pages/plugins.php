@@ -1,4 +1,4 @@
-<? if ($_SESSION['role'] != 'admin'){
+<?php if ($_SESSION['role'] != 'admin'){
  echo '<h1>Access Denied</h1>';
  exit(1);
 }?>
@@ -17,13 +17,13 @@
 
 <div id="container">
 
-<? if (isset($_POST['save'])) :?>
+<?php if (isset($_POST['save'])) { ?>
 <p class="message success">Plugins Saved</p>
-<? Plugins::savePlugins($_POST['enabled']) ?>
-<? endif; ?>
+<?php Plugins::savePlugins($_POST['enabled']) ?>
+<?php } ?>
 
 <form action="dashboard.php?page=plugins" method="post">
-<?
+<?php
 	$plugins = Plugins::listPlugins();
 	$enabled = Plugins::enabledPlugins();
 	

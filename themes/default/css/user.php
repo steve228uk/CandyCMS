@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * @package CandyCMS
 * @theme Default
@@ -16,29 +16,29 @@ $colors = Theme::getColors();
 ?>
 
 body{
-	background: <? echo $colors->bg ?>;
+	background: <?php echo $colors->bg ?>;
 }
 
 a:link, a:visited{
-	color: <? echo $colors->link ?>;
+	color: <?php echo $colors->link ?>;
 }
 
 .nav li a{
-	background: <? echo $colors->nav ?>;
+	background: <?php echo $colors->nav ?>;
 }
 
 .nav li a:hover{
-	background: <? echo $colors->hover ?>;
+	background: <?php echo $colors->hover ?>;
 }
 
 .nav li.active-page a, .nav li.active-page a:hover{
-	background: <? echo $colors->active ?>;
+	background: <?php echo $colors->active ?>;
 }
 
 h1{
-	color: <? echo $colors->h1 ?>;
+	color: <?php echo $colors->h1 ?>;
 }
 
 header{
-	background: <? echo $colors->active ?>;
+	background: <?php echo $colors->active ?>;
 }

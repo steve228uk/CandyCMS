@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @package CandyCMS
@@ -9,7 +9,7 @@
 */
 
 ?>
-<? if ($_SESSION['role'] != 'admin'){
+<?php if ($_SESSION['role'] != 'admin'){
  echo '<h1>Access Denied</h1>';
  exit(1);
 }?>
@@ -30,16 +30,16 @@
 <div id="container">
 
 
-<? if (isset($_POST['save'])) {
+<?php if (isset($_POST['save'])) {
 	Settings::updateSettings($_POST['site_title'], $_POST['theme'], $_POST['pages'], $_POST['site_url']);
 	echo '<p class="message success">Settings Updated</p>';	
 } ?>
 
-<form action="<? echo $_SERVER['PHP_SELF'] ?>?page=settings" method="post" class="clear">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>?page=settings" method="post" class="clear">
 	<fieldset>
 		<ul>
-			<li><label>Site Title</label><input type="text" name="site_title" placeholder="Site Title" value="<? echo Candy::Options('site_title') ?>" /></li>
-			<li><label>Site URL</label><input type="text" name="site_url" placeholder="Site URL" value="<? echo Candy::Options('site_url') ?>" /></li>
+			<li><label>Site Title</label><input type="text" name="site_title" placeholder="Site Title" value="<?php echo Candy::Options('site_title') ?>" /></li>
+			<li><label>Site URL</label><input type="text" name="site_url" placeholder="Site URL" value="<?php echo Candy::Options('site_url') ?>" /></li>
 		</ul>
 	</fieldset>
 	<fieldset>
@@ -48,7 +48,7 @@
 				<label>Theme</label>
 				<select name="theme">
 					
-					<?
+					<?php
 						$themes = $themes = Theme::listThemes();
 						foreach ($themes as $value) {
 							
@@ -68,12 +68,12 @@
 	<fieldset>
 		<ul>
 			<li>
-				<? $homepage = Candy::Options('homepage') ?>
-				<label>Homepage</label><? Pages::dropdownPages('pages', $homepage) ?>
+				<?php $homepage = Candy::Options('homepage') ?>
+				<label>Homepage</label><?php Pages::dropdownPages('pages', $homepage) ?>
 			</li>
 		</ul>
 	</fieldset>
-	<? Settings::pluginSettings() ?>
+	<?php Settings::pluginSettings() ?>
 	<input type="submit" name="save" class="button settings-btn" value="Save Settings" />
 </form>
 </div>

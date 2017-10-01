@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @package CandyCMS
@@ -10,13 +10,20 @@
 
 session_start();
 
+if (!isset($_SESSION['initiated']))
+{
+    session_regenerate_id();
+    $_SESSION['initiated'] = true;
+}
+
+
 if(isset($_SESSION['loggedin'])) header('Location: dashboard.php');
 
 require('bootstrap.php');
 
 ?>
 
-<? if(isset($_POST['submit'])) {
+<?php if(isset($_POST['submit'])) {
 	User::resetPassword($_POST['email']);
 } ?>
 
@@ -34,14 +41,14 @@ require('bootstrap.php');
 	<div id="container">
 		<div id="box">
 			<h1>Forgot?</h1>
-			<? if (isset($_POST['submit'])) : ?>
+			<?php if (isset($_POST['submit'])) : ?>
 				<p>Your password is on its way!</p>
-			<? else: ?>
-			<form action="<? $_SERVER['PHP_SELF']?>" method="post">
+			<?php else: ?>
+			<form action="<?php $_SERVER['PHP_SELF']?>" method="post">
 				<input type="email" name="email" placeholder="Email Address" />
 				<input type="submit" name="submit" value="Reset Password" class="button" />
 			</form>
-			<? endif; ?>
+			<?php endif; ?>
 		</div>
 		<a href="login.php" title="View Site">&larr;Back to Login</a>
 	</div>

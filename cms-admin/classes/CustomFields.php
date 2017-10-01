@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @class CustomFields
@@ -38,18 +38,18 @@ class CustomFields {
 		$sth->execute();
 		$fields = $sth->fetchAll(PDO::FETCH_CLASS);
 		
-		$return = '';
+		$ret = '';
 		
 		foreach ($fields as $value) {
 			$input = self::getInput($value->field_type, $value->field_name, $value->field_value);
-			$return .= '<li>';
-			$return .= '<h3>'.$value->field_title.'</h3>';
-			$return .= '<p>'.$value->field_desc.'</p>';
-			$return .= $input;
-			$return .= '</li>';
+			$ret .= '<li>';
+			$ret .= '<h3>'.$value->field_title.'</h3>';
+			$ret .= '<p>'.$value->field_desc.'</p>';
+			$ret .= $input;
+			$ret .= '</li>';
 		}
 		
-		echo $return;
+		echo $ret;
 		
 	}
 	

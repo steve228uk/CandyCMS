@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * @package CandyCMS
 * @version 0.7
@@ -184,14 +184,14 @@ $path = dirname(__FILE__);
 </head>
 <body>
 	<div id="container">
-		<? if (isset($_GET['install'])) : ?>
+		<?php if (isset($_GET['install'])) { ?>
 		
 		<h1>Candy Installer</h1>
 		
-		<?
+		<?php
 			
 			$currentmodal = substr(sprintf('%o', fileperms('./core')), -4);
-			
+
 			if ($currentmodal != "0755" && $currentmodal != "0777") {
 			
 				$result = @chmod($path."core", 0755);
@@ -212,7 +212,7 @@ $path = dirname(__FILE__);
 			$dbname = $_POST['dbname'];
 			$dbprefix = $_POST['dbprefix'];
 		
-			$config = "<?\n\n";
+			$config = "<?php\n\n";
 			$config .= "/**\n";
 			$config .= "* @package CandyCMS\n";
 			$config .= "* @version 0.1\n";
@@ -343,9 +343,9 @@ $path = dirname(__FILE__);
 		<p class="leadin">
 			Thanks for installing Candy!
 		</p>
-		<a href="index.php" class="button">Continue To <? echo $_POST['title'] ?></a>
+		<a href="index.php" class="button">Continue To <?php echo $_POST['title'] ?></a>
 		
-		<? else : ?>
+		<?php } else { ?>
 		
 		<h1>Candy Installer</h1>
 		<p class="leadin">
@@ -355,7 +355,7 @@ $path = dirname(__FILE__);
 			<fieldset>
 				<h3>Site Information</h3>
 				<ul>
-					<li><label>Site URL</label><input type="text" name="url" value="http://<? echo$_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
+					<li><label>Site URL</label><input type="text" name="url" value="http://<?php echo$_SERVER['HTTP_HOST'].trim($_SERVER['PHP_SELF'], 'install.php') ?>"/></li>
 					<li><label>Site Title</label><input type="text" name="title" placeholder="Site TItle" /></li>
 				</ul>
 			</fieldset>
@@ -380,7 +380,7 @@ $path = dirname(__FILE__);
 			</fieldset>
 			<input type="submit" name="submit" value="Install Away!" class="button" />
 		</form>
-		<? endif; ?>
+		<?php } ?>
 		
 	</div>
 </body>

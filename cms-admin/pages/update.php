@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * @package CandyCMS
@@ -11,7 +11,7 @@
 
 ?>
 
-<? if (isset($_GET['update'])) : ?>
+<?php if (isset($_GET['update'])) { ?>
 	
 	<div id="title-bar">
 		
@@ -25,7 +25,7 @@
 	
 	<div id="container">
 	
-	<?
+	<?php
 	
 		if (Update::checkUpdate() == false) {
 			echo '<p class="leadin">CandyCMS is up to date!</p>';
@@ -56,7 +56,7 @@
 	
 	</div>
 	
-<? else : ?>
+<?php } else { ?>
 
 	<div id="title-bar">
 		
@@ -69,7 +69,7 @@
 	</div>
 	
 	<div id="container">
-	<? Update::getChangelog() ?>
+	<?php Update::getChangelog() ?>
 	</div>
 
-<? endif; ?>
+<?php } ?>

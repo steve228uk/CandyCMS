@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * @plugin Blog
@@ -493,17 +493,17 @@
 	$catid = CandyDB::col('SELECT cat_id FROM '.DB_PREFIX.'categories WHERE cat_name = :cat', array('cat' => $category));
   	$posts = CandyDB::results('SELECT post_id, cat_id FROM '.DB_PREFIX.'posts WHERE status = :status', array('status' => 'published'));
   	
-  	$return = array();
+  	$ret = array();
   	
   	foreach ($posts as $post) {
   		$ids = json_decode(stripslashes($post->cat_id));
   		
   		if (is_array($ids) && in_array($catid, $ids)) {
-  			$return[] = $post->post_id;
+  			$ret[] = $post->post_id;
   		}
   	}
   	
-  	$ids = join(',', $return);
+  	$ids = join(',', $ret);
 
   	return CandyDB::results("SELECT * FROM ". DB_PREFIX ."posts WHERE `post_id` IN (".$ids.") ORDER BY post_title ASC");
  
